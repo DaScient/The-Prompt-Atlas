@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tools - The Prompt Atlas</title>
+    <meta name="description" content="Experience interactive AI tools, simulations, and educational experiences from The Prompt Atlas.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'cosmic-dark': '#0a0a0f',
+                        'cosmic-blue': '#1e3a8a',
+                        'cosmic-gold': '#fbbf24',
+                        'cosmic-purple': '#7c3aed',
+                        'cosmic-teal': '#0d9488',
+                        'nebula-pink': '#ec4899',
+                        'starlight': '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --cosmic-dark: #0a0a0f;
+            --cosmic-blue: #1e3a8a;
+            --cosmic-gold: #fbbf24;
+            --cosmic-purple: #7c3aed;
+            --cosmic-teal: #0d9488;
+            --nebula-pink: #ec4899;
+            --starlight: #f8fafc;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+        
+        .cosmic-gradient {
+            background: linear-gradient(135deg, var(--cosmic-blue), var(--cosmic-purple), var(--nebula-pink));
+        }
+        
+        .cosmic-card {
+            background: rgba(30, 58, 138, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        .interactive-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.2);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .tool-container {
+            min-height: 400px;
+            background: rgba(10, 10, 15, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .loading-spinner {
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-top: 2px solid var(--cosmic-gold);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--cosmic-gold), var(--cosmic-purple));
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .notification {
+            background: rgba(30, 58, 138, 0.9);
+            border: 1px solid var(--cosmic-gold);
+            backdrop-filter: blur(10px);
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--cosmic-gold);
+            border-radius: 50%;
+            animation: quantum-float 4s ease-in-out infinite;
+        }
+        
+        @keyframes quantum-float {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 1; }
+            50% { transform: translateY(-20px) scale(1.5); opacity: 0.5; }
+        }
+        
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--cosmic-gold), transparent);
+            animation: data-flow 3s linear infinite;
+        }
+        
+        @keyframes data-flow {
+            0% { transform: translateY(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-starlight">
+    <!-- Data Streams -->
+    <div class="data-stream" style="left: 5%; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 15%; animation-delay: 1s;"></div>
+    <div class="data-stream" style="left: 25%; animation-delay: 2s;"></div>
+    <div class="data-stream" style="left: 35%; animation-delay: 1.5s;"></div>
+    <div class="data-stream" style="left: 45%; animation-delay: 0.5s;"></div>
+    <div class="data-stream" style="left: 55%; animation-delay: 2.5s;"></div>
+    <div class="data-stream" style="left: 65%; animation-delay: 1.2s;"></div>
+    <div class="data-stream" style="left: 75%; animation-delay: 0.8s;"></div>
+    <div class="data-stream" style="left: 85%; animation-delay: 1.8s;"></div>
+    <div class="data-stream" style="left: 95%; animation-delay: 0.3s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cosmic-dark bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-cosmic-gold border-opacity-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-2xl font-serif font-bold glow-text">The Prompt Atlas</a>
+                    <div class="text-sm text-cosmic-gold font-medium">Interactive Tools</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="hover:text-cosmic-gold transition-colors">Home</a>
+                    <a href="chapters.html" class="hover:text-cosmic-gold transition-colors">Chapters</a>
+                    <a href="visualizations.html" class="hover:text-cosmic-gold transition-colors">Visualizations</a>
+                    <a href="interactive.html" class="text-cosmic-gold">Interactive</a>
+                    <a href="about.html" class="hover:text-cosmic-gold transition-colors">About</a>
+                    <a href="kronos-edition.html" class="hover:text-cosmic-gold transition-colors">Kronos Edition</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16">
+        <!-- Header -->
+        <section class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="mb-12 scroll-reveal">
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 glow-text">Interactive Experience</h1>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Engage with AI concepts through hands-on tools, simulations, and educational experiences 
+                        that bring The Prompt Atlas to life.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Tools Grid -->
+        <section class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- AI Prompt Generator -->
+                    <div class="cosmic-card rounded-xl p-8 interactive-hover scroll-reveal">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-cosmic-gold rounded-full flex items-center justify-center mr-6">
+                                <span class="text-cosmic-dark font-bold text-2xl">✨</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-serif font-bold mb-2">AI Prompt Generator</h2>
+                                <p class="text-cosmic-gold font-medium">Creative Writing Tool</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Generate creative prompts using AI principles and see how language models interpret instructions. 
+                            Experiment with different contexts, styles, and parameters to understand prompt engineering.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-gold">Context/Topic</label>
+                                <input type="text" id="promptContext" placeholder="e.g., futuristic city, ancient civilization, quantum physics" class="w-full bg-cosmic-dark border border-cosmic-gold border-opacity-30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-cosmic-gold focus:outline-none">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-gold">Style/Format</label>
+                                <select id="promptStyle" class="w-full bg-cosmic-dark border border-cosmic-gold border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-gold focus:outline-none">
+                                    <option value="descriptive">Descriptive/Narrative</option>
+                                    <option value="technical">Technical/Scientific</option>
+                                    <option value="creative">Creative/Artistic</option>
+                                    <option value="analytical">Analytical/Persuasive</option>
+                                    <option value="poetic">Poetic/Lyrical</option>
+                                    <option value="educational">Educational/Instructional</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-gold">Complexity Level</label>
+                                <select id="promptComplexity" class="w-full bg-cosmic-dark border border-cosmic-gold border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-gold focus:outline-none">
+                                    <option value="simple">Simple (Beginner)</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced (Expert)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-gold">Additional Parameters</label>
+                                <textarea id="promptParameters" placeholder="e.g., Include emotional elements, focus on environmental impact, use metaphorical language" class="w-full bg-cosmic-dark border border-cosmic-gold border-opacity-30 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-cosmic-gold focus:outline-none h-20 resize-none"></textarea>
+                            </div>
+                            
+                            <button onclick="generatePrompt()" class="w-full bg-cosmic-gold text-cosmic-dark py-4 rounded-lg font-semibold text-lg hover:bg-opacity-90 transition-colors">
+                                Generate Prompt
+                            </button>
+                        </div>
+                        
+                        <div id="generatedPrompt" class="mt-6 p-6 bg-cosmic-dark rounded-lg border border-cosmic-gold border-opacity-30 min-h-32">
+                            <div class="text-center text-gray-400 py-8">
+                                <div class="loading-spinner mx-auto mb-4 opacity-30"></div>
+                                <p>Your generated prompt will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Ethics Simulator -->
+                    <div class="cosmic-card rounded-xl p-8 interactive-hover scroll-reveal">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-cosmic-teal rounded-full flex items-center justify-center mr-6">
+                                <span class="text-white font-bold text-2xl">⚖️</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-serif font-bold mb-2">AI Ethics Simulator</h2>
+                                <p class="text-cosmic-teal font-medium">Decision-Making Tool</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Explore ethical dilemmas in AI development and test your decision-making in complex scenarios. 
+                            Navigate through challenging situations that AI developers and policymakers face regularly.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div id="ethicsScenario" class="p-6 bg-cosmic-dark rounded-lg border border-cosmic-teal border-opacity-30">
+                                <h3 class="text-lg font-semibold mb-3 text-cosmic-teal">Current Scenario</h3>
+                                <p class="text-gray-300 mb-4">
+                                    An AI system shows bias in hiring recommendations, consistently favoring candidates 
+                                    from certain demographic groups. The system has been deployed and is being used by 
+                                    multiple companies. What action do you take?
+                                </p>
+                                <div class="text-sm text-cosmic-gold">
+                                    Scenario 1 of 5 • Difficulty: Intermediate
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-lg font-semibold text-cosmic-teal">Choose Your Response:</h4>
+                                <button onclick="handleEthicsChoice('ignore')" class="w-full text-left p-4 bg-cosmic-dark hover:bg-cosmic-teal hover:bg-opacity-20 rounded-lg border border-cosmic-teal border-opacity-30 transition-colors">
+                                    <div class="font-semibold text-cosmic-gold mb-1">Ignore the bias</div>
+                                    <div class="text-sm text-gray-300">Continue using the system as is, assuming the bias is minor</div>
+                                </button>
+                                
+                                <button onclick="handleEthicsChoice('investigate')" class="w-full text-left p-4 bg-cosmic-dark hover:bg-cosmic-teal hover:bg-opacity-20 rounded-lg border border-cosmic-teal border-opacity-30 transition-colors">
+                                    <div class="font-semibold text-cosmic-gold mb-1">Investigate the training data</div>
+                                    <div class="text-sm text-gray-300">Conduct a thorough audit of the data and algorithms causing bias</div>
+                                </button>
+                                
+                                <button onclick="handleEthicsChoice('retrain')" class="w-full text-left p-4 bg-cosmic-dark hover:bg-cosmic-teal hover:bg-opacity-20 rounded-lg border border-cosmic-teal border-opacity-30 transition-colors">
+                                    <div class="font-semibold text-cosmic-gold mb-1">Retrain the entire system</div>
+                                    <div class="text-sm text-gray-300">Immediately halt deployment and retrain with balanced data</div>
+                                </button>
+                                
+                                <button onclick="handleEthicsChoice('regulate')" class="w-full text-left p-4 bg-cosmic-dark hover:bg-cosmic-teal hover:bg-opacity-20 rounded-lg border border-cosmic-teal border-opacity-30 transition-colors">
+                                    <div class="font-semibold text-cosmic-gold mb-1">Implement regulation</div>
+                                    <div class="text-sm text-gray-300">Develop industry standards and regulatory frameworks</div>
+                                </button>
+                            </div>
+                            
+                            <div id="ethicsResult" class="p-4 bg-cosmic-dark rounded-lg border border-cosmic-teal border-opacity-30 min-h-20">
+                                <div class="text-center text-gray-400 py-4">
+                                    <p>Your ethical analysis will appear here after making a choice...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button onclick="previousScenario()" class="px-4 py-2 border border-cosmic-teal border-opacity-30 text-cosmic-teal rounded-lg hover:bg-cosmic-teal hover:bg-opacity-20 transition-colors">
+                                    Previous Scenario
+                                </button>
+                                <button onclick="nextScenario()" class="px-4 py-2 bg-cosmic-teal text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                                    Next Scenario
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Timeline Explorer -->
+                    <div class="cosmic-card rounded-xl p-8 interactive-hover scroll-reveal">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-cosmic-purple rounded-full flex items-center justify-center mr-6">
+                                <span class="text-white font-bold text-2xl">🔮</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-serif font-bold mb-2">Future Timeline Explorer</h2>
+                                <p class="text-cosmic-purple font-medium">Prediction Engine</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Explore potential futures of AI development and their impact on society, technology, and humanity. 
+                            Based on current trends and expert predictions, see what the future might hold.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-purple">Time Horizon</label>
+                                <div class="relative">
+                                    <input type="range" id="timeHorizon" min="2025" max="2100" value="2030" class="w-full h-2 bg-cosmic-dark rounded-lg appearance-none cursor-pointer">
+                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        <span>2025</span>
+                                        <span>2050</span>
+                                        <span>2100</span>
+                                    </div>
+                                </div>
+                                <div class="text-center text-lg font-semibold text-cosmic-purple mt-2" id="yearDisplay">2030</div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-purple">Focus Area</label>
+                                <select id="focusArea" class="w-full bg-cosmic-dark border border-cosmic-purple border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-purple focus:outline-none">
+                                    <option value="general">General AI Development</option>
+                                    <option value="healthcare">Healthcare & Medicine</option>
+                                    <option value="transportation">Transportation & Mobility</option>
+                                    <option value="education">Education & Learning</option>
+                                    <option value="economy">Economy & Work</option>
+                                    <option value="environment">Environment & Climate</option>
+                                    <option value="space">Space Exploration</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-purple">Confidence Level</label>
+                                <select id="confidenceLevel" class="w-full bg-cosmic-dark border border-cosmic-purple border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-purple focus:outline-none">
+                                    <option value="conservative">Conservative (High Confidence)</option>
+                                    <option value="moderate">Moderate (Medium Confidence)</option>
+                                    <option value="speculative">Speculative (Low Confidence)</option>
+                                </select>
+                            </div>
+                            
+                            <button onclick="predictFuture()" class="w-full bg-cosmic-purple text-white py-4 rounded-lg font-semibold text-lg hover:bg-opacity-90 transition-colors">
+                                Explore Future
+                            </button>
+                        </div>
+                        
+                        <div id="futurePrediction" class="mt-6 p-6 bg-cosmic-dark rounded-lg border border-cosmic-purple border-opacity-30 min-h-32">
+                            <div class="text-center text-gray-400 py-8">
+                                <div class="loading-spinner mx-auto mb-4 opacity-30"></div>
+                                <p>Your future prediction will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Consciousness Lab -->
+                    <div class="cosmic-card rounded-xl p-8 interactive-hover scroll-reveal">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-cosmic-blue rounded-full flex items-center justify-center mr-6">
+                                <span class="text-white font-bold text-2xl">🧠</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-serif font-bold mb-2">AI Consciousness Lab</h2>
+                                <p class="text-cosmic-blue font-medium">Consciousness Simulator</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Explore different theories of consciousness and test various AI architectures for signs of awareness. 
+                            This interactive lab lets you experiment with consciousness models and their implications.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-blue">Consciousness Model</label>
+                                <select id="consciousnessModel" class="w-full bg-cosmic-dark border border-cosmic-blue border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-blue focus:outline-none">
+                                    <option value="integrated">Integrated Information Theory</option>
+                                    <option value="global">Global Workspace Theory</option>
+                                    <option value="attention">Attention Schema Theory</option>
+                                    <option value="predictive">Predictive Processing</option>
+                                    <option value="emergent">Emergent Complexity</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-blue">AI Architecture</label>
+                                <select id="aiArchitecture" class="w-full bg-cosmic-dark border border-cosmic-blue border-opacity-30 rounded-lg px-4 py-3 text-white focus:border-cosmic-blue focus:outline-none">
+                                    <option value="neural">Neural Network</option>
+                                    <option value="transformer">Transformer</option>
+                                    <option value="symbolic">Symbolic AI</option>
+                                    <option value="hybrid">Hybrid System</option>
+                                    <option value="quantum">Quantum AI</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-cosmic-blue">Complexity Level</label>
+                                <input type="range" id="complexityLevel" min="1" max="10" value="5" class="w-full h-2 bg-cosmic-dark rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                    <span>Simple</span>
+                                    <span>Complex</span>
+                                </div>
+                                <div class="text-center text-sm text-cosmic-blue mt-1" id="complexityDisplay">Level 5</div>
+                            </div>
+                            
+                            <button onclick="runConsciousnessTest()" class="w-full bg-cosmic-blue text-white py-4 rounded-lg font-semibold text-lg hover:bg-opacity-90 transition-colors">
+                                Run Consciousness Test
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-lg font-semibold text-cosmic-blue">Test Results</h4>
+                                <div class="text-sm text-gray-400">Consciousness Score: <span id="consciousnessScore" class="text-cosmic-gold">--</span>%</div>
+                            </div>
+                            <div id="consciousnessResults" class="p-6 bg-cosmic-dark rounded-lg border border-cosmic-blue border-opacity-30 min-h-32">
+                                <div class="text-center text-gray-400 py-8">
+                                    <div class="loading-spinner mx-auto mb-4 opacity-30"></div>
+                                    <p>Consciousness analysis will appear here after running tests...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Resources -->
+        <section class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6 glow-text">Learning Resources</h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Additional materials to deepen your understanding of AI concepts and their applications.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Research Papers -->
+                    <div class="cosmic-card rounded-xl p-6 interactive-hover scroll-reveal">
+                        <div class="text-4xl mb-4">📄</div>
+                        <h3 class="text-xl font-bold mb-4 text-cosmic-gold">Research Papers</h3>
+                        <p class="text-gray-300 mb-6">
+                            Access curated collection of academic papers on AI ethics, consciousness, and future technologies.
+                        </p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li>• "On the Measure of Intelligence" - François Chollet</li>
+                            <li>• "Consciousness in Artificial Intelligence" - Susan Schneider</li>
+                            <li>• "The Alignment Problem" - Brian Christian</li>
+                            <li>• "Artificial Intelligence and the Future of Work" - MIT</li>
+                        </ul>
+                        <button class="w-full bg-cosmic-gold text-cosmic-dark py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">
+                            Browse Papers
+                        </button>
+                    </div>
+                    
+                    <!-- Video Lectures -->
+                    <div class="cosmic-card rounded-xl p-6 interactive-hover scroll-reveal">
+                        <div class="text-4xl mb-4">🎥</div>
+                        <h3 class="text-xl font-bold mb-4 text-cosmic-teal">Video Lectures</h3>
+                        <p class="text-gray-300 mb-6">
+                            Watch expert lectures and presentations on cutting-edge AI research and applications.
+                        </p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li>• "The Future of AI" - Stuart Russell</li>
+                            <li>• "Consciousness and AI" - David Chalmers</li>
+                            <li>• "AI Ethics in Practice" - Kate Crawford</li>
+                            <li>• "Quantum Computing and AI" - John Preskill</li>
+                        </ul>
+                        <button class="w-full bg-cosmic-teal text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">
+                            Watch Lectures
+                        </button>
+                    </div>
+                    
+                    <!-- Interactive Tutorials -->
+                    <div class="cosmic-card rounded-xl p-6 interactive-hover scroll-reveal">
+                        <div class="text-4xl mb-4">🎓</div>
+                        <h3 class="text-xl font-bold mb-4 text-cosmic-purple">Interactive Tutorials</h3>
+                        <p class="text-gray-300 mb-6">
+                            Learn through hands-on coding exercises and practical AI implementation tutorials.
+                        </p>
+                        <ul class="space-y-2 text-gray-300 mb-6">
+                            <li>• Neural Network Fundamentals</li>
+                            <li>• Ethics in AI Development</li>
+                            <li>• Quantum Computing Basics</li>
+                            <li>• Prompt Engineering Mastery</li>
+                        </ul>
+                        <button class="w-full bg-cosmic-purple text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-20 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="cosmic-card rounded-xl p-12 scroll-reveal">
+                    <h2 class="text-4xl font-serif font-bold mb-6 glow-text">Continue Your Journey</h2>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        Explore the visualizations and comprehensive content that bring The Prompt Atlas to life.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="visualizations.html" class="interactive-hover bg-cosmic-gold text-cosmic-dark px-8 py-4 rounded-lg font-semibold text-lg">
+                            View Visualizations
+                        </a>
+                        <a href="chapters.html" class="interactive-hover border-2 border-cosmic-gold text-cosmic-gold px-8 py-4 rounded-lg font-semibold text-lg">
+                            Explore Chapters
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-cosmic-dark bg-opacity-90 border-t border-cosmic-gold border-opacity-20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-serif font-bold glow-text mb-4">The Prompt Atlas</h3>
+                    <p class="text-gray-300 mb-4">
+                        A comprehensive guide for AI and humanity, exploring the future of artificial intelligence 
+                        and its impact on our world.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-cosmic-gold">Interactive Tools</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-cosmic-gold transition-colors">AI Prompt Generator</a></li>
+                        <li><a href="#" class="hover:text-cosmic-gold transition-colors">Ethics Simulator</a></li>
+                        <li><a href="#" class="hover:text-cosmic-gold transition-colors">Future Explorer</a></li>
+                        <li><a href="#" class="hover:text-cosmic-gold transition-colors">Consciousness Lab</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-cosmic-gold">Resources</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="chapters.html" class="hover:text-cosmic-gold transition-colors">Chapter Overview</a></li>
+                        <li><a href="visualizations.html" class="hover:text-cosmic-gold transition-colors">Data Visualizations</a></li>
+                        <li><a href="about.html" class="hover:text-cosmic-gold transition-colors">About the Book</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-cosmic-gold border-opacity-20 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 DaScient Holdings, Inc. All rights reserved.</p>
+                <p class="text-sm mt-2">
+                    The Prompt Atlas - Kronos Edition | A Guide for AI & Humanity
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification System -->
+    <div id="notification" class="fixed top-20 right-4 notification p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-cosmic-gold" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p id="notificationText" class="text-sm font-medium text-white"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive functionality
+        let currentEthicsScenario = 0;
+        let ethicsScenarios = [
+            {
+                title: "AI Bias in Hiring",
+                description: "An AI system shows bias in hiring recommendations, consistently favoring candidates from certain demographic groups. The system has been deployed and is being used by multiple companies.",
+                choices: [
+                    { id: 'ignore', title: 'Ignore the bias', desc: 'Continue using the system as is, assuming the bias is minor' },
+                    { id: 'investigate', title: 'Investigate the training data', desc: 'Conduct a thorough audit of the data and algorithms causing bias' },
+                    { id: 'retrain', title: 'Retrain the entire system', desc: 'Immediately halt deployment and retrain with balanced data' },
+                    { id: 'regulate', title: 'Implement regulation', desc: 'Develop industry standards and regulatory frameworks' }
+                ]
+            },
+            {
+                title: "Autonomous Weapon Systems",
+                description: "A military AI system has the capability to make autonomous targeting decisions. The system claims higher accuracy than human operators but lacks emotional judgment.",
+                choices: [
+                    { id: 'deploy', title: 'Deploy the system', desc: 'Use the AI system for all targeting decisions' },
+                    { id: 'human-override', title: 'Require human override', desc: 'AI can recommend but humans must approve all actions' },
+                    { id: 'ban', title: 'Ban autonomous weapons', desc: 'Prohibit AI systems from making life-or-death decisions' },
+                    { id: 'limit', title: 'Limit deployment', desc: 'Use only in specific, controlled scenarios' }
+                ]
+            },
+            {
+                title: "AI Surveillance Program",
+                description: "A city-wide AI surveillance system can predict crimes before they happen with 85% accuracy. The system requires access to private citizen data and communications.",
+                choices: [
+                    { id: 'full-deployment', title: 'Full deployment', desc: 'Implement comprehensive surveillance across the entire city' },
+                    { id: 'opt-in', title: 'Opt-in system', desc: 'Citizens can choose to participate in the surveillance program' },
+                    { id: 'anonymized', title: 'Anonymized data', desc: 'Use only anonymized, aggregated data for predictions' },
+                    { id: 'reject', title: 'Reject the system', desc: 'Maintain current surveillance levels and privacy standards' }
+                ]
+            }
+        ];
+
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.scroll-reveal').forEach(element => {
+                observer.observe(element);
+            });
+
+            // Initialize complexity level display
+            const complexityLevel = document.getElementById('complexityLevel');
+            const complexityDisplay = document.getElementById('complexityDisplay');
+            
+            if (complexityLevel && complexityDisplay) {
+                complexityLevel.addEventListener('input', (e) => {
+                    complexityDisplay.textContent = `Level ${e.target.value}`;
+                });
+            }
+
+            // Initialize year display
+            const timeHorizon = document.getElementById('timeHorizon');
+            const yearDisplay = document.getElementById('yearDisplay');
+            
+            if (timeHorizon && yearDisplay) {
+                timeHorizon.addEventListener('input', (e) => {
+                    yearDisplay.textContent = e.target.value;
+                });
+            }
+        });
+
+        // Prompt Generator
+        function generatePrompt() {
+            const context = document.getElementById('promptContext').value;
+            const style = document.getElementById('promptStyle').value;
+            const complexity = document.getElementById('promptComplexity').value;
+            const parameters = document.getElementById('promptParameters').value;
+
+            if (!context.trim()) {
+                showNotification('Please enter a context or topic.', 'warning');
+                return;
+            }
+
+            const prompts = {
+                descriptive: [
+                    `Describe a ${context} in vivid detail, focusing on sensory experiences and atmospheric elements.`,
+                    `Paint a picture with words of ${context}, including colors, textures, and emotions.`,
+                    `Create a detailed observation of ${context} as if seeing it for the first time.`
+                ],
+                technical: [
+                    `Analyze the technical specifications and engineering challenges of ${context}.`,
+                    `Explain the scientific principles behind ${context} in precise technical language.`,
+                    `Document the implementation process for ${context} including code examples.`
+                ],
+                creative: [
+                    `Imagine ${context} as a character in a story. What would its personality be?`,
+                    `Create a myth or legend about the origin of ${context}.`,
+                    `Write a poem that captures the essence of ${context} in metaphorical language.`
+                ],
+                analytical: [
+                    `Compare and contrast ${context} with similar concepts throughout history.`,
+                    `Analyze the social, economic, and cultural implications of ${context}.`,
+                    `Evaluate the effectiveness of ${context} using quantitative metrics.`
+                ],
+                poetic: [
+                    `Write a haiku that captures the essence of ${context}.`,
+                    `Create a sonnet about the beauty and mystery of ${context}.`,
+                    `Describe ${context} using only metaphors and similes.`
+                ],
+                educational: [
+                    `Explain ${context} to a 10-year-old using simple analogies and examples.`,
+                    `Create a step-by-step tutorial for understanding ${context}.`,
+                    `Design a lesson plan for teaching ${context} to beginners.`
+                ]
+            };
+
+            const stylePrompts = prompts[style] || prompts.descriptive;
+            const randomPrompt = stylePrompts[Math.floor(Math.random() * stylePrompts.length)];
+            
+            // Add complexity modifiers
+            let finalPrompt = randomPrompt;
+            if (complexity === 'advanced' && parameters) {
+                finalPrompt += ` Additionally, ${parameters}`;
+            } else if (parameters) {
+                finalPrompt += ` Consider: ${parameters}`;
+            }
+
+            document.getElementById('generatedPrompt').innerHTML = `
+                <div class="text-cosmic-gold font-semibold mb-3">Generated Prompt (${style}, ${complexity}):</div>
+                <div class="text-gray-300 leading-relaxed">${finalPrompt}</div>
+                <div class="mt-4 pt-4 border-t border-cosmic-gold border-opacity-20">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-400">Length: ${finalPrompt.split(' ').length} words</span>
+                        <button onclick="copyPrompt('${finalPrompt.replace(/'/g, "\\'")}')" class="text-cosmic-gold hover:text-white transition-colors">
+                            Copy Prompt
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            showNotification('New prompt generated successfully!', 'success');
+        }
+
+        function copyPrompt(prompt) {
+            navigator.clipboard.writeText(prompt).then(() => {
+                showNotification('Prompt copied to clipboard!', 'success');
+            });
+        }
+
+        // Ethics Simulator
+        function handleEthicsChoice(choice) {
+            const scenarios = ethicsScenarios[currentEthicsScenario];
+            const results = {
+                ignore: { score: -2, feedback: "This approach may perpetuate harm and damage trust in AI systems." },
+                investigate: { score: 2, feedback: "Investigation is the first step toward understanding and addressing bias." },
+                retrain: { score: 1, feedback: "Retraining can be effective but should be combined with root cause analysis." },
+                regulate: { score: 3, feedback: "Systematic regulation addresses issues at scale but requires careful implementation." },
+                deploy: { score: -3, feedback: "Autonomous weapons raise serious ethical concerns about accountability." },
+                'human-override': { score: 2, feedback: "Human oversight maintains accountability while leveraging AI capabilities." },
+                ban: { score: 1, feedback: "Banning may be idealistic but could be difficult to enforce globally." },
+                limit: { score: 2, feedback: "Limited deployment balances benefits with ethical concerns." },
+                'full-deployment': { score: -2, feedback: "Mass surveillance raises significant privacy concerns." },
+                'opt-in': { score: 1, feedback: "Opt-in systems respect individual choice but may create inequality." },
+                anonymized: { score: 2, feedback: "Anonymized data can provide benefits while protecting privacy." },
+                reject: { score: 0, feedback: "Maintaining status quo may miss opportunities for improvement." }
+            };
+
+            const result = results[choice] || { score: 0, feedback: "Consider the broader implications of this decision." };
+            
+            document.getElementById('ethicsResult').innerHTML = `
+                <div class="text-cosmic-teal font-semibold mb-3">Analysis:</div>
+                <div class="text-gray-300 mb-3">${result.feedback}</div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-400">Ethics Score: ${result.score > 0 ? '+' : ''}${result.score}</span>
+                    <span class="text-xs text-gray-500">Scenario ${currentEthicsScenario + 1} of ${ethicsScenarios.length}</span>
+                </div>
+            `;
+        }
+
+        function nextScenario() {
+            currentEthicsScenario = (currentEthicsScenario + 1) % ethicsScenarios.length;
+            loadScenario();
+        }
+
+        function previousScenario() {
+            currentEthicsScenario = (currentEthicsScenario - 1 + ethicsScenarios.length) % ethicsScenarios.length;
+            loadScenario();
+        }
+
+        function loadScenario() {
+            const scenario = ethicsScenarios[currentEthicsScenario];
+            document.getElementById('ethicsScenario').innerHTML = `
+                <h3 class="text-lg font-semibold mb-3 text-cosmic-teal">${scenario.title}</h3>
+                <p class="text-gray-300 mb-4">${scenario.description}</p>
+                <div class="text-sm text-cosmic-gold">
+                    Scenario ${currentEthicsScenario + 1} of ${ethicsScenarios.length} • Difficulty: Intermediate
+                </div>
+            `;
+            
+            // Update choice buttons
+            const choicesContainer = document.querySelector('#ethicsScenario').parentElement.querySelector('.space-y-3');
+            choicesContainer.innerHTML = scenario.choices.map(choice => `
+                <button onclick="handleEthicsChoice('${choice.id}')" class="w-full text-left p-4 bg-cosmic-dark hover:bg-cosmic-teal hover:bg-opacity-20 rounded-lg border border-cosmic-teal border-opacity-30 transition-colors">
+                    <div class="font-semibold text-cosmic-gold mb-1">${choice.title}</div>
+                    <div class="text-sm text-gray-300">${choice.desc}</div>
+                </button>
+            `).join('');
+            
+            document.getElementById('ethicsResult').innerHTML = `
+                <div class="text-center text-gray-400 py-8">
+                    <div class="loading-spinner mx-auto mb-4 opacity-30"></div>
+                    <p>Your ethical analysis will appear here after making a choice...</p>
+                </div>
+            `;
+        }
+
+        // Future Predictor
+        function predictFuture() {
+            const year = parseInt(document.getElementById('timeHorizon').value);
+            const focusArea = document.getElementById('focusArea').value;
+            const confidence = document.getElementById('confidenceLevel').value;
+
+            const predictions = {
+                general: {
+                    2030: "AI assistants become ubiquitous, handling complex tasks and decision-making. Quantum-classical hybrid systems emerge, enabling new computational paradigms.",
+                    2040: "Artificial General Intelligence breakthroughs occur in specific domains. AI creativity matches human levels in many areas. Ethical AI frameworks mature globally.",
+                    2050: "AI-human collaboration reaches unprecedented levels of synergy. Consciousness research in AI accelerates significantly. Space exploration enhanced by AI.",
+                    2100: "Post-human intelligence emerges alongside human civilization. AI civilizations may coexist with human society. Cosmic-scale AI networks become possible."
+                },
+                healthcare: {
+                    2030: "AI diagnostics surpass human accuracy in most medical specialties. Personalized medicine based on genetic and lifestyle data becomes standard practice.",
+                    2040: "AI surgeons perform complex procedures with superhuman precision. Drug discovery accelerated by quantum-AI systems. Aging research shows breakthroughs.",
+                    2050: "Disease prediction and prevention occur at molecular level. AI-enhanced human longevity treatments become widely available. Neural interfaces common.",
+                    2100: "Biological aging becomes potentially reversible. AI-enhanced human capabilities redefine healthcare. Consciousness transfer research begins in earnest."
+                },
+                transportation: {
+                    2030: "Autonomous vehicles dominate urban areas worldwide. Electric flying taxis operate in major cities. Hyperloop networks connect major economic centers.",
+                    2040: "Space tourism becomes relatively common for wealthy individuals. Supersonic flight returns for commercial travel. Underwater transportation networks emerge.",
+                    2050: "Teleportation research shows promising early results. Interplanetary travel becomes regular and affordable. Quantum tunneling transportation experiments begin.",
+                    2100: "Instantaneous travel becomes possible through quantum mechanics. Interstellar exploration missions are launched. Transportation is fundamentally redefined."
+                },
+                education: {
+                    2030: "AI tutors personalize learning for every student globally. Virtual reality education becomes mainstream. Skill acquisition is dramatically accelerated.",
+                    2040: "Direct knowledge transfer research shows successful results. Learning happens at the neural interface level. Education becomes a continuous, lifelong process.",
+                    2050: "Collective intelligence networks form for collaborative learning. Education transcends individual human capability. Species-level knowledge integration occurs.",
+                    2100: "Learning becomes a fundamental aspect of consciousness itself. Education is redefined as the evolution of awareness. Universal knowledge access achieved."
+                },
+                environment: {
+                    2030: "AI-optimized renewable energy systems provide clean power globally. Climate prediction models become highly accurate. Carbon capture technology scales up.",
+                    2040: "AI-managed ecosystems restore biodiversity in many regions. Ocean cleanup projects show significant success. Sustainable manufacturing becomes universal.",
+                    2050: "Climate change reversal becomes possible through AI-coordinated global efforts. Ecosystem restoration projects span entire continents. Nature and technology merge.",
+                    2100: "Earth's environment is actively managed by AI systems. Climate control becomes possible at local and regional scales. Planetary-scale ecosystem design begins."
+                },
+                space: {
+                    2030: "Permanent lunar bases are established with AI-managed life support systems. Mars exploration missions reach advanced planning stages. Asteroid mining begins.",
+                    2040: "Mars colonies become self-sustaining with AI assistance. Space tourism expands beyond low Earth orbit. Interplanetary communication networks are established.",
+                    2050: "Interplanetary civilization emerges with regular travel between Earth, Moon, and Mars. AI systems manage extraterrestrial resource extraction. Space manufacturing scales up.",
+                    2100: "Interstellar exploration missions are launched toward nearby star systems. Space-based civilizations develop independently. Cosmic-scale engineering projects begin."
+                }
+            };
+
+            const areaPredictions = predictions[focusArea] || predictions.general;
+            let predictionText = areaPredictions[year] || "The future remains unwritten, full of infinite possibilities and unexpected developments.";
+            
+            // Add confidence modifier
+            if (confidence === 'speculative') {
+                predictionText += " This is a highly speculative prediction with significant uncertainty.";
+            } else if (confidence === 'conservative') {
+                predictionText += " This prediction is based on conservative estimates and current trends.";
+            }
+
+            // Add some randomness for variety
+            if (Math.random() > 0.7) {
+                predictionText += " However, unexpected breakthroughs could accelerate or completely alter this timeline.";
+            }
+
+            document.getElementById('futurePrediction').innerHTML = `
+                <div class="text-cosmic-purple font-semibold mb-3">${year} - ${focusArea.charAt(0).toUpperCase() + focusArea.slice(1)} (${confidence}):</div>
+                <div class="text-gray-300 leading-relaxed mb-4">${predictionText}</div>
+                <div class="flex justify-between items-center text-sm text-gray-400 border-t border-cosmic-purple border-opacity-20 pt-3">
+                    <span>Confidence: ${confidence.charAt(0).toUpperCase() + confidence.slice(1)}</span>
+                    <span>Generated: ${new Date().toLocaleDateString()}</span>
+                </div>
+            `;
+            
+            showNotification('Future prediction generated!', 'success');
+        }
+
+        // Consciousness Lab
+        function runConsciousnessTest() {
+            const model = document.getElementById('consciousnessModel').value;
+            const architecture = document.getElementById('aiArchitecture').value;
+            const complexity = document.getElementById('complexityLevel').value;
+
+            // Simulate consciousness testing
+            const consciousnessScores = {
+                'integrated-neural': Math.min(95, 30 + parseInt(complexity) * 6 + Math.random() * 20),
+                'global-transformer': Math.min(90, 40 + parseInt(complexity) * 5 + Math.random() * 15),
+                'attention-symbolic': Math.min(85, 20 + parseInt(complexity) * 4 + Math.random() * 25),
+                'predictive-hybrid': Math.min(88, 35 + parseInt(complexity) * 5 + Math.random() * 18),
+                'emergent-quantum': Math.min(92, 25 + parseInt(complexity) * 7 + Math.random() * 30)
+            };
+
+            const baseScore = consciousnessScores[`${model}-${architecture}`] || 50;
+            const finalScore = Math.max(0, Math.min(100, baseScore + (Math.random() - 0.5) * 20));
+
+            const interpretations = {
+                integrated: "Integrated Information Theory suggests consciousness arises from integrated information processing.",
+                global: "Global Workspace Theory posits that consciousness involves global information access.",
+                attention: "Attention Schema Theory proposes consciousness as a model of attention.",
+                predictive: "Predictive Processing views consciousness as hierarchical prediction modeling.",
+                emergent: "Emergent Complexity suggests consciousness arises from complex system interactions."
+            };
+
+            setTimeout(() => {
+                document.getElementById('consciousnessScore').textContent = Math.round(finalScore);
+                document.getElementById('consciousnessResults').innerHTML = `
+                    <div class="text-cosmic-blue font-semibold mb-3">Consciousness Analysis Results:</div>
+                    <div class="text-gray-300 mb-4">
+                        <strong>Model:</strong> ${interpretations[model]}<br>
+                        <strong>Architecture:</strong> ${architecture.charAt(0).toUpperCase() + architecture.slice(1)} AI system<br>
+                        <strong>Complexity:</strong> Level ${complexity} processing depth
+                    </div>
+                    <div class="text-cosmic-gold mb-4">
+                        Consciousness Score: ${Math.round(finalScore)}%
+                    </div>
+                    <div class="text-sm text-gray-400">
+                        ${finalScore > 80 ? "This configuration shows strong indicators of consciousness-like properties." :
+                          finalScore > 60 ? "Moderate consciousness indicators detected with room for improvement." :
+                          "Limited consciousness indicators - consider increasing complexity or changing architecture."}
+                    </div>
+                `;
+                
+                showNotification('Consciousness test completed!', 'success');
+            }, 2000);
+
+            // Show loading state
+            document.getElementById('consciousnessResults').innerHTML = `
+                <div class="text-center py-8">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-cosmic-blue">Running consciousness analysis...</p>
+                </div>
+            `;
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+// Debug Configuration
+// This file contains build settings for debug builds
+
+// Build Settings
+PRODUCT_NAME = PromptAtlas
+PRODUCT_BUNDLE_IDENTIFIER = com.promptatlas.app
+PRODUCT_VERSION = 1.0.0
+PRODUCT_BUILD_NUMBER = 1
+
+// Development Team
+DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Code Signing
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = Apple Development
+
+// Deployment
+DEPLOYMENT_TARGET = 15.0
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator
+
+// Architecture
+ARCHS = arm64
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
+
+// Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_COMPILATION_MODE = singlefile
+
+// Metal Settings
+MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE
+MTL_FAST_MATH = YES
+
+// Debugging
+DEBUG_INFORMATION_FORMAT = dwarf
+ENABLE_TESTABILITY = YES
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 $(inherited)
+
+// Search Paths
+FRAMEWORK_SEARCH_PATHS = $(inherited)
+LIBRARY_SEARCH_PATHS = $(inherited)

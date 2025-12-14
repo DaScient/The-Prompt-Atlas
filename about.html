@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - The Prompt Atlas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .glow { box-shadow: 0 0 30px rgba(102, 126, 234, 0.3); }
+        .team-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .timeline-item { position: relative; padding-left: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 12px; height: 12px; background: #8B5CF6; border-radius: 50%; }
+        .timeline-line { position: absolute; left: 5px; top: 1.5rem; bottom: -1rem; width: 2px; background: linear-gradient(to bottom, #8B5CF6, transparent); }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">PA</span>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">The Prompt Atlas</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="chapters.html" class="text-gray-300 hover:text-white transition-colors">Chapters</a>
+                    <a href="interactive.html" class="text-gray-300 hover:text-white transition-colors">Interactive</a>
+                    <a href="visualizations.html" class="text-gray-300 hover:text-white transition-colors">Visualizations</a>
+                    <a href="about.html" class="text-white font-medium">About</a>
+                    <a href="kronos-edition.html" class="text-gray-300 hover:text-white transition-colors">Kronos Edition</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text floating">
+                About The Prompt Atlas
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                Discover the story behind the most comprehensive AI exploration platform, 
+                built by pioneers for pioneers in the artificial intelligence frontier.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <span class="px-4 py-2 bg-purple-600/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Founded 2024</span>
+                <span class="px-4 py-2 bg-blue-600/20 text-blue-300 rounded-full text-sm border border-blue-500/30">Global Team</span>
+                <span class="px-4 py-2 bg-green-600/20 text-green-300 rounded-full text-sm border border-green-500/30">Open Source</span>
+                <span class="px-4 py-2 bg-orange-600/20 text-orange-300 rounded-full text-sm border border-orange-500/30">Community Driven</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Mission & Vision -->
+            <section class="mb-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl font-bold gradient-text mb-6">Our Mission</h2>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            The Prompt Atlas was born from a simple yet profound realization: the field of artificial intelligence 
+                            was advancing so rapidly that even experts struggled to keep pace. We set out to create a comprehensive, 
+                            accessible platform that would serve as both a guide and a gateway to understanding AI's evolution.
+                        </p>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            Our mission is to democratize AI knowledge, making complex concepts understandable for everyone 
+                            while providing the depth that professionals need. We believe that understanding AI is not just 
+                            for researchers and engineers—it's essential for anyone who wants to navigate our increasingly 
+                            AI-driven world.
+                        </p>
+                        <div class="flex space-x-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-400">50K+</div>
+                                <div class="text-gray-400 text-sm">Monthly Visitors</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-400">1M+</div>
+                                <div class="text-gray-400 text-sm">Pages Explored</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-green-400">500+</div>
+                                <div class="text-gray-400 text-sm">AI Models Covered</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="team-card rounded-2xl p-8 glow">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl">🧠</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Knowledge</h3>
+                                    <p class="text-gray-400 text-sm">Comprehensive AI education</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl">🚀</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Innovation</h3>
+                                    <p class="text-gray-400 text-sm">Cutting-edge insights</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl">🌐</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Accessibility</h3>
+                                    <p class="text-gray-400 text-sm">Open to everyone</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-white text-2xl">🤝</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Community</h3>
+                                    <p class="text-gray-400 text-sm">Collaborative learning</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Story -->
+            <section class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold gradient-text mb-4">Our Story</h2>
+                    <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                        From a small research project to a global platform, discover how The Prompt Atlas evolved 
+                        into the definitive resource for AI exploration and education.
+                    </p>
+                </div>
+                <div class="team-card rounded-2xl p-8 glow">
+                    <div class="space-y-8">
+                        <div class="timeline-item">
+                            <div class="timeline-line"></div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">The Beginning - January 2024</h3>
+                                <p class="text-gray-300 mb-3">
+                                    Dr. Sarah Chen, a leading AI researcher at Stanford, noticed a critical gap between 
+                                    AI advancement and public understanding. She gathered a small team of researchers 
+                                    and developers to create a solution.
+                                </p>
+                                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm">Research Phase</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-line"></div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Platform Development - March 2024</h3>
+                                <p class="text-gray-300 mb-3">
+                                    After extensive research and planning, development began on the core platform. 
+                                    The team focused on creating an intuitive interface that could handle complex 
+                                    data visualizations while remaining accessible to all users.
+                                </p>
+                                <span class="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-sm">Development</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-line"></div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Beta Launch - June 2024</h3>
+                                <p class="text-gray-300 mb-3">
+                                    The first beta version launched with 100 selected users from academia and industry. 
+                                    Their feedback proved invaluable in refining the platform's features and user experience.
+                                </p>
+                                <span class="px-3 py-1 bg-green-600/20 text-green-300 rounded-full text-sm">Beta Testing</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-line"></div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Public Release - September 2024</h3>
+                                <p class="text-gray-300 mb-3">
+                                    After three months of intensive testing and refinement, The Prompt Atlas officially 
+                                    launched to the public. The response was overwhelming, with over 10,000 users 
+                                    joining in the first week.
+                                </p>
+                                <span class="px-3 py-1 bg-orange-600/20 text-orange-300 rounded-full text-sm">Launch</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Global Recognition - December 2024</h3>
+                                <p class="text-gray-300 mb-3">
+                                    Today, The Prompt Atlas serves over 50,000 monthly visitors from 120+ countries. 
+                                    We've been recognized by leading tech publications and educational institutions 
+                                    as a groundbreaking resource for AI education.
+                                </p>
+                                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm">Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold gradient-text mb-4">Meet Our Team</h2>
+                    <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                        A diverse group of AI researchers, educators, and technologists dedicated to making 
+                        artificial intelligence accessible to everyone.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">👩‍🔬</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Dr. Sarah Chen</h3>
+                        <p class="text-purple-400 mb-3">Founder & CEO</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Former Stanford AI researcher with 15+ years in machine learning. 
+                            PhD in Computer Science from MIT.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Machine Learning</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">NLP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">👨‍💻</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Marcus Rodriguez</h3>
+                        <p class="text-green-400 mb-3">CTO</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Full-stack developer and AI systems architect. Previously led engineering 
+                            teams at Google and Microsoft.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Systems</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Architecture</span>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">👩‍🏫</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Dr. Emily Watson</h3>
+                        <p class="text-orange-400 mb-3">Head of Education</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Educational technology specialist and former professor. 
+                            Expert in curriculum design and online learning.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Education</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Curriculum</span>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">🎨</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Alex Kim</h3>
+                        <p class="text-pink-400 mb-3">UX/UI Director</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Award-winning designer specializing in data visualization and 
+                            user experience for complex systems.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Design</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Visualization</span>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">🤖</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Dr. James Liu</h3>
+                        <p class="text-indigo-400 mb-3">AI Research Lead</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Computer vision and robotics researcher. Published 50+ papers 
+                            in top-tier conferences and journals.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Computer Vision</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Robotics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-24 h-24 bg-gradient-to-r from-teal-500 to-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-3xl">📊</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Priya Patel</h3>
+                        <p class="text-teal-400 mb-3">Data Science Lead</p>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Data scientist and machine learning engineer. Expert in 
+                            building scalable data pipelines and ML systems.
+                        </p>
+                        <div class="flex justify-center space-x-3">
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">Data Science</span>
+                            <span class="px-2 py-1 bg-gray-700 rounded text-xs">ML Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values & Principles -->
+            <section class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold gradient-text mb-4">Our Values</h2>
+                    <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                        The principles that guide our work and shape our commitment to 
+                        responsible AI education and community building.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🎯</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Accuracy</h3>
+                        <p class="text-gray-300 text-sm">
+                            We commit to providing factually accurate, up-to-date information 
+                            about AI developments and research.
+                        </p>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🌟</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Accessibility</h3>
+                        <p class="text-gray-300 text-sm">
+                            AI knowledge should be accessible to everyone, regardless of their 
+                            technical background or expertise level.
+                        </p>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🔬</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Transparency</h3>
+                        <p class="text-gray-300 text-sm">
+                            We're open about our sources, methodologies, and the limitations 
+                            of the information we provide.
+                        </p>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-6 card-hover text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🤝</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3">Community</h3>
+                        <p class="text-gray-300 text-sm">
+                            We believe in the power of collaborative learning and building 
+                            inclusive communities around AI education.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact & Future -->
+            <section class="mb-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="team-card rounded-2xl p-8 card-hover glow">
+                        <h2 class="text-3xl font-bold gradient-text mb-6">Get in Touch</h2>
+                        <p class="text-gray-300 mb-6">
+                            We're always excited to connect with fellow AI enthusiasts, researchers, 
+                            educators, and anyone curious about artificial intelligence.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">📧</span>
+                                </div>
+                                <span class="text-gray-300">hello@promptatlas.com</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">🐦</span>
+                                </div>
+                                <span class="text-gray-300">@PromptAtlasAI</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm">💬</span>
+                                </div>
+                                <span class="text-gray-300">Community Discord</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                                Join Community
+                            </button>
+                            <button class="px-6 py-2 border border-purple-600 text-purple-400 rounded-lg hover:bg-purple-600 hover:text-white transition-colors">
+                                Contribute
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card rounded-2xl p-8 card-hover glow">
+                        <h2 class="text-3xl font-bold gradient-text mb-6">The Future</h2>
+                        <p class="text-gray-300 mb-6">
+                            As AI continues to evolve at an unprecedented pace, so does our commitment to 
+                            keeping The Prompt Atlas at the forefront of AI education and exploration.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span class="text-gray-300">Interactive AI simulations and experiments</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span class="text-gray-300">Multilingual platform support</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-gray-300">AI-powered personalized learning paths</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                <span class="text-gray-300">Collaborative research tools</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                <span class="text-gray-300">Mobile application launch</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            We're constantly exploring new ways to make AI knowledge more accessible, 
+                            engaging, and impactful for our global community.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">PA</span>
+                </div>
+                <span class="text-xl font-bold gradient-text">The Prompt Atlas</span>
+            </div>
+            <p class="text-gray-400 mb-4">© 2025 The Prompt Atlas. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">Exploring the frontiers of artificial intelligence through education and community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all team cards and timeline items
+        document.querySelectorAll('.team-card, .timeline-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+
+        // Add hover effects for team cards
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Interactive button effects
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            button {
+                position: relative;
+                overflow: hidden;
+            }
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.floating');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Add dynamic gradient animation
+        let gradientAngle = 135;
+        setInterval(() => {
+            gradientAngle += 1;
+            const gradientElements = document.querySelectorAll('.gradient-text');
+            gradientElements.forEach(element => {
+                element.style.background = `linear-gradient(${gradientAngle}deg, #667eea 0%, #764ba2 100%)`;
+                element.style.webkitBackgroundClip = 'text';
+                element.style.webkitTextFillColor = 'transparent';
+            });
+        }, 100);
+    </script>
+</body>
+</html>

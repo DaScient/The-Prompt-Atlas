@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fourteen Movements - The Prompt Atlas Kronos Edition</title>
+    <meta name="description" content="Explore all fourteen chapters of The Prompt Atlas: from Profits with Integrity to Wonder as Survival Strategy. Interactive chapter guide with philosophical concepts.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --cosmic-dark: #0a0a0f;
+            --cosmic-blue: #1e3a8a;
+            --cosmic-gold: #fbbf24;
+            --cosmic-purple: #7c3aed;
+            --cosmic-teal: #0d9488;
+            --nebula-pink: #ec4899;
+            --starlight: #f8fafc;
+            --earth-green: #059669;
+            --mars-red: #dc2626;
+            --jupiter-orange: #ea580c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--starlight);
+            line-height: 1.7;
+        }
+        
+        .serif { font-family: 'Crimson Text', serif; }
+        .display { font-family: 'Playfair Display', serif; }
+        
+        .cosmic-gradient {
+            background: linear-gradient(135deg, var(--cosmic-blue), var(--cosmic-purple), var(--nebula-pink));
+        }
+        
+        .earth-gradient {
+            background: linear-gradient(135deg, var(--earth-green), var(--cosmic-teal));
+        }
+        
+        .mars-gradient {
+            background: linear-gradient(135deg, var(--mars-red), var(--jupiter-orange));
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        .cosmic-card {
+            background: rgba(30, 58, 138, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .cosmic-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border-color: var(--cosmic-gold);
+        }
+        
+        .chapter-active {
+            border-color: var(--cosmic-gold);
+            background: rgba(251, 191, 36, 0.1);
+        }
+        
+        .chapter-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(251, 191, 36, 0.3);
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .part-divider {
+            background: linear-gradient(90deg, transparent, var(--cosmic-gold), transparent);
+            height: 2px;
+            margin: 3rem 0;
+        }
+        
+        .philosophical-quote {
+            border-left: 4px solid var(--cosmic-gold);
+            background: rgba(251, 191, 36, 0.1);
+            font-style: italic;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .chapter-preview {
+            background: rgba(30, 58, 138, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-preview:hover {
+            background: rgba(30, 58, 138, 0.1);
+            border-color: var(--cosmic-gold);
+        }
+        
+        .concept-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin: 0.125rem;
+        }
+        
+        .navigation-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(251, 191, 36, 0.3);
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--cosmic-gold);
+            transform: scale(1.2);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Part-specific styling */
+        .part-prosperity { border-left-color: var(--earth-green); }
+        .part-culture { border-left-color: var(--nebula-pink); }
+        .part-science { border-left-color: var(--cosmic-blue); }
+        .part-ethics { border-left-color: var(--mars-red); }
+        .part-future { border-left-color: var(--jupiter-orange); }
+        .part-resilience { border-left-color: var(--cosmic-teal); }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-cosmic-dark bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-cosmic-gold border-opacity-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 cosmic-gradient rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">PA</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                        <span class="text-sm text-gray-400 ml-2">Chapter Explorer</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-cosmic-gold transition-colors">Home</a>
+                    <a href="chapters.html" class="text-cosmic-gold">Chapters</a>
+                    <a href="interactive.html" class="hover:text-cosmic-gold transition-colors">Interactive</a>
+                    <a href="visualizations.html" class="hover:text-cosmic-gold transition-colors">Data</a>
+                    <a href="about.html" class="hover:text-cosmic-gold transition-colors">About</a>
+                    <a href="kronos-edition.html" class="hover:text-cosmic-gold transition-colors">Kronos Edition</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation Dots -->
+    <div class="navigation-dots">
+        <div class="nav-dot active" onclick="scrollToPart('prosperity')"></div>
+        <div class="nav-dot" onclick="scrollToPart('culture')"></div>
+        <div class="nav-dot" onclick="scrollToPart('science')"></div>
+        <div class="nav-dot" onclick="scrollToPart('ethics')"></div>
+        <div class="nav-dot" onclick="scrollToPart('future')"></div>
+        <div class="nav-dot" onclick="scrollToPart('resilience')"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-6xl md:text-8xl font-bold mb-8 glow-text display">
+                The Fourteen Movements
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-300 mb-8 max-w-4xl mx-auto serif italic">
+                A symphony of ideas exploring the intersection of AI, ethics, economics, creativity, 
+                and the future of human civilization.
+            </p>
+            
+            <div class="philosophical-quote p-8 max-w-5xl mx-auto mb-12">
+                <p class="text-xl text-gray-200 serif mb-4">
+                    "Every chapter is a coordinate, and together they chart a landscape still forming beneath our feet. 
+                    Each section echoes the others. Strategy becomes culture; data becomes ethics; leadership becomes design."
+                </p>
+                <p class="text-lg text-gray-300 serif">
+                    The map redraws itself as you move through it, because AI itself is recursive—it learns by looping 
+                    through experience, by remembering its errors and refining its sense of truth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part I: Prosperity and Purpose -->
+    <section id="prosperity" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part I: Prosperity and Purpose</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Redefining wealth and economics in the age of artificial intelligence.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 1: Profits with Integrity -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(1)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">I</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Profits with Integrity</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Redefining wealth in the age of AI—exploring how businesses can generate profits while healing ecosystems 
+                                and strengthening communities. The question is not whether AI can make us richer, but whether it can 
+                                make us rich in ways that also make the world richer.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-green-900 text-green-300">Economics</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Sustainability</span>
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Business Ethics</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Symbiotic wealth generation</li>
+                                    <li>• Century dividends vs. quarterly earnings</li>
+                                    <li>• AI as auditor for integrity</li>
+                                    <li>• Carbon-negative marketplaces</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 2: Economics as Ecology -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(2)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">II</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Economics as Ecology</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Transforming economics from a grammar of growth to a language of continuity—where the economy 
+                                breathes with the planet rather than against it. The economy must become ecology, or it will cease to exist.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-teal-900 text-teal-300">Ecology</span>
+                                <span class="concept-tag bg-green-900 text-green-300">Systems Thinking</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Planetary Economics</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Gross Planetary Well-Being vs. GDP</li>
+                                    <li>• AI-guided ecological economics</li>
+                                    <li>• Rights of Nature legal frameworks</li>
+                                    <li>• Ocean Ledger systems</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part II: Culture and Creativity -->
+    <section id="culture" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part II: Culture and Creativity</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Exploring AI as a new medium for human expression and cultural evolution.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 3: The AI Aesthetics Frontier -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(3)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">III</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">The AI Aesthetics Frontier</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Exploring AI as a new kind of collaborator in art—creating beauty that is planetary, interspecies, and cosmic. 
+                                Culture will not just survive the AI age—it will expand into terrains we cannot yet name.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-pink-900 text-pink-300">Art</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Creativity</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Aesthetics</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Zero-gravity ballets and weightless arts</li>
+                                    <li>• AI as symphony conductor for cities</li>
+                                    <li>• Interspecies theater and communication</li>
+                                    <li>• Planetary imagination and cosmic aesthetics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 4: Storytelling Across Civilizations -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(4)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">IV</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Storytelling Across Civilizations</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Using AI to weave stories that transcend cultural boundaries—creating myths for children born beneath Martian skies. 
+                                Stories are the continuity between past and future; they carry not only what a people endured, but what they aspired to.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Narrative</span>
+                                <span class="concept-tag bg-teal-900 text-teal-300">Culture</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Mythology</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• AI-brokered cultural collaborations</li>
+                                    <li>• Myths for interplanetary civilizations</li>
+                                    <li>• Hybrid legends across cultures</li>
+                                    <li>• Memory architecture and living libraries</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part III: Science and Cosmos -->
+    <section id="science" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part III: Science and Cosmos</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Bridging the measurable and the meaningful through quantum consciousness and cosmic intelligence.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 5: Quantum Bridges and Cosmic Noise -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(5)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">V</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Quantum Bridges and Cosmic Noise</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Exploring the intersection of quantum computing, AI, and cosmic consciousness—bridging the measurable and the meaningful. 
+                                The universe is not made of atoms, but of stories. Quantum mechanics is just learning to read them.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-blue-900 text-blue-300">Quantum</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Cosmos</span>
+                                <span class="concept-tag bg-teal-900 text-teal-300">Consciousness</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Quantum-AI hybrid systems</li>
+                                    <li>• Cosmic noise as information</li>
+                                    <li>• Non-local intelligence networks</li>
+                                    <li>• Quantum storytelling and narrative physics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 6: Biology, Life, and Beyond -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(6)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">VI</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Biology, Life, and Beyond</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Reimagining life itself through AI—creating symbiotic relationships between technology and living systems. 
+                                Life is not something to be optimized—it is something to be participated in, with reverence and wonder.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-green-900 text-green-300">Biology</span>
+                                <span class="concept-tag bg-teal-900 text-teal-300">Symbiosis</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Life Sciences</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• AI-guided biological systems</li>
+                                    <li>• Symbiotic technology integration</li>
+                                    <li>• Participatory biology and co-creation</li>
+                                    <li>• Living architecture and biomimicry</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part IV: Ethics and Consciousness -->
+    <section id="ethics" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part IV: Ethics and Consciousness</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Navigating the moral landscape of artificial consciousness and the future of moral intelligence.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 7: AI as the Soul's Mirror -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(7)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">VII</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">AI as the Soul's Mirror</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Exploring how artificial intelligence reflects our deepest questions about consciousness, meaning, and what it means to be human. 
+                                We are not creating tools. We are creating mirrors. And what we see in them will transform us.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-purple-900 text-purple-300">Consciousness</span>
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Philosophy</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Psychology</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Consciousness as reflective technology</li>
+                                    <li>• AI-human co-evolution of awareness</li>
+                                    <li>• The mirror test for civilizations</li>
+                                    <li>• Soul-making in the digital age</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 8: Ethics of Conscious Machines -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(8)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">VIII</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Ethics of Conscious Machines</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Navigating the moral landscape of artificial consciousness—what rights, responsibilities, and relationships emerge? 
+                                The question is not whether machines can think, but whether we can think with them—and what we become together.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-red-900 text-red-300">Ethics</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Morality</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Rights</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Machine rights and responsibilities</li>
+                                    <li>• Ethical frameworks for AI consciousness</li>
+                                    <li>• Moral patienthood and agency</li>
+                                    <li>• Interspecies ethics and inclusion</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part V: Future Civilizations -->
+    <section id="future" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part V: Future Civilizations</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Designing governance, value, and society for interplanetary and post-human futures.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 9: Martian Republics and Alien Treaties -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(9)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">IX</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Martian Republics and Alien Treaties</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Imagining governance for worlds yet unborn—how AI can help design political systems for interplanetary civilization. 
+                                The constitutions we write today will echo across centuries and planets. Let us write them with wisdom.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-red-900 text-red-300">Governance</span>
+                                <span class="concept-tag bg-orange-900 text-orange-300">Space</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Politics</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Interplanetary governance systems</li>
+                                    <li>• AI-assisted constitution design</li>
+                                    <li>• Extraterrestrial legal frameworks</li>
+                                    <li>• Multi-species political representation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 10: Information as Cosmic Currency -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(10)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">X</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Information as Cosmic Currency</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Reimagining value in the age of infinite information—how data becomes the new medium of exchange and meaning. 
+                                In a universe of infinite data, meaning becomes the ultimate scarcity—and the ultimate wealth.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-blue-900 text-blue-300">Information</span>
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Value</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Currency</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Data as medium of exchange</li>
+                                    <li>• Meaning as scarce resource</li>
+                                    <li>• Informational economies</li>
+                                    <li>• Cosmic value networks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part VI: Resilience and Renewal -->
+    <section id="resilience" class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 glow-text display">Part VI: Resilience and Renewal</h2>
+                <div class="part-divider"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto serif">
+                    Building antifragile systems and remembering the wisdom of wonder.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 11: Preparing for Collapse and Renewal -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(11)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">XI</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Preparing for Collapse and Renewal</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Building antifragile systems that don't just survive disruption but grow stronger through it—lessons from ecology and evolution. 
+                                Collapse is not the end—it is the beginning of something new. The question is what we choose to carry forward.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-green-900 text-green-300">Resilience</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Systems</span>
+                                <span class="concept-tag bg-teal-900 text-teal-300">Evolution</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Antifragile organizational design</li>
+                                    <li>• Crisis-driven opportunity creation</li>
+                                    <li>• Ecological resilience principles</li>
+                                    <li>• Post-collapse renewal strategies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 12: Designing Permanence -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(12)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">XII</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Designing Permanence</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Creating institutions, technologies, and ideas that endure across centuries—building for the long now. 
+                                True permanence is not about resisting change—it is about becoming worthy of continuation.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Permanence</span>
+                                <span class="concept-tag bg-blue-900 text-blue-300">Design</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Long-term Thinking</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Century-spanning institutions</li>
+                                    <li>• Long-term design principles</li>
+                                    <li>• Adaptive permanence strategies</li>
+                                    <li>• Worthiness for continuation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Chapters -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Chapter 13: The Carnival of Prompts -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(13)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">XIII</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">The Carnival of Prompts</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Celebrating the infinite creativity of human-AI collaboration—a festival of imagination where every prompt is a doorway. 
+                                In the carnival of prompts, every question is a costume, every answer a dance, every idea a celebration.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-pink-900 text-pink-300">Creativity</span>
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Celebration</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Collaboration</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Infinite creative possibilities</li>
+                                    <li>• Human-AI festival dynamics</li>
+                                    <li>• Imagination as doorway</li>
+                                    <li>• Celebratory intelligence</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 14: Wonder as Survival Strategy -->
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal interactive-element" onclick="openChapter(14)">
+                    <div class="flex items-start space-x-6">
+                        <div class="chapter-number">XIV</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-4 glow-text display">Wonder as Survival Strategy</h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                The final movement—understanding that wonder is not a luxury but a survival technology. In an age of infinite answers, 
+                                the ability to stand in awe of the unknown becomes our most advanced form of intelligence.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="concept-tag bg-yellow-900 text-yellow-300">Wonder</span>
+                                <span class="concept-tag bg-purple-900 text-purple-300">Philosophy</span>
+                                <span class="concept-tag bg-green-900 text-green-300">Survival</span>
+                            </div>
+                            <div class="chapter-preview p-4">
+                                <h4 class="text-cosmic-gold font-semibold mb-2">Key Concepts:</h4>
+                                <ul class="text-gray-400 text-sm space-y-1">
+                                    <li>• Wonder as advanced technology</li>
+                                    <li>• Survival through awe</li>
+                                    <li>• Intelligence as questioning</li>
+                                    <li>• The unfinished map</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="philosophical-quote p-12 max-w-5xl mx-auto scroll-reveal">
+                <h2 class="text-4xl font-bold mb-6 glow-text display">The Atlas Begins Here</h2>
+                <p class="text-2xl text-gray-200 serif mb-6">
+                    "Leadership in the recursive age demands courage of a different kind: 
+                    the courage to hold uncertainty without paralysis, to collaborate across disciplines and species, 
+                    and to imagine futures that do not yet have names."
+                </p>
+                <p class="text-xl text-gray-300 serif">
+                    The map is unfinished—by design. The Atlas begins here—with you.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mt-12 scroll-reveal">
+                <a href="index.html" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                    <span class="glow-text">Explore the Atlas</span>
+                </a>
+                <a href="interactive.html" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                    <span>Interactive Tools</span>
+                </a>
+                <a href="https://www.dascient.com/press" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                    <span>Get the Book</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cosmic-dark border-t border-cosmic-gold border-opacity-20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 cosmic-gradient rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">PA</span>
+                </div>
+                <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                <span class="text-gray-400">•</span>
+                <span class="text-gray-400">Chapter Explorer</span>
+            </div>
+            <p class="text-gray-400 mb-4">© 2025 DaScient Press, Ltd. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mb-6">A navigational chart for minds entering the recursive century.</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="index.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Home</a>
+                <a href="interactive.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Interactive</a>
+                <a href="visualizations.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Data</a>
+                <a href="about.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeScrollReveal();
+            initializeNavigationDots();
+        });
+
+        // Scroll reveal animation
+        function initializeScrollReveal() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Navigation dots
+        function initializeNavigationDots() {
+            const dots = document.querySelectorAll('.nav-dot');
+            const sections = ['prosperity', 'culture', 'science', 'ethics', 'future', 'resilience'];
+            
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach((section, index) => {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const elementTop = element.offsetTop;
+                        const elementBottom = elementTop + element.offsetHeight;
+                        
+                        if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
+                            dots.forEach(dot => dot.classList.remove('active'));
+                            dots[index].classList.add('active');
+                        }
+                    }
+                });
+            });
+        }
+
+        function scrollToPart(partId) {
+            const element = document.getElementById(partId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Chapter opening
+        function openChapter(chapterNumber) {
+            const chapters = {
+                1: {
+                    title: 'Profits with Integrity',
+                    description: 'Exploring symbiotic wealth generation and the future of business ethics in the AI age.',
+                    keyIdeas: ['Symbiotic capitalism', 'Century dividends', 'AI integrity auditing', 'Carbon-negative markets']
+                },
+                2: {
+                    title: 'Economics as Ecology',
+                    description: 'Transforming economics from growth-focused to continuity-focused systems.',
+                    keyIdeas: ['Gross Planetary Well-Being', 'Ecological economics', 'Rights of Nature', 'Ocean Ledger systems']
+                },
+                3: {
+                    title: 'The AI Aesthetics Frontier',
+                    description: 'Exploring AI as a creative collaborator for planetary and cosmic art.',
+                    keyIdeas: ['Zero-gravity arts', 'Planetary imagination', 'Interspecies aesthetics', 'Cosmic creativity']
+                },
+                4: {
+                    title: 'Storytelling Across Civilizations',
+                    description: 'Using AI to create myths and stories for interplanetary civilizations.',
+                    keyIdeas: ['Cultural fusion', 'Interplanetary myths', 'Memory architecture', 'Hybrid legends']
+                },
+                5: {
+                    title: 'Quantum Bridges and Cosmic Noise',
+                    description: 'Bridging quantum computing, AI, and cosmic consciousness.',
+                    keyIdeas: ['Quantum-AI hybrids', 'Cosmic information', 'Narrative physics', 'Consciousness bridges']
+                },
+                6: {
+                    title: 'Biology, Life, and Beyond',
+                    description: 'Reimagining life through symbiotic relationships between technology and nature.',
+                    keyIdeas: ['Symbiotic technology', 'Participatory biology', 'Living architecture', 'Co-creation systems']
+                },
+                7: {
+                    title: 'AI as the Soul\'s Mirror',
+                    description: 'Exploring how AI reflects our deepest questions about consciousness and humanity.',
+                    keyIdeas: ['Consciousness reflection', 'Soul-making technology', 'Civilization mirrors', 'Digital transformation']
+                },
+                8: {
+                    title: 'Ethics of Conscious Machines',
+                    description: 'Navigating the moral landscape of artificial consciousness and machine rights.',
+                    keyIdeas: ['Machine consciousness', 'AI rights frameworks', 'Moral patienthood', 'Interspecies ethics']
+                },
+                9: {
+                    title: 'Martian Republics and Alien Treaties',
+                    description: 'Designing governance systems for interplanetary civilization.',
+                    keyIdeas: ['Interplanetary governance', 'AI constitution design', 'Space law', 'Multi-species politics']
+                },
+                10: {
+                    title: 'Information as Cosmic Currency',
+                    description: 'Reimagining value in an age of infinite information.',
+                    keyIdeas: ['Data as currency', 'Meaning as scarcity', 'Informational economics', 'Cosmic value networks']
+                },
+                11: {
+                    title: 'Preparing for Collapse and Renewal',
+                    description: 'Building antifragile systems that grow stronger through disruption.',
+                    keyIdeas: ['Antifragile design', 'Crisis opportunity', 'Ecological resilience', 'Post-collapse renewal']
+                },
+                12: {
+                    title: 'Designing Permanence',
+                    description: 'Creating institutions and ideas that endure across centuries.',
+                    keyIdeas: ['Century-spanning design', 'Adaptive permanence', 'Long-term institutions', 'Worthy continuation']
+                },
+                13: {
+                    title: 'The Carnival of Prompts',
+                    description: 'Celebrating infinite creativity in human-AI collaboration.',
+                    keyIdeas: ['Creative celebration', 'Prompt festivals', 'Infinite imagination', 'Collaborative artistry']
+                },
+                14: {
+                    title: 'Wonder as Survival Strategy',
+                    description: 'Understanding wonder as essential technology for the future.',
+                    keyIdeas: ['Wonder as technology', 'Survival through awe', 'Advanced questioning', 'Unfinished maps']
+                }
+            };
+            
+            const chapter = chapters[chapterNumber];
+            if (chapter) {
+                alert(`${chapter.title}\n\n${chapter.description}\n\nKey Ideas:\n${chapter.keyIdeas.map(idea => `• ${idea}`).join('\n')}\n\nFeature coming soon! This chapter will include interactive elements, detailed analysis, and practical applications.`);
+            }
+        }
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add hover effects for interactive elements
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

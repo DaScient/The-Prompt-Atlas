@@ -1,0 +1,358 @@
+[
+  {
+    "id": 1,
+    "title": "Profits & Purpose",
+    "subtitle": "Aligning financial success with meaningful impact",
+    "themes": ["business", "purpose", "wealth", "impact"],
+    "summary": "Explore the intersection of financial success and meaningful purpose. This chapter challenges traditional profit-first thinking and guides you toward creating sustainable value that serves both your bottom line and the greater good.",
+    "prompts": [
+      {
+        "id": "p1_001",
+        "text": "What would your business look like if profit was a byproduct of purpose, not the primary goal?",
+        "category": "vision",
+        "relatedChapters": [1, 2],
+        "difficulty": "intermediate",
+        "estimatedTime": 10,
+        "tags": ["purpose", "vision", "business-model"]
+      },
+      {
+        "id": "p1_002",
+        "text": "How can you measure success beyond financial metrics?",
+        "category": "metrics",
+        "relatedChapters": [1, 7],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["success", "metrics", "holistic"]
+      },
+      {
+        "id": "p1_003",
+        "text": "What legacy do you want your work to create in the world?",
+        "category": "legacy",
+        "relatedChapters": [1, 14],
+        "difficulty": "advanced",
+        "estimatedTime": 15,
+        "tags": ["legacy", "impact", "long-term"]
+      }
+    ],
+    "caseStudies": [
+      {
+        "id": "cs1_001",
+        "title": "Patagonia: Profits with Purpose",
+        "narrative": "Patagonia transformed from a small climbing equipment company into a global brand that donates 1% of sales to environmental causes. Their 'Don't Buy This Jacket' campaign paradoxically increased sales while promoting conscious consumption.",
+        "prompts": [
+          "How did Patagonia turn anti-consumption messaging into business growth?",
+          "What tensions exist between profit and purpose in your industry?",
+          "How can you create authentic brand values that customers trust?"
+        ],
+        "visualAssets": ["patagonia_campaign.jpg", "growth_chart.png"],
+        "estimatedDuration": 20
+      }
+    ],
+    "visualTheme": "profits",
+    "exercises": [
+      {
+        "id": "e1_001",
+        "type": "journaling",
+        "title": "Purpose Statement Workshop",
+        "instructions": "Craft a clear purpose statement that guides your business decisions. Consider your impact on customers, community, and the environment.",
+        "durationMinutes": 15,
+        "requiredTools": ["notebook", "pen"],
+        "difficulty": "intermediate",
+        "template": {
+          "placeholder": "Our purpose is to [action] for [audience] by [method] while [impact]...",
+          "suggestions": [
+            "Focus on who you serve, not what you sell",
+            "Include both immediate and long-term impact",
+            "Make it specific enough to guide decisions"
+          ],
+          "wordLimit": 50
+        }
+      },
+      {
+        "id": "e1_002",
+        "type": "visualization",
+        "title": "Future Impact Visualization",
+        "instructions": "Visualize your business in 10 years, operating at the intersection of profit and purpose. What does success look like across multiple dimensions?",
+        "durationMinutes": 20,
+        "requiredTools": ["quiet space"],
+        "difficulty": "beginner"
+      }
+    ],
+    "estimatedDuration": 45,
+    "difficulty": "intermediate",
+    "relatedChapters": [2, 7, 14],
+    "metadata": {
+      "author": "Prompt Atlas Team",
+      "lastUpdated": "2024-01-15T10:00:00Z",
+      "version": "1.0",
+      "prerequisites": [],
+      "relatedTopics": ["social entrepreneurship", "sustainable business", "impact investing"]
+    }
+  },
+  {
+    "id": 2,
+    "title": "Ecology of Ideas",
+    "subtitle": "Understanding how thoughts and innovations spread",
+    "themes": ["ecology", "ideas", "innovation", "systems"],
+    "summary": "Discover how ideas evolve, spread, and create ecosystems of their own. Learn to nurture innovative thinking and understand the interconnected nature of creative breakthroughs.",
+    "prompts": [
+      {
+        "id": "p2_001",
+        "text": "What ideas are you cultivating that could grow into something larger?",
+        "category": "cultivation",
+        "relatedChapters": [2, 13],
+        "difficulty": "intermediate",
+        "estimatedTime": 8,
+        "tags": ["ideas", "growth", "potential"]
+      },
+      {
+        "id": "p2_002",
+        "text": "How do you create environments where creativity can flourish?",
+        "category": "environment",
+        "relatedChapters": [2, 14],
+        "difficulty": "advanced",
+        "estimatedTime": 12,
+        "tags": ["creativity", "environment", "culture"]
+      }
+    ],
+    "caseStudies": [
+      {
+        "id": "cs2_001",
+        "title": "The Silicon Valley Ecosystem",
+        "narrative": "How Stanford University, venture capital, and a culture of failure created an innovation ecosystem that transformed global technology and business.",
+        "prompts": [
+          "What environmental factors enabled Silicon Valley's success?",
+          "How can you create similar conditions in your context?",
+          "What role does failure play in innovation ecosystems?"
+        ],
+        "estimatedDuration": 15
+      }
+    ],
+    "visualTheme": "ecology",
+    "exercises": [
+      {
+        "id": "e2_001",
+        "type": "meditation",
+        "title": "Ecosystem Meditation",
+        "instructions": "Meditate on your current projects as an interconnected ecosystem. How do they support and influence each other?",
+        "durationMinutes": 10,
+        "requiredTools": ["quiet space"],
+        "difficulty": "beginner"
+      }
+    ],
+    "estimatedDuration": 35,
+    "difficulty": "intermediate",
+    "relatedChapters": [1, 13, 14],
+    "metadata": {
+      "author": "Prompt Atlas Team",
+      "lastUpdated": "2024-01-15T10:00:00Z",
+      "version": "1.0",
+      "prerequisites": [1],
+      "relatedTopics": ["innovation theory", "systems thinking", "creative ecosystems"]
+    }
+  },
+  {
+    "id": 7,
+    "title": "Mirror of Self",
+    "subtitle": "Reflecting on identity and personal transformation",
+    "themes": ["identity", "reflection", "transformation", "self-awareness"],
+    "summary": "Journey into self-discovery through the metaphor of mirrors. Explore how self-perception shapes reality and learn techniques for authentic self-reflection and personal growth.",
+    "prompts": [
+      {
+        "id": "p7_001",
+        "text": "What aspects of yourself do you avoid looking at directly?",
+        "category": "shadow",
+        "relatedChapters": [7, 13],
+        "difficulty": "advanced",
+        "estimatedTime": 15,
+        "tags": ["shadow", "self-awareness", "growth"]
+      },
+      {
+        "id": "p7_002",
+        "text": "How do you want to evolve in the next year?",
+        "category": "evolution",
+        "relatedChapters": [7, 14],
+        "difficulty": "intermediate",
+        "estimatedTime": 10,
+        "tags": ["evolution", "growth", "future"]
+      }
+    ],
+    "caseStudies": [
+      {
+        "id": "cs7_001",
+        "title": "The Mirror Exercise in Leadership",
+        "narrative": "How a Fortune 500 CEO used daily mirror work to transform their leadership style and company culture, leading to unprecedented employee satisfaction and business results.",
+        "prompts": [
+          "How does self-perception influence leadership effectiveness?",
+          "What practices help you maintain authentic self-awareness?",
+          "How do you handle the discomfort of honest self-reflection?"
+        ],
+        "estimatedDuration": 18
+      }
+    ],
+    "visualTheme": "mirror",
+    "exercises": [
+      {
+        "id": "e7_001",
+        "type": "mirrorReflection",
+        "title": "Mirror Reflection Practice",
+        "instructions": "Spend time looking into your own eyes in a mirror. What do you see? What emotions arise? What truths become visible?",
+        "durationMinutes": 10,
+        "requiredTools": ["mirror", "private space"],
+        "difficulty": "beginner"
+      },
+      {
+        "id": "e7_002",
+        "type": "journaling",
+        "title": "Identity Exploration",
+        "instructions": "Write about the different 'selves' you present to the world. Which are authentic? Which are masks?",
+        "durationMinutes": 20,
+        "requiredTools": ["journal", "pen"],
+        "difficulty": "advanced"
+      }
+    ],
+    "estimatedDuration": 40,
+    "difficulty": "advanced",
+    "relatedChapters": [1, 2, 14],
+    "metadata": {
+      "author": "Prompt Atlas Team",
+      "lastUpdated": "2024-01-15T10:00:00Z",
+      "version": "1.0",
+      "prerequisites": [1, 2],
+      "relatedTopics": ["self-awareness", "transformation", "authentic leadership"]
+    }
+  },
+  {
+    "id": 13,
+    "title": "Carnival of Ideas",
+    "subtitle": "Embracing chaos and creativity in innovation",
+    "themes": ["creativity", "chaos", "innovation", "play"],
+    "summary": "Explore the wild, unpredictable nature of creative breakthroughs. Learn to embrace chaos, foster play, and create conditions where revolutionary ideas can emerge and flourish.",
+    "prompts": [
+      {
+        "id": "p13_001",
+        "text": "What would you create if you knew you couldn't fail?",
+        "category": "possibility",
+        "relatedChapters": [13, 14],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["creativity", "possibility", "fear"]
+      },
+      {
+        "id": "p13_002",
+        "text": "How can you inject more play into your serious work?",
+        "category": "play",
+        "relatedChapters": [13, 2],
+        "difficulty": "intermediate",
+        "estimatedTime": 8,
+        "tags": ["play", "work", "balance"]
+      }
+    ],
+    "caseStudies": [
+      {
+        "id": "cs13_001",
+        "title": "Google's 20% Time",
+        "narrative": "How Google's policy of allowing employees to spend 20% of their time on passion projects led to innovations like Gmail, AdSense, and Google News.",
+        "prompts": [
+          "What conditions allow creative chaos to flourish?",
+          "How do you balance structure and freedom in innovation?",
+          "What would your 20% project be?"
+        ],
+        "estimatedDuration": 12
+      }
+    ],
+    "visualTheme": "carnival",
+    "exercises": [
+      {
+        "id": "e13_001",
+        "type": "festivalDesign",
+        "title": "Innovation Festival Design",
+        "instructions": "Design a one-day 'festival of ideas' for your team or organization. What activities, environments, and rules would foster maximum creativity?",
+        "durationMinutes": 25,
+        "requiredTools": ["paper", "colored pens"],
+        "difficulty": "intermediate"
+      }
+    ],
+    "estimatedDuration": 30,
+    "difficulty": "intermediate",
+    "relatedChapters": [1, 2, 7, 14],
+    "metadata": {
+      "author": "Prompt Atlas Team",
+      "lastUpdated": "2024-01-15T10:00:00Z",
+      "version": "1.0",
+      "prerequisites": [1, 2, 7],
+      "relatedTopics": ["creative process", "innovation culture", "play-based learning"]
+    }
+  },
+  {
+    "id": 14,
+    "title": "Wonder & Awe",
+    "subtitle": "Cultivating curiosity and transcendent thinking",
+    "themes": ["wonder", "awe", "curiosity", "transcendence"],
+    "summary": "Reconnect with the sense of wonder that drives human progress and innovation. Learn practices for maintaining curiosity, experiencing awe, and thinking beyond conventional boundaries.",
+    "prompts": [
+      {
+        "id": "p14_001",
+        "text": "When did you last feel genuine awe? What sparked it?",
+        "category": "awe",
+        "relatedChapters": [14, 7],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["awe", "experience", "wonder"]
+      },
+      {
+        "id": "p14_002",
+        "text": "What questions about the universe keep you up at night?",
+        "category": "curiosity",
+        "relatedChapters": [14, 2],
+        "difficulty": "intermediate",
+        "estimatedTime": 10,
+        "tags": ["curiosity", "universe", "questions"]
+      }
+    ],
+    "caseStudies": [
+      {
+        "id": "cs14_001",
+        "title": "The Overview Effect",
+        "narrative": "How astronauts experiencing Earth from space report profound shifts in consciousness, leading to new perspectives on humanity, borders, and our place in the universe.",
+        "prompts": [
+          "What perspectives have fundamentally shifted your worldview?",
+          "How can we cultivate 'overview effect' thinking without leaving Earth?",
+          "What boundaries in your thinking need to be transcended?"
+        ],
+        "estimatedDuration": 15
+      }
+    ],
+    "visualTheme": "wonder",
+    "exercises": [
+      {
+        "id": "e14_001",
+        "type": "visualization",
+        "title": "Cosmic Perspective",
+        "instructions": "Visualize yourself floating in space, looking at Earth. Feel the awe and perspective shift. How does this change your view of your daily concerns?",
+        "durationMinutes": 15,
+        "requiredTools": ["quiet space", "imagination"],
+        "difficulty": "beginner"
+      },
+      {
+        "id": "e14_002",
+        "type": "journaling",
+        "title": "Curiosity Questions",
+        "instructions": "Write 20 questions about anything that puzzles or fascinates you. Don't censor or judge—let pure curiosity guide you.",
+        "durationMinutes": 15,
+        "requiredTools": ["journal", "pen"],
+        "difficulty": "intermediate"
+      }
+    ],
+    "estimatedDuration": 40,
+    "difficulty": "beginner",
+    "relatedChapters": [1, 2, 7, 13],
+    "metadata": {
+      "author": "Prompt Atlas Team",
+      "lastUpdated": "2024-01-15T10:00:00Z",
+      "version": "1.0",
+      "prerequisites": [],
+      "relatedTopics": ["curiosity", "transcendence", "cosmic perspective", "innovation"]
+    }
+  }
+]

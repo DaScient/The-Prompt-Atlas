@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Prompt Atlas: Kronos Edition '25 - DaScient Press</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e67e22;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --bg-primary: #fefefe;
+            --bg-secondary: #f8f9fa;
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .serif { font-family: 'Crimson Text', serif; }
+        
+        .gradient-text { 
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover { 
+            transition: all 0.4s ease; 
+            border: 1px solid rgba(44, 62, 80, 0.1);
+        }
+        
+        .card-hover:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15); 
+            border-color: var(--accent-color);
+        }
+        
+        .floating { 
+            animation: float 8s ease-in-out infinite; 
+        }
+        
+        @keyframes float { 
+            0%, 100% { transform: translateY(0px); } 
+            50% { transform: translateY(-30px); } 
+        }
+        
+        .glow { 
+            box-shadow: 0 0 40px rgba(230, 126, 34, 0.2); 
+        }
+        
+        .chapter-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(44, 62, 80, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .chapter-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-8px);
+        }
+        
+        .philosophical-quote {
+            border-left: 4px solid var(--accent-color);
+            font-style: italic;
+            background: rgba(230, 126, 34, 0.05);
+        }
+        
+        .movement-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(44, 62, 80, 0.1);
+            line-height: 1;
+        }
+        
+        .kronos-badge {
+            background: linear-gradient(135deg, #2c3e50 0%, #e67e22 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .isbn-box {
+            background: rgba(44, 62, 80, 0.05);
+            border: 2px dashed var(--accent-color);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .foreword-highlight {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(52, 73, 94, 0.1) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .interactive-concept {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .interactive-concept:hover {
+            background: rgba(230, 126, 34, 0.1);
+            transform: translateX(8px);
+        }
+        
+        .concept-active {
+            background: rgba(230, 126, 34, 0.2);
+            border-left: 4px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-gray-800 to-orange-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">PA</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold gradient-text">The Prompt Atlas</span>
+                        <span class="text-sm text-gray-500 ml-2">Kronos Edition '25</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="chapters.html" class="text-gray-600 hover:text-gray-900 transition-colors">Chapters</a>
+                    <a href="interactive.html" class="text-gray-600 hover:text-gray-900 transition-colors">Interactive</a>
+                    <a href="visualizations.html" class="text-gray-600 hover:text-gray-900 transition-colors">Data</a>
+                    <a href="about.html" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+                    <a href="kronos-edition.html" class="text-gray-900 font-medium">Kronos Edition</a>
+                </div>
+                <button class="md:hidden text-gray-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div id="hero-canvas" class="absolute inset-0 opacity-30"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <div class="kronos-badge floating">Kronos Edition • 2025</div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-8 gradient-text serif floating">
+                    The Prompt Atlas
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-600 mb-8 max-w-4xl mx-auto serif italic">
+                    A Navigational Chart for Minds Entering the Recursive Century
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <span class="px-6 py-2 bg-gray-100 text-gray-700 rounded-full text-sm border border-gray-300">DaScient Press</span>
+                    <span class="px-6 py-2 bg-orange-100 text-orange-700 rounded-full text-sm border border-orange-300">Accessible Intelligence</span>
+                    <span class="px-6 py-2 bg-blue-100 text-blue-700 rounded-full text-sm border border-blue-300">Philosophical AI</span>
+                    <span class="px-6 py-2 bg-green-100 text-green-700 rounded-full text-sm border border-green-300">Future Studies</span>
+                </div>
+                
+                <div class="philosophical-quote p-6 max-w-4xl mx-auto">
+                    <p class="text-xl text-gray-700 serif mb-4">
+                        "In an era where artificial intelligence shapes not just tools but thought itself, 
+                        <strong>The Prompt Atlas</strong> offers a navigational chart for minds entering the recursive century."
+                    </p>
+                    <p class="text-lg text-gray-600 serif">
+                        It bridges architecture, science, philosophy, and myth to ask one enduring question: 
+                        <em>how should intelligence—human or artificial—build the future it deserves?</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Book Overview -->
+            <section class="mb-20">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-2">
+                        <h2 class="text-4xl font-bold mb-8 gradient-text serif">The Journey</h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                                Across its <strong>seven movements</strong>, the Atlas unfolds a grand conversation between technology and conscience: 
+                                economies that heal rather than extract, art that collaborates with algorithms, biology guided by symbiosis, 
+                                and governance imagined for planets yet unborn.
+                            </p>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                                It treats prompts not as commands, but as <em>instruments of discovery</em>—blueprints for futures that learn 
+                                to question themselves. Profoundly practical yet philosophically alive, The Prompt Atlas invites leaders, 
+                                builders, and dreamers to treat AI as mirror and companion, not master.
+                            </p>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-8">
+                                It is a call to sustain integrity in data as we do in stone, to design permanence through adaptability, 
+                                and to remember that progress without wonder is merely acceleration.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-2xl p-8 border-l-4 border-orange-500">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Every page is a coordinate; every question, a compass.</h3>
+                            <p class="text-xl text-gray-600 serif italic">The map is unfinished—by design.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="chapter-card rounded-2xl p-6 glow">
+                            <div class="text-center mb-4">
+                                <div class="w-32 h-40 bg-gradient-to-b from-gray-800 to-orange-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                    <div class="text-white text-center">
+                                        <div class="text-2xl font-bold mb-2">THE</div>
+                                        <div class="text-lg mb-1">PROMPT</div>
+                                        <div class="text-3xl font-bold">ATLAS</div>
+                                        <div class="text-sm mt-2 opacity-80">KRONOS EDITION</div>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">Publication Details</h3>
+                            </div>
+                            
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Publisher:</span>
+                                    <span class="text-gray-800 font-medium">DaScient Press, Ltd.</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Series:</span>
+                                    <span class="text-gray-800 font-medium">Accessible Intelligence</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Edition:</span>
+                                    <span class="text-gray-800 font-medium">Kronos Edition '25</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Format:</span>
+                                    <span class="text-gray-800 font-medium">Kindle</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Year:</span>
+                                    <span class="text-gray-800 font-medium">2025</span>
+                                </div>
+                            </div>
+                            
+                            <div class="isbn-box rounded-lg p-4 mt-6 text-center">
+                                <div class="text-xs text-gray-600 mb-2">ISBN</div>
+                                <div class="text-lg font-mono text-gray-800">978-1-66804-XXX-X</div>
+                            </div>
+                        </div>
+                        
+                        <div class="chapter-card rounded-2xl p-6">
+                            <h4 class="text-lg font-semibold mb-3 text-gray-800">Available At</h4>
+                            <div class="space-y-3">
+                                <button class="w-full px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium">
+                                    Amazon Kindle Store
+                                </button>
+                                <button class="w-full px-4 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                                    Apple Books
+                                </button>
+                                <button class="w-full px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                                    DaScient Direct
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seven Movements -->
+            <section class="mb-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold mb-6 gradient-text serif">Seven Movements</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        A symphony of ideas exploring the intersection of technology, philosophy, and human potential
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">I</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">The Recursive Century</h3>
+                        <p class="text-gray-600 mb-4">
+                            Understanding how AI shapes not just tools but thought itself, creating 
+                            recursive loops of human-machine co-evolution.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Philosophy</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Cognition</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">II</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Healing Economies</h3>
+                        <p class="text-gray-600 mb-4">
+                            Exploring economic systems that restore rather than extract, using AI 
+                            to create regenerative models of prosperity.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Economics</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">Sustainability</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">III</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Collaborative Art</h3>
+                        <p class="text-gray-600 mb-4">
+                            Examining the intersection of human creativity and algorithmic expression, 
+                            forging new forms of artistic collaboration.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Creativity</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">Art</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">IV</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Symbiotic Biology</h3>
+                        <p class="text-gray-600 mb-4">
+                            Investigating how AI can guide biological systems toward symbiosis, 
+                            creating harmony between technology and nature.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">Biology</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">Symbiosis</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">V</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Planetary Governance</h3>
+                        <p class="text-gray-600 mb-4">
+                            Imagining governance systems designed for worlds yet unborn, 
+                            using AI to create adaptive, ethical frameworks.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Governance</span>
+                            <span class="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-sm">Ethics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover">
+                        <div class="movement-number">VI</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Instruments of Discovery</h3>
+                        <p class="text-gray-600 mb-4">
+                            Treating prompts as tools for exploration, creating blueprints for 
+                            futures that learn to question themselves.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">Prompts</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">Discovery</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8 card-hover md:col-span-2 lg:col-span-3">
+                        <div class="movement-number">VII</div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 serif">Mirrors and Companions</h3>
+                        <p class="text-gray-600 mb-4">
+                            The culmination of our journey—learning to treat AI as both mirror and companion, 
+                            not master. Sustaining integrity in data as we do in stone, designing permanence 
+                            through adaptability, and remembering that progress without wonder is merely acceleration.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">Integration</span>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">Wonder</span>
+                            <span class="px-3 py-1 bg-lime-100 text-lime-700 rounded-full text-sm">Integrity</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Foreword by Alfredo M. Tadaya -->
+            <section class="mb-20">
+                <div class="foreword-highlight">
+                    <div class="text-center mb-8">
+                        <h2 class="text-4xl font-bold mb-4 gradient-text serif">Foreword</h2>
+                        <p class="text-xl text-gray-600">By Alfredo M. Tadaya</p>
+                    </div>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 serif">
+                            "When I first encountered The Prompt Atlas, I was struck by its audacious ambition: 
+                            to create a navigational chart for minds entering what the authors call 'the recursive century.' 
+                            In an age where artificial intelligence shapes not merely our tools but our very patterns of thought, 
+                            such a chart is not just helpful—it is essential."
+                        </p>
+                        
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 serif">
+                            "What makes this work remarkable is its refusal to treat AI as either savior or demon. 
+                            Instead, it presents artificial intelligence as what it truly is: a mirror reflecting our own 
+                            intelligence back to us, sometimes distorted, sometimes clarified, but always revealing."
+                        </p>
+                        
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 serif">
+                            "The seven movements of this Atlas take us on a journey through the landscape of our possible futures, 
+                            each chapter a coordinate, each insight a compass point. From healing economies to symbiotic biology, 
+                            from collaborative art to planetary governance, we are invited to imagine not just what AI can do, 
+                            but what kind of future we want to build with it."
+                        </p>
+                        
+                        <p class="text-lg text-gray-700 leading-relaxed serif">
+                            "This is not a book about technology. It is a book about humanity's next chapter, 
+                            written in collaboration with the very tools that will help shape it. The map is unfinished—by design. 
+                            The question is not whether we will complete it, but what kind of cartographers we will choose to become."
+                        </p>
+                        
+                        <div class="text-right mt-8">
+                            <p class="text-gray-600 font-medium">— Alfredo M. Tadaya</p>
+                            <p class="text-gray-500 text-sm">Author, "The Recursive Mind"</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Philosophy Explorer -->
+            <section class="mb-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-6 gradient-text serif">Philosophical Concepts Explorer</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Interactive exploration of the key philosophical concepts that shape our understanding of AI and the future
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="chapter-card rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Core Concepts</h3>
+                        <div class="space-y-4">
+                            <div class="interactive-concept" onclick="exploreConcept('recursive-thought')">
+                                <h4 class="font-semibold text-gray-800 mb-2">Recursive Thought</h4>
+                                <p class="text-gray-600 text-sm">How AI shapes not just tools but thought itself</p>
+                            </div>
+                            <div class="interactive-concept" onclick="exploreConcept('intelligence-mirror')">
+                                <h4 class="font-semibold text-gray-800 mb-2">Intelligence as Mirror</h4>
+                                <p class="text-gray-600 text-sm">AI reflecting human intelligence back to us</p>
+                            </div>
+                            <div class="interactive-concept" onclick="exploreConcept('symbiotic-future')">
+                                <h4 class="font-semibold text-gray-800 mb-2">Symbiotic Futures</h4>
+                                <p class="text-gray-600 text-sm">Harmony between technology and nature</p>
+                            </div>
+                            <div class="interactive-concept" onclick="exploreConcept('wonder-progress')">
+                                <h4 class="font-semibold text-gray-800 mb-2">Wonder & Progress</h4>
+                                <p class="text-gray-600 text-sm">Progress without wonder is merely acceleration</p>
+                            </div>
+                            <div class="interactive-concept" onclick="exploreConcept('unfinished-map')">
+                                <h4 class="font-semibold text-gray-800 mb-2">The Unfinished Map</h4>
+                                <p class="text-gray-600 text-sm">By design, the map remains incomplete</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chapter-card rounded-2xl p-8">
+                        <div id="concept-explorer">
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800">Concept Visualization</h3>
+                            <div id="concept-canvas" style="height: 400px;" class="bg-gray-50 rounded-lg flex items-center justify-center">
+                                <div class="text-center text-gray-500">
+                                    <div class="text-4xl mb-4">🧭</div>
+                                    <p>Click on a concept to explore its connections</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Copyright & Publisher Info -->
+            <section class="mb-20">
+                <div class="chapter-card rounded-2xl p-8 glow">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800">Publisher's Note</h3>
+                            <div class="space-y-4 text-gray-700">
+                                <p>
+                                    <strong>DaScient Press, Ltd.</strong> upholds the creative integrity of all authors, artists, and thinkers. 
+                                    Copyright isn't red tape—it's the very scaffolding of culture.
+                                </p>
+                                <p>
+                                    By purchasing an authorized copy and respecting these rights, you help sustain diverse voices 
+                                    and protect intellectual labor.
+                                </p>
+                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mt-6">
+                                    <h4 class="font-semibold text-orange-800 mb-2">AI Training Prohibition</h4>
+                                    <p class="text-orange-700 text-sm">
+                                        This publication and its contents may not be used, in whole or in part, 
+                                        for the training or development of artificial intelligence systems or any other high-caliber technologies.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6 text-gray-800">Publication Details</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Publisher:</span>
+                                    <span class="text-gray-800 font-medium">DaScient Press, Ltd.</span>
+                                </div>
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Division:</span>
+                                    <span class="text-gray-800 font-medium">DaScient, LLC</span>
+                                </div>
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Address:</span>
+                                    <span class="text-gray-800 font-medium">1200 Pearl St. Boulder, CO</span>
+                                </div>
+                                <div class="flex justify-between py-2 border-b border-gray-200">
+                                    <span class="text-gray-600">Contact:</span>
+                                    <span class="text-gray-800 font-medium">kindle@dascient.com</span>
+                                </div>
+                                <div class="flex justify-between py-2">
+                                    <span class="text-gray-600">Website:</span>
+                                    <span class="text-gray-800 font-medium">www.dascient.com/the-prompt-atlas</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="font-semibold text-gray-800 mb-3">GitHub Repository</h4>
+                                <a href="https://github.com/dascient/prompt-atlas-ecl" class="inline-flex items-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    <span>View Source Code</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-r from-gray-600 to-orange-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">PA</span>
+                </div>
+                <span class="text-xl font-bold text-white">The Prompt Atlas</span>
+                <span class="text-gray-400">•</span>
+                <span class="text-gray-400">Kronos Edition '25</span>
+            </div>
+            <p class="text-gray-400 mb-4">© 2025 DaScient Press, Ltd. All rights reserved.</p>
+            <p class="text-gray-500 text-sm">A navigational chart for minds entering the recursive century.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Three.js background
+        function initHeroBackground() {
+            const container = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            // Create interconnected nodes
+            const nodes = [];
+            const nodeCount = 30;
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const geometry = new THREE.SphereGeometry(0.3, 8, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: new THREE.Color().setHSL(0.1 + Math.random() * 0.1, 0.6, 0.4 + Math.random() * 0.2),
+                    transparent: true,
+                    opacity: 0.7
+                });
+                const sphere = new THREE.Mesh(geometry, material);
+                
+                sphere.position.x = (Math.random() - 0.5) * 60;
+                sphere.position.y = (Math.random() - 0.5) * 40;
+                sphere.position.z = (Math.random() - 0.5) * 40;
+                
+                sphere.userData = {
+                    velocity: new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.01,
+                        (Math.random() - 0.5) * 0.01,
+                        (Math.random() - 0.5) * 0.01
+                    )
+                };
+                
+                nodes.push(sphere);
+                scene.add(sphere);
+            }
+
+            // Create connections
+            const connections = [];
+            for (let i = 0; i < nodeCount; i++) {
+                for (let j = i + 1; j < nodeCount; j++) {
+                    const distance = nodes[i].position.distanceTo(nodes[j].position);
+                    if (distance < 20 && Math.random() < 0.4) {
+                        const geometry = new THREE.BufferGeometry().setFromPoints([
+                            nodes[i].position,
+                            nodes[j].position
+                        ]);
+                        const material = new THREE.LineBasicMaterial({
+                            color: 0x666666,
+                            opacity: 0.2,
+                            transparent: true
+                        });
+                        const line = new THREE.Line(geometry, material);
+                        connections.push(line);
+                        scene.add(line);
+                    }
+                }
+            }
+
+            camera.position.z = 50;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Update node positions
+                nodes.forEach(node => {
+                    node.position.add(node.userData.velocity);
+                    
+                    // Bounce off boundaries
+                    if (Math.abs(node.position.x) > 30) node.userData.velocity.x *= -1;
+                    if (Math.abs(node.position.y) > 20) node.userData.velocity.y *= -1;
+                    if (Math.abs(node.position.z) > 20) node.userData.velocity.z *= -1;
+                });
+
+                // Update connections
+                connections.forEach(line => {
+                    line.geometry.attributes.position.needsUpdate = true;
+                });
+
+                scene.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        // Concept exploration
+        function exploreConcept(concept) {
+            // Remove active class from all concepts
+            document.querySelectorAll('.interactive-concept').forEach(el => {
+                el.classList.remove('concept-active');
+            });
+            
+            // Add active class to clicked concept
+            event.target.closest('.interactive-concept').classList.add('concept-active');
+            
+            const canvas = document.getElementById('concept-canvas');
+            
+            const concepts = {
+                'recursive-thought': {
+                    title: 'Recursive Thought',
+                    description: 'How AI shapes not just tools but thought itself',
+                    visualization: 'network',
+                    color: '#8B5CF6'
+                },
+                'intelligence-mirror': {
+                    title: 'Intelligence as Mirror',
+                    description: 'AI reflecting human intelligence back to us',
+                    visualization: 'mirror',
+                    color: '#06B6D4'
+                },
+                'symbiotic-future': {
+                    title: 'Symbiotic Futures',
+                    description: 'Harmony between technology and nature',
+                    visualization: 'symbiosis',
+                    color: '#10B981'
+                },
+                'wonder-progress': {
+                    title: 'Wonder & Progress',
+                    description: 'Progress without wonder is merely acceleration',
+                    visualization: 'spiral',
+                    color: '#F59E0B'
+                },
+                'unfinished-map': {
+                    title: 'The Unfinished Map',
+                    description: 'By design, the map remains incomplete',
+                    visualization: 'map',
+                    color: '#EF4444'
+                }
+            };
+            
+            const conceptData = concepts[concept];
+            if (!conceptData) return;
+            
+            // Create visualization
+            canvas.innerHTML = `
+                <div class="p-6">
+                    <h4 class="text-xl font-bold mb-3 text-gray-800">${conceptData.title}</h4>
+                    <p class="text-gray-600 mb-6">${conceptData.description}</p>
+                    <div class="bg-white rounded-lg p-6 border-2 border-gray-200" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                        <div class="text-center">
+                            <div class="text-6xl mb-4" style="color: ${conceptData.color}">
+                                ${getConceptIcon(concept)}
+                            </div>
+                            <p class="text-gray-500">${getConceptDescription(concept)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getConceptIcon(concept) {
+            const icons = {
+                'recursive-thought': '🔄',
+                'intelligence-mirror': '🪞',
+                'symbiotic-future': '🌱',
+                'wonder-progress': '✨',
+                'unfinished-map': '🗺️'
+            };
+            return icons[concept] || '💭';
+        }
+        
+        function getConceptDescription(concept) {
+            const descriptions = {
+                'recursive-thought': 'Cyclical patterns of human-AI co-evolution',
+                'intelligence-mirror': 'Reflection and self-discovery through AI',
+                'symbiotic-future': 'Harmonious integration of technology and nature',
+                'wonder-progress': 'Balanced advancement with curiosity',
+                'unfinished-map': 'Continuous discovery and exploration'
+            };
+            return descriptions[concept] || 'Concept visualization';
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initHeroBackground();
+            
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all chapter cards
+            document.querySelectorAll('.chapter-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

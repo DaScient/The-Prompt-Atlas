@@ -1,0 +1,272 @@
+[
+  {
+    "id": "daily_001",
+    "text": "What small act of kindness can you perform today?",
+    "category": "kindness",
+    "relatedChapters": [7, 14],
+    "difficulty": "beginner",
+    "estimatedTime": 3,
+    "tags": ["kindness", "daily", "action"]
+  },
+  {
+    "id": "daily_002",
+    "text": "What are you most grateful for in this moment?",
+    "category": "gratitude",
+    "relatedChapters": [14, 7],
+    "difficulty": "beginner",
+    "estimatedTime": 5,
+    "tags": ["gratitude", "mindfulness", "presence"]
+  },
+  {
+    "id": "daily_003",
+    "text": "What assumption about your work or life might be worth questioning?",
+    "category": "assumption",
+    "relatedChapters": [2, 13],
+    "difficulty": "intermediate",
+    "estimatedTime": 8,
+    "tags": ["assumptions", "questioning", "growth"]
+  },
+  {
+    "id": "daily_004",
+    "text": "How did you grow or learn something new today?",
+    "category": "growth",
+    "relatedChapters": [7, 14],
+    "difficulty": "beginner",
+    "estimatedTime": 5,
+    "tags": ["growth", "learning", "reflection"]
+  },
+  {
+    "id": "daily_005",
+    "text": "What would you do differently if you knew you couldn't fail?",
+    "category": "possibility",
+    "relatedChapters": [13, 14],
+    "difficulty": "intermediate",
+    "estimatedTime": 10,
+    "tags": ["possibility", "fear", "courage"]
+  },
+  {
+    "id": "daily_006",
+    "text": "What patterns do you notice in your daily routines?",
+    "category": "patterns",
+    "relatedChapters": [2, 7],
+    "difficulty": "intermediate",
+    "estimatedTime": 8,
+    "tags": ["patterns", "habits", "awareness"]
+  },
+  {
+    "id": "daily_007",
+    "text": "How do you want to show up in the world tomorrow?",
+    "category": "intention",
+    "relatedChapters": [7, 14],
+    "difficulty": "beginner",
+    "estimatedTime": 5,
+    "tags": ["intention", "presence", "future"]
+  },
+  {
+    "id": "daily_008",
+    "text": "What creative idea has been on your mind lately?",
+    "category": "creativity",
+    "relatedChapters": [2, 13],
+    "difficulty": "beginner",
+    "estimatedTime": 7,
+    "tags": ["creativity", "ideas", "innovation"]
+  },
+  {
+    "id": "daily_009",
+    "text": "What connections do you see between your different projects or interests?",
+    "category": "connections",
+    "relatedChapters": [2, 14],
+    "difficulty": "advanced",
+    "estimatedTime": 12,
+    "tags": ["connections", "synthesis", "integration"]
+  },
+  {
+    "id": "daily_010",
+    "text": "What would you tell your younger self about today's experience?",
+    "category": "reflection",
+    "relatedChapters": [7, 14],
+    "difficulty": "intermediate",
+    "estimatedTime": 10,
+    "tags": ["reflection", "wisdom", "growth"]
+  },
+  {
+    "id": "daily_011",
+    "text": "How can you bring more play into your serious work?",
+    "category": "play",
+    "relatedChapters": [13, 2],
+    "difficulty": "intermediate",
+    "estimatedTime": 8,
+    "tags": ["play", "work", "creativity"]
+  },
+  {
+    "id": "daily_012",
+    "text": "What boundary might you need to set or reconsider?",
+    "category": "boundaries",
+    "relatedChapters": [7, 13],
+    "difficulty": "advanced",
+    "estimatedTime": 12,
+    "tags": ["boundaries", "self-care", "limits"]
+  },
+  {
+    "id": "daily_013",
+    "text": "What story are you telling yourself about your current situation?",
+    "category": "narrative",
+    "relatedChapters": [7, 14],
+    "difficulty": "advanced",
+    "estimatedTime": 15,
+    "tags": ["narrative", "story", "perspective"]
+  },
+  {
+    "id": "daily_014",
+    "text": "How do you want to contribute to the world today?",
+    "category": "contribution",
+    "relatedChapters": [1, 14],
+    "difficulty": "intermediate",
+    "estimatedTime": 7,
+    "tags": ["contribution", "purpose", "impact"]
+  },
+  {
+    "id": "daily_015",
+    "text": "What are you avoiding, and what might happen if you faced it?",
+    "category": "avoidance",
+    "relatedChapters": [7, 13],
+    "difficulty": "advanced",
+    "estimatedTime": 15,
+    "tags": ["avoidance", "fear", "courage"]
+  },
+  {
+    "id": "daily_016",
+    "text": "What small win can you celebrate from today?",
+    "category": "celebration",
+    "relatedChapters": [13, 14],
+    "difficulty": "beginner",
+    "estimatedTime": 3,
+    "tags": ["celebration", "wins", "gratitude"]
+  },
+  {
+    "id": "daily_017",
+    "text": "How has your perspective shifted recently?",
+    "category": "perspective",
+    "relatedChapters": [2, 7],
+    "difficulty": "intermediate",
+    "estimatedTime": 8,
+    "tags": ["perspective", "growth", "change"]
+  },
+  {
+    "id": "daily_018",
+    "text": "What would you create if resources were unlimited?",
+    "category": "abundance",
+    "relatedChapters": [13, 14],
+    "difficulty": "intermediate",
+    "estimatedTime": 10,
+    "tags": ["abundance", "creativity", "possibility"]
+  },
+  {
+    "id": "daily_019",
+    "text": "How do you maintain curiosity in familiar situations?",
+    "category": "curiosity",
+    "relatedChapters": [14, 2],
+    "difficulty": "advanced",
+        "estimatedTime": 10,
+        "tags": ["curiosity", "familiarity", "wonder"]
+      },
+      {
+        "id": "daily_020",
+        "text": "What legacy do you hope to leave through your daily actions?",
+        "category": "legacy",
+        "relatedChapters": [1, 14],
+        "difficulty": "intermediate",
+        "estimatedTime": 12,
+        "tags": ["legacy", "impact", "daily actions"]
+      },
+      {
+        "id": "daily_021",
+        "text": "When do you feel most alive and engaged?",
+        "category": "engagement",
+        "relatedChapters": [7, 13],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["engagement", "flow", "aliveness"]
+      },
+      {
+        "id": "daily_022",
+        "text": "What assumption about yourself might be holding you back?",
+        "category": "limiting beliefs",
+        "relatedChapters": [7, 13],
+        "difficulty": "advanced",
+        "estimatedTime": 15,
+        "tags": ["assumptions", "limits", "belief"]
+      },
+      {
+        "id": "daily_023",
+        "text": "How can you practice more compassion today?",
+        "category": "compassion",
+        "relatedChapters": [7, 14],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["compassion", "kindness", "practice"]
+      },
+      {
+        "id": "daily_024",
+        "text": "What connections do you see between your challenges and growth?",
+        "category": "growth through challenge",
+        "relatedChapters": [7, 13],
+        "difficulty": "intermediate",
+        "estimatedTime": 10,
+        "tags": ["challenges", "growth", "learning"]
+      },
+      {
+        "id": "daily_025",
+        "text": "How do you want to remember this day in the future?",
+        "category": "memory",
+        "relatedChapters": [14, 7],
+        "difficulty": "intermediate",
+        "estimatedTime": 8,
+        "tags": ["memory", "future", "perspective"]
+      },
+      {
+        "id": "daily_026",
+        "text": "What would you do if you had no fear of judgment?",
+        "category": "authenticity",
+        "relatedChapters": [7, 13],
+        "difficulty": "advanced",
+        "estimatedTime": 12,
+        "tags": ["authenticity", "fear", "judgment"]
+      },
+      {
+        "id": "daily_027",
+        "text": "How can you bring more beauty into the world today?",
+        "category": "beauty",
+        "relatedChapters": [14, 2],
+        "difficulty": "beginner",
+        "estimatedTime": 5,
+        "tags": ["beauty", "creation", "aesthetics"]
+      },
+      {
+        "id": "daily_028",
+        "text": "What patterns in your thinking might you need to break?",
+        "category": "mental patterns",
+        "relatedChapters": [2, 7],
+        "difficulty": "advanced",
+        "estimatedTime": 12,
+        "tags": ["patterns", "thinking", "change"]
+      },
+      {
+        "id": "daily_029",
+        "text": "How do you stay grounded when everything feels uncertain?",
+        "category": "grounding",
+        "relatedChapters": [7, 14],
+        "difficulty": "intermediate",
+        "estimatedTime": 8,
+        "tags": ["grounding", "uncertainty", "stability"]
+      },
+      {
+        "id": "daily_030",
+        "text": "What dream have you been putting off that deserves attention?",
+        "category": "dreams",
+        "relatedChapters": [13, 14],
+        "difficulty": "intermediate",
+        "estimatedTime": 10,
+        "tags": ["dreams", "postponement", "attention"]
+      }
+]

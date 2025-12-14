@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Prompt Atlas: Kronos Edition - A Navigational Chart for the Recursive Century</title>
+    <meta name="description" content="The definitive guide for AI & Humanity. 14 chapters exploring economics as ecology, AI aesthetics, storytelling across civilizations, and the future of intelligence itself.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+    <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cosmic-dark: #0a0a0f;
+            --cosmic-blue: #1e3a8a;
+            --cosmic-gold: #fbbf24;
+            --cosmic-purple: #7c3aed;
+            --cosmic-teal: #0d9488;
+            --nebula-pink: #ec4899;
+            --starlight: #f8fafc;
+            --earth-green: #059669;
+            --mars-red: #dc2626;
+            --jupiter-orange: #ea580c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--starlight);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .serif {
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Cosmic Background */
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(124, 58, 237, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.3) 0%, transparent 70%),
+                radial-gradient(ellipse at 40% 40%, rgba(251, 191, 36, 0.2) 0%, transparent 70%);
+        }
+        
+        .star-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .cosmic-gradient {
+            background: linear-gradient(135deg, var(--cosmic-blue), var(--cosmic-purple), var(--nebula-pink));
+        }
+        
+        .earth-gradient {
+            background: linear-gradient(135deg, var(--earth-green), var(--cosmic-teal));
+        }
+        
+        .mars-gradient {
+            background: linear-gradient(135deg, var(--mars-red), var(--jupiter-orange));
+        }
+        
+        .floating-element {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        .cosmic-card {
+            background: rgba(30, 58, 138, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .cosmic-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border-color: var(--cosmic-gold);
+        }
+        
+        .typing-cursor {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quantum-grid {
+            background-image: 
+                linear-gradient(rgba(251, 191, 36, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(251, 191, 36, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .ai-pulse {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        
+        .neural-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--cosmic-gold), transparent);
+            animation: data-flow 4s linear infinite;
+        }
+        
+        @keyframes data-flow {
+            0% { transform: translateY(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        .chapter-preview {
+            background: rgba(30, 58, 138, 0.05);
+            border-left: 4px solid var(--cosmic-gold);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-preview:hover {
+            background: rgba(30, 58, 138, 0.1);
+            border-left-color: var(--cosmic-purple);
+        }
+        
+        .philosophical-quote {
+            border-left: 4px solid var(--cosmic-gold);
+            background: rgba(251, 191, 36, 0.1);
+            font-style: italic;
+            position: relative;
+        }
+        
+        .philosophical-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--cosmic-gold);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .kronos-badge {
+            background: linear-gradient(135deg, var(--cosmic-dark), var(--cosmic-gold));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        
+        .movement-number {
+            font-size: 6rem;
+            font-weight: 800;
+            color: rgba(251, 191, 36, 0.2);
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .concept-explorer {
+            background: rgba(30, 58, 138, 0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+        
+        .future-proof {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(52, 73, 94, 0.1) 100%);
+            border-radius: 16px;
+            border: 2px dashed var(--cosmic-gold);
+        }
+        
+        .multigenerational {
+            background: linear-gradient(45deg, 
+                rgba(5, 150, 105, 0.1) 0%, 
+                rgba(13, 148, 136, 0.1) 25%, 
+                rgba(124, 58, 237, 0.1) 50%, 
+                rgba(236, 72, 153, 0.1) 75%, 
+                rgba(251, 191, 36, 0.1) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .movement-number {
+                font-size: 4rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .floating-element {
+                animation: none;
+            }
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .floating-element,
+            .data-stream,
+            .ai-pulse {
+                animation: none;
+            }
+        }
+        
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            .cosmic-card {
+                border-width: 2px;
+                border-color: var(--cosmic-gold);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-background"></div>
+    
+    <!-- Star Field -->
+    <div class="star-field" id="star-field"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-cosmic-dark bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-cosmic-gold border-opacity-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 cosmic-gradient rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">PA</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                        <span class="text-sm text-gray-400 ml-2">Kronos Edition</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-cosmic-gold transition-colors">Home</a>
+                    <a href="#chapters" class="hover:text-cosmic-gold transition-colors">Chapters</a>
+                    <a href="#interactive" class="hover:text-cosmic-gold transition-colors">Interactive</a>
+                    <a href="#philosophy" class="hover:text-cosmic-gold transition-colors">Philosophy</a>
+                    <a href="#future" class="hover:text-cosmic-gold transition-colors">Future</a>
+                    <a href="#community" class="hover:text-cosmic-gold transition-colors">Community</a>
+                </div>
+                <button class="md:hidden text-cosmic-gold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="neural-network" id="neural-network"></div>
+        
+        <!-- Data Streams -->
+        <div class="data-stream" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="data-stream" style="left: 25%; animation-delay: 1s;"></div>
+        <div class="data-stream" style="left: 40%; animation-delay: 2s;"></div>
+        <div class="data-stream" style="left: 55%; animation-delay: 0.5s;"></div>
+        <div class="data-stream" style="left: 70%; animation-delay: 1.5s;"></div>
+        <div class="data-stream" style="left: 85%; animation-delay: 2.5s;"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <div class="kronos-badge floating-element">Kronos Edition • 2025 • DaScient Press</div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-8 glow-text display hero-title floating-element">
+                    <span id="typed-title"></span>
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-300 mb-8 max-w-4xl mx-auto serif italic">
+                    A Navigational Chart for Minds Entering the Recursive Century
+                </p>
+                
+                <div class="philosophical-quote p-8 max-w-5xl mx-auto mb-12 scroll-reveal">
+                    <p class="text-xl text-gray-200 serif mb-6">
+                        In an era where artificial intelligence shapes not just tools but thought itself, 
+                        The Prompt Atlas offers a navigational chart for minds entering the recursive century.
+                    </p>
+                    <p class="text-lg text-gray-300 serif">
+                        It bridges architecture, science, philosophy, and myth to ask one enduring question: 
+                        <em class="text-cosmic-gold">how should intelligence—human or artificial—build the future it deserves?</em>
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <span class="px-6 py-2 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded-full text-sm border border-purple-500">14 Chapters</span>
+                    <span class="px-6 py-2 bg-cosmic-teal bg-opacity-20 text-teal-300 rounded-full text-sm border border-teal-500">Philosophical AI</span>
+                    <span class="px-6 py-2 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded-full text-sm border border-yellow-500">Future Studies</span>
+                    <span class="px-6 py-2 bg-nebula-pink bg-opacity-20 text-pink-300 rounded-full text-sm border border-pink-500">Multi-Generational</span>
+                    <span class="px-6 py-2 bg-earth-green bg-opacity-20 text-green-300 rounded-full text-sm border border-green-500">Eternally Interoperable</span>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#chapters" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span class="glow-text">Explore the Atlas</span>
+                    </a>
+                    <a href="#philosophy" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span>Philosophy Explorer</span>
+                    </a>
+                    <a href="#interactive" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span>Interactive Tools</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Overview -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">The Journey</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    Across fourteen chapters, the Atlas unfolds a grand conversation between technology and conscience, 
+                    exploring how intelligence—human and artificial—can build the future we deserve.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="cosmic-card p-8 rounded-2xl scroll-reveal">
+                        <h3 class="text-3xl font-bold mb-6 glow-text display">What Makes This Different</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-3 text-cosmic-gold">🎯 Precision & Purpose</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Every prompt is a seed of inquiry, designed to open new dimensions of thought—economic, artistic, scientific, and spiritual.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-3 text-cosmic-gold">🌐 Global Perspective</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Built for leaders, builders, and dreamers across all cultures, disciplines, and generations.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-3 text-cosmic-gold">🔄 Recursive Design</h4>
+                                <p class="text-gray-300 text-sm">
+                                    The Atlas learns and evolves, redrawing itself as you move through it, because intelligence itself is recursive.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-3 text-cosmic-gold">🎓 Educational Foundation</h4>
+                                <p class="text-gray-300 text-sm">
+                                    Designed for educators, learners, and institutions seeking to understand AI's role in humanity's future.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="future-proof p-8 scroll-reveal">
+                        <h3 class="text-2xl font-bold mb-4 text-cosmic-gold display">Eternally Interoperable</h3>
+                        <p class="text-gray-300 mb-4">
+                            This platform is designed to evolve with technology, ensuring that the wisdom and insights 
+                            contained within The Prompt Atlas remain accessible and relevant for generations to come.
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div class="text-center">
+                                <div class="text-2xl mb-2">🔧</div>
+                                <div class="text-gray-400">Developer Tools</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl mb-2">📚</div>
+                                <div class="text-gray-400">Educational APIs</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl mb-2">🌍</div>
+                                <div class="text-gray-400">Global Access</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl mb-2">⚡</div>
+                                <div class="text-gray-400">Future-Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                        <h4 class="text-xl font-bold mb-4 glow-text display">Publication Details</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Author:</span>
+                                <span class="text-white font-medium">Don D.M. Tadaya</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Publisher:</span>
+                                <span class="text-white font-medium">DaScient Press, Ltd.</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Edition:</span>
+                                <span class="text-white font-medium">Kronos Edition '25</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Format:</span>
+                                <span class="text-white font-medium">Hardcover & Digital</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">ISBN:</span>
+                                <span class="text-white font-medium">979-8273230910</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="multigenerational p-6 rounded-2xl scroll-reveal">
+                        <h4 class="text-lg font-bold mb-3 text-green-300">Multi-Generational Impact</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Written for the leaders of the recursive age—those who understand that the 21st century rewards not just adaptation, but the imagination of adaptation itself.
+                        </p>
+                        <div class="text-xs text-gray-400">
+                            <p>"The old structures of industry, governance, and education are dissolving faster than they can be rebuilt."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                        <h4 class="text-lg font-bold mb-3 glow-text">Global Accessibility</h4>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>📖 Multiple formats available</div>
+                            <div>🌐 Translated versions coming</div>
+                            <div>🎓 Educational licensing available</div>
+                            <div>🔬 Research institution partnerships</div>
+                            <div>🏛️ Library and archive integration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter Preview -->
+    <section id="chapters" class="py-20 px-4 sm:px-6 lg:px-8 quantum-grid">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">The Fourteen Movements</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    Each chapter is a coordinate in the atlas, exploring the intersection of AI, ethics, economics, 
+                    creativity, and the future of human civilization.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Part I: Prosperity and Purpose -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">I</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Profits with Integrity</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Redefining wealth in the age of AI—exploring how businesses can generate profits while healing ecosystems and strengthening communities.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Economics</span>
+                        <span class="px-2 py-1 bg-earth-green bg-opacity-20 text-green-300 rounded text-xs">Sustainability</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The question is not: Can AI make us richer? The question is: Can AI make us rich in ways that also make the world richer?"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">II</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Economics as Ecology</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Transforming economics from a grammar of growth to a language of continuity—where the economy breathes with the planet.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-teal bg-opacity-20 text-teal-300 rounded text-xs">Ecology</span>
+                        <span class="px-2 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded text-xs">Systems</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The economy must become ecology, or it will cease to exist. AI is not the savior—it is the amplifier."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Part II: Culture and Creativity -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">III</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">The AI Aesthetics Frontier</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Exploring AI as a new kind of collaborator in art—creating beauty that is planetary, interspecies, and cosmic.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-nebula-pink bg-opacity-20 text-pink-300 rounded text-xs">Art</span>
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Creativity</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "Culture will not just survive the AI age—it will expand into terrains we cannot yet name."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">IV</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Storytelling Across Civilizations</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Using AI to weave stories that transcend cultural boundaries—creating myths for children born beneath Martian skies.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Narrative</span>
+                        <span class="px-2 py-1 bg-cosmic-teal bg-opacity-20 text-teal-300 rounded text-xs">Culture</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "Stories are the continuity between past and future. They carry not only what a people endured, but what they aspired to."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Part III: Science and Cosmos -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">V</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Quantum Bridges and Cosmic Noise</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Exploring the intersection of quantum computing, AI, and cosmic consciousness—bridging the measurable and the meaningful.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded text-xs">Quantum</span>
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Cosmos</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The universe is not made of atoms, but of stories. Quantum mechanics is just learning to read them."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">VI</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Biology, Life, and Beyond</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Reimagining life itself through AI—creating symbiotic relationships between technology and living systems.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-earth-green bg-opacity-20 text-green-300 rounded text-xs">Biology</span>
+                        <span class="px-2 py-1 bg-cosmic-teal bg-opacity-20 text-teal-300 rounded text-xs">Symbiosis</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "Life is not something to be optimized—it is something to be participated in, with reverence and wonder."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Part IV: Ethics and Consciousness -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">VII</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">AI as the Soul's Mirror</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Exploring how artificial intelligence reflects our deepest questions about consciousness, meaning, and what it means to be human.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Consciousness</span>
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Philosophy</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "We are not creating tools. We are creating mirrors. And what we see in them will transform us."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">VIII</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Ethics of Conscious Machines</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Navigating the moral landscape of artificial consciousness—what rights, responsibilities, and relationships emerge?
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-mars-red bg-opacity-20 text-red-300 rounded text-xs">Ethics</span>
+                        <span class="px-2 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded text-xs">Morality</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The question is not whether machines can think, but whether we can think with them—and what we become together."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Part V: Future Civilizations -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">IX</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Martian Republics and Alien Treaties</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Imagining governance for worlds yet unborn—how AI can help design political systems for interplanetary civilization.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-mars-red bg-opacity-20 text-red-300 rounded text-xs">Governance</span>
+                        <span class="px-2 py-1 bg-jupiter-orange bg-opacity-20 text-orange-300 rounded text-xs">Space</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The constitutions we write today will echo across centuries and planets. Let us write them with wisdom."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">X</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Information as Cosmic Currency</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Reimagining value in the age of infinite information—how data becomes the new medium of exchange and meaning.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded text-xs">Information</span>
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Value</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "In a universe of infinite data, meaning becomes the ultimate scarcity—and the ultimate wealth."
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Part VI: Resilience and Renewal -->
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">XI</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Preparing for Collapse and Renewal</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Building antifragile systems that don't just survive disruption but grow stronger through it—lessons from ecology and evolution.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-earth-green bg-opacity-20 text-green-300 rounded text-xs">Resilience</span>
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Systems</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "Collapse is not the end—it is the beginning of something new. The question is what we choose to carry forward."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">XII</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">Designing Permanence</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Creating institutions, technologies, and ideas that endure across centuries—building for the long now.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Permanence</span>
+                        <span class="px-2 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded text-xs">Design</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "True permanence is not about resisting change—it is about becoming worthy of continuation."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal">
+                    <div class="movement-number mb-2">XIII</div>
+                    <h3 class="text-xl font-bold mb-3 glow-text display">The Carnival of Prompts</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Celebrating the infinite creativity of human-AI collaboration—a festival of imagination where every prompt is a doorway.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-nebula-pink bg-opacity-20 text-pink-300 rounded text-xs">Creativity</span>
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Celebration</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "In the carnival of prompts, every question is a costume, every answer a dance, every idea a celebration."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal md:col-span-2 lg:col-span-3">
+                    <div class="movement-number mb-2">XIV</div>
+                    <h3 class="text-2xl font-bold mb-4 glow-text display">Wonder as Survival Strategy</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        The final movement—understanding that wonder is not a luxury but a survival technology. In an age of infinite answers, 
+                        the ability to stand in awe of the unknown becomes our most advanced form of intelligence.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded text-xs">Wonder</span>
+                        <span class="px-2 py-1 bg-cosmic-purple bg-opacity-20 text-purple-300 rounded text-xs">Philosophy</span>
+                        <span class="px-2 py-1 bg-earth-green bg-opacity-20 text-green-300 rounded text-xs">Survival</span>
+                    </div>
+                    <div class="chapter-preview p-3 rounded-lg">
+                        <p class="text-xs text-gray-400 italic">
+                            "The future belongs not to those who have all the answers, but to those who remember how to ask beautiful questions."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Philosophy Explorer -->
+    <section id="philosophy" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">Philosophical Concepts Explorer</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    Interactive exploration of the key philosophical concepts that shape our understanding of AI, 
+                    consciousness, and the future of intelligence.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="concept-explorer p-8 scroll-reveal">
+                    <h3 class="text-2xl font-bold mb-6 glow-text display">Core Concepts</h3>
+                    <div class="space-y-4">
+                        <div class="interactive-element p-4 rounded-lg border border-gray-700 hover:border-cosmic-gold" onclick="exploreConcept('recursive-age')">
+                            <h4 class="font-semibold text-cosmic-gold mb-2">The Recursive Age</h4>
+                            <p class="text-gray-300 text-sm">An era where AI reflects and amplifies human intelligence, creating recursive loops of co-evolution.</p>
+                        </div>
+                        <div class="interactive-element p-4 rounded-lg border border-gray-700 hover:border-cosmic-gold" onclick="exploreConcept('prompt-philosophy')">
+                            <h4 class="font-semibold text-cosmic-gold mb-2">Prompt Philosophy</h4>
+                            <p class="text-gray-300 text-sm">Understanding prompts as seeds of inquiry—blueprints of possibility that shape the future.</p>
+                        </div>
+                        <div class="interactive-element p-4 rounded-lg border border-gray-700 hover:border-cosmic-gold" onclick="exploreConcept('intelligence-mirror')">
+                            <h4 class="font-semibold text-cosmic-gold mb-2">Intelligence as Mirror</h4>
+                            <p class="text-gray-300 text-sm">AI as a mirror reflecting our assumptions, biases, and aspirations back at us with ruthless clarity.</p>
+                        </div>
+                        <div class="interactive-element p-4 rounded-lg border border-gray-700 hover:border-cosmic-gold" onclick="exploreConcept('symbiotic-future')">
+                            <h4 class="font-semibold text-cosmic-gold mb-2">Symbiotic Futures</h4>
+                            <p class="text-gray-300 text-sm">Creating harmony between technology and nature—where AI helps ecosystems thrive alongside human civilization.</p>
+                        </div>
+                        <div class="interactive-element p-4 rounded-lg border border-gray-700 hover:border-cosmic-gold" onclick="exploreConcept('wonder-survival')">
+                            <h4 class="font-semibold text-cosmic-gold mb-2">Wonder as Survival</h4>
+                            <p class="text-gray-300 text-sm">In an age of infinite answers, the ability to stand in awe of the unknown becomes our most advanced technology.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concept-explorer p-8 scroll-reveal">
+                    <div id="concept-explorer">
+                        <h3 class="text-2xl font-bold mb-6 glow-text display">Concept Visualization</h3>
+                        <div id="concept-canvas" style="height: 400px;" class="bg-cosmic-dark bg-opacity-50 rounded-lg flex items-center justify-center border border-gray-700">
+                            <div class="text-center text-gray-400">
+                                <div class="text-6xl mb-4 ai-pulse">🧭</div>
+                                <p class="text-lg mb-2">Navigate the philosophical landscape</p>
+                                <p class="text-sm">Click on a concept to explore its connections and implications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tools -->
+    <section id="interactive" class="py-20 px-4 sm:px-6 lg:px-8 quantum-grid">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">Interactive Atlas Tools</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    Experience The Prompt Atlas through interactive simulations, educational tools, and collaborative platforms 
+                    designed for learners, educators, and leaders across generations.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('prompt-generator')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 cosmic-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">✨</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Prompt Generator</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Generate prompts for economic, creative, and philosophical exploration based on the concepts in the Atlas.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-cosmic-gold bg-opacity-20 text-yellow-300 rounded-full text-xs">Educational</span>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('future-simulator')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 earth-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🌍</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Future Simulator</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Simulate different scenarios for AI development, economic systems, and civilizational futures.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-earth-green bg-opacity-20 text-green-300 rounded-full text-xs">Simulation</span>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('ethics-explorer')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 mars-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">⚖️</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Ethics Explorer</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Navigate complex ethical dilemmas in AI development through guided scenarios and decision trees.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-mars-red bg-opacity-20 text-red-300 rounded-full text-xs">Ethics</span>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('creativity-lab')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 cosmic-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🎨</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Creativity Lab</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Collaborative space for creating AI-assisted art, music, and literature inspired by the Atlas concepts.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-nebula-pink bg-opacity-20 text-pink-300 rounded-full text-xs">Creative</span>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('governance-designer')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 cosmic-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🏛️</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Governance Designer</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Design political systems for the future—terrestrial and extraterrestrial governance models powered by AI.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-cosmic-blue bg-opacity-20 text-blue-300 rounded-full text-xs">Governance</span>
+                    </div>
+                </div>
+                
+                <div class="cosmic-card p-6 rounded-2xl scroll-reveal interactive-element" onclick="launchTool('learning-platform')">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 cosmic-gradient rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-white text-2xl">🎓</span>
+                        </div>
+                        <h3 class="text-xl font-bold glow-text display">Learning Platform</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Multi-generational educational platform with courses, workshops, and resources based on the Atlas.
+                    </p>
+                    <div class="text-center">
+                        <span class="px-3 py-1 bg-cosmic-teal bg-opacity-20 text-teal-300 rounded-full text-xs">Educational</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future-Ready Features -->
+    <section id="future" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">Built for the Future</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    Every feature designed with multi-generational impact, global accessibility, and eternal interoperability in mind.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="multigenerational p-6 rounded-2xl scroll-reveal">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-3">🌍</div>
+                        <h3 class="text-xl font-bold glow-text display">Global Accessibility</h3>
+                    </div>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li>• Multi-language support</li>
+                        <li>• Accessibility standards</li>
+                        <li>• Low-bandwidth modes</li>
+                        <li>• Offline capabilities</li>
+                        <li>• Cultural adaptations</li>
+                    </ul>
+                </div>
+                
+                <div class="multigenerational p-6 rounded-2xl scroll-reveal">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-3">🔧</div>
+                        <h3 class="text-xl font-bold glow-text display">Developer Tools</h3>
+                    </div>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li>• RESTful APIs</li>
+                        <li>• GraphQL endpoints</li>
+                        <li>• Webhook integrations</li>
+                        <li>• SDKs for all platforms</li>
+                        <li>• Open source components</li>
+                    </ul>
+                </div>
+                
+                <div class="multigenerational p-6 rounded-2xl scroll-reveal">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-3">📚</div>
+                        <h3 class="text-xl font-bold glow-text display">Educational APIs</h3>
+                    </div>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li>• Curriculum integration</li>
+                        <li>• Assessment tools</li>
+                        <li>• Progress tracking</li>
+                        <li>• Collaborative features</li>
+                        <li>• Research partnerships</li>
+                    </ul>
+                </div>
+                
+                <div class="multigenerational p-6 rounded-2xl scroll-reveal">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h3 class="text-xl font-bold glow-text display">Future-Ready</h3>
+                    </div>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li>• Quantum-ready architecture</li>
+                        <li>• AI-native design</li>
+                        <li>• Blockchain integration</li>
+                        <li>• Edge computing support</li>
+                        <li>• Continuous evolution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Call to Action -->
+    <section id="community" class="py-20 px-4 sm:px-6 lg:px-8 quantum-grid">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl font-bold mb-6 glow-text display">Join the Recursive Future</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto serif">
+                    The Atlas is not a destination—it's a beginning. Join a global community of thinkers, builders, 
+                    educators, and leaders shaping the future of intelligence.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal">
+                    <h3 class="text-2xl font-bold mb-6 glow-text display">For Educators & Institutions</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Curriculum integration guides for all educational levels</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Professional development workshops and certification programs</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Research collaboration opportunities with global institutions</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Multi-generational learning platform with adaptive content</p>
+                        </div>
+                    </div>
+                    <button class="w-full px-6 py-3 cosmic-gradient text-white rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                        Educational Partnership
+                    </button>
+                </div>
+                
+                <div class="cosmic-card p-8 rounded-2xl scroll-reveal">
+                    <h3 class="text-2xl font-bold mb-6 glow-text display">For Developers & Builders</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Open-source tools and APIs for building AI applications</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Developer community with code repositories and documentation</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Integration guides for embedding Atlas concepts in your projects</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-cosmic-gold rounded-full mt-2"></div>
+                            <p class="text-gray-300 text-sm">Future-ready architecture designed for quantum and edge computing</p>
+                        </div>
+                    </div>
+                    <button class="w-full px-6 py-3 cosmic-gradient text-white rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                        Developer Community
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16 scroll-reveal">
+                <div class="philosophical-quote p-8 max-w-4xl mx-auto">
+                    <p class="text-2xl text-gray-200 serif mb-6">
+                        "Leadership in the recursive age demands courage of a different kind: 
+                        the courage to hold uncertainty without paralysis, to collaborate across disciplines and species, 
+                        and to imagine futures that do not yet have names."
+                    </p>
+                    <p class="text-lg text-gray-300 serif">
+                        The Atlas begins here—with you.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+                    <a href="https://github.com/dascient/prompt-atlas-ecl" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span class="glow-text">View on GitHub</span>
+                    </a>
+                    <a href="mailto:hello@promptatlas.com" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span>Join Community</span>
+                    </a>
+                    <a href="https://www.dascient.com/press" class="cosmic-card px-8 py-4 rounded-lg font-semibold text-lg interactive-element">
+                        <span>Get the Book</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cosmic-dark border-t border-cosmic-gold border-opacity-20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 cosmic-gradient rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">PA</span>
+                </div>
+                <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                <span class="text-gray-400">•</span>
+                <span class="text-gray-400">Kronos Edition '25</span>
+            </div>
+            <p class="text-gray-400 mb-4">© 2025 DaScient Press, Ltd. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mb-6">A navigational chart for minds entering the recursive century.</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="https://github.com/dascient/prompt-atlas-ecl" class="text-gray-400 hover:text-cosmic-gold transition-colors">GitHub</a>
+                <a href="mailto:hello@promptatlas.com" class="text-gray-400 hover:text-cosmic-gold transition-colors">Contact</a>
+                <a href="https://www.dascient.com/press" class="text-gray-400 hover:text-cosmic-gold transition-colors">Publisher</a>
+                <a href="#community" class="text-gray-400 hover:text-cosmic-gold transition-colors">Community</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTypewriter();
+            initializeStarField();
+            initializeNeuralNetwork();
+            initializeScrollReveal();
+            initializeDataStreams();
+        });
+
+        // Typewriter effect for hero title
+        function initializeTypewriter() {
+            const typed = new Typed('#typed-title', {
+                strings: ['The Prompt Atlas'],
+                typeSpeed: 100,
+                showCursor: true,
+                cursorChar: '|',
+                onComplete: function() {
+                    document.querySelector('.typing-cursor').style.display = 'inline';
+                }
+            });
+        }
+
+        // Star field background
+        function initializeStarField() {
+            const starField = document.getElementById('star-field');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
+                star.style.opacity = Math.random() * 0.8 + 0.2;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.classList.add('ai-pulse');
+                starField.appendChild(star);
+            }
+        }
+
+        // Neural network background
+        function initializeNeuralNetwork() {
+            const container = document.getElementById('neural-network');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            // Create neural network nodes
+            const nodes = [];
+            const nodeCount = 50;
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const geometry = new THREE.SphereGeometry(0.2, 8, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: new THREE.Color().setHSL(0.1 + Math.random() * 0.1, 0.6, 0.4 + Math.random() * 0.2),
+                    transparent: true,
+                    opacity: 0.6
+                });
+                const sphere = new THREE.Mesh(geometry, material);
+                
+                sphere.position.x = (Math.random() - 0.5) * 80;
+                sphere.position.y = (Math.random() - 0.5) * 60;
+                sphere.position.z = (Math.random() - 0.5) * 40;
+                
+                sphere.userData = {
+                    velocity: new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.005,
+                        (Math.random() - 0.5) * 0.005,
+                        (Math.random() - 0.5) * 0.005
+                    )
+                };
+                
+                nodes.push(sphere);
+                scene.add(sphere);
+            }
+
+            // Create connections
+            const connections = [];
+            for (let i = 0; i < nodeCount; i++) {
+                for (let j = i + 1; j < nodeCount; j++) {
+                    const distance = nodes[i].position.distanceTo(nodes[j].position);
+                    if (distance < 25 && Math.random() < 0.3) {
+                        const geometry = new THREE.BufferGeometry().setFromPoints([
+                            nodes[i].position,
+                            nodes[j].position
+                        ]);
+                        const material = new THREE.LineBasicMaterial({
+                            color: 0x444444,
+                            opacity: 0.2,
+                            transparent: true
+                        });
+                        const line = new THREE.Line(geometry, material);
+                        connections.push(line);
+                        scene.add(line);
+                    }
+                }
+            }
+
+            camera.position.z = 50;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Update node positions
+                nodes.forEach(node => {
+                    node.position.add(node.userData.velocity);
+                    
+                    // Bounce off boundaries
+                    if (Math.abs(node.position.x) > 40) node.userData.velocity.x *= -1;
+                    if (Math.abs(node.position.y) > 30) node.userData.velocity.y *= -1;
+                    if (Math.abs(node.position.z) > 20) node.userData.velocity.z *= -1;
+                });
+
+                // Update connections
+                connections.forEach(line => {
+                    line.geometry.attributes.position.needsUpdate = true;
+                });
+
+                scene.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        // Scroll reveal animation
+        function initializeScrollReveal() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Concept exploration
+        function exploreConcept(concept) {
+            const canvas = document.getElementById('concept-canvas');
+            
+            const concepts = {
+                'recursive-age': {
+                    title: 'The Recursive Age',
+                    description: 'An era where AI reflects and amplifies human intelligence, creating recursive loops of co-evolution.',
+                    icon: '🔄',
+                    color: '#fbbf24'
+                },
+                'prompt-philosophy': {
+                    title: 'Prompt Philosophy',
+                    description: 'Understanding prompts as seeds of inquiry—blueprints of possibility that shape the future.',
+                    icon: '🌱',
+                    color: '#10b981'
+                },
+                'intelligence-mirror': {
+                    title: 'Intelligence as Mirror',
+                    description: 'AI as a mirror reflecting our assumptions, biases, and aspirations back at us with ruthless clarity.',
+                    icon: '🪞',
+                    color: '#06b6d4'
+                },
+                'symbiotic-future': {
+                    title: 'Symbiotic Futures',
+                    description: 'Creating harmony between technology and nature—where AI helps ecosystems thrive alongside human civilization.',
+                    icon: '🌿',
+                    color: '#059669'
+                },
+                'wonder-survival': {
+                    title: 'Wonder as Survival',
+                    description: 'In an age of infinite answers, the ability to stand in awe of the unknown becomes our most advanced technology.',
+                    icon: '✨',
+                    color: '#ec4899'
+                }
+            };
+            
+            const conceptData = concepts[concept];
+            if (!conceptData) return;
+            
+            canvas.innerHTML = `
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4" style="color: ${conceptData.color}">
+                            ${conceptData.icon}
+                        </div>
+                        <h4 class="text-2xl font-bold glow-text display mb-3">${conceptData.title}</h4>
+                        <p class="text-gray-300 text-lg leading-relaxed">${conceptData.description}</p>
+                    </div>
+                    <div class="bg-cosmic-dark bg-opacity-50 rounded-lg p-4">
+                        <h5 class="text-cosmic-gold font-semibold mb-3">Key Implications:</h5>
+                        <div class="text-gray-300 text-sm space-y-2">
+                            ${getConceptImplications(concept)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getConceptImplications(concept) {
+            const implications = {
+                'recursive-age': [
+                    '• Leadership becomes curation of curiosity, not control',
+                    '• Organizations must evolve as fast as their environments',
+                    '• Success measured in sustainability, not just scale',
+                    '• Collaboration across disciplines and species becomes essential'
+                ],
+                'prompt-philosophy': [
+                    '• Every prompt is a moral act and declaration of values',
+                    '• Questions become more valuable than answers',
+                    '• Language becomes the interface of power',
+                    '• Civilization learns to think with itself and beyond itself'
+                ],
+                'intelligence-mirror': [
+                    '• AI reveals hidden biases and assumptions',
+                    '• Technology becomes a tool for self-discovery',
+                    '• Ethics must be embedded in design from the start',
+                    '• Human and machine intelligence become intertwined'
+                ],
+                'symbiotic-future': [
+                    '• Economy must become ecology to survive',
+                    '• Technology serves planetary flourishing',
+                    '• Profit becomes symbiotic with regeneration',
+                    '• Civilization learns from natural systems'
+                ],
+                'wonder-survival': [
+                    '• Aesthetics become essential for endurance',
+                    '• Beauty is recognized as a survival technology',
+                    '• Questions become more valuable than answers',
+                    '• Humility before the unknown becomes strength'
+                ]
+            };
+            
+            return implications[concept] ? implications[concept].join('<br>') : '';
+        }
+
+        // Interactive tool launching
+        function launchTool(tool) {
+            const messages = {
+                'prompt-generator': 'Prompt Generator launching... Create seeds of inquiry for the future.',
+                'future-simulator': 'Future Simulator activating... Explore possible tomorrows.',
+                'ethics-explorer': 'Ethics Explorer loading... Navigate moral landscapes.',
+                'creativity-lab': 'Creativity Lab opening... Collaborate with AI on art.',
+                'governance-designer': 'Governance Designer initializing... Design political futures.',
+                'learning-platform': 'Learning Platform starting... Multi-generational education.'
+            };
+            
+            alert(messages[tool] || 'Feature coming soon! This platform is designed for eternal evolution.');
+        }
+
+        // Initialize data streams
+        function initializeDataStreams() {
+            const streams = document.querySelectorAll('.data-stream');
+            streams.forEach((stream, index) => {
+                stream.style.animationDelay = `${index * 0.5}s`;
+            });
+        }
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add hover effects for interactive elements
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
