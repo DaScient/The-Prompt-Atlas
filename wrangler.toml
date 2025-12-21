@@ -1,24 +1,24 @@
 name = "prompt-atlas"
 main = "worker.js"
 compatibility_date = "2025-01-01"
-type = "javascript"
+account_id = "22202ff07e559347483b0526ded1fd31"
 
-# Bind KV namespace
+# KV Namespaces (using your existing ones)
 kv_namespaces = [
-  { binding = "ATLAS_KV", id = "<YOUR_KV_NAMESPACE_ID>" }
+  { binding = "ATLAS_KV", id = "6806f0b27b60448bbe8ac9f3bba2a4e8" },
+  { binding = "RAG_KV",    id = "721d959b75ab4bed88d0153cf1408d64" }
 ]
 
-# Bind D1 database
+# D1 Database
 [[d1_databases]]
 binding = "ATLAS_DB"
 database_name = "prompt_atlas_db"
 
-# Bind R2 bucket for artifacts
+# R2 Bucket
 [[r2_buckets]]
 binding = "ATLAS_R2"
 bucket_name = "prompt-atlas-r2"
 
 [vars]
-# API keys allowed to use protected endpoints
-API_KEYS = "YOUR_FREEMIUM_AND_DEV_KEYS"
+API_KEYS = "your_real_api_key_here"
 ENVIRONMENT = "prod"
