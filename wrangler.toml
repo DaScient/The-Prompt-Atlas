@@ -1,0 +1,24 @@
+name = "prompt-atlas"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+type = "javascript"
+
+# Bind KV namespace
+kv_namespaces = [
+  { binding = "ATLAS_KV", id = "<YOUR_KV_NAMESPACE_ID>" }
+]
+
+# Bind D1 database
+[[d1_databases]]
+binding = "ATLAS_DB"
+database_name = "prompt_atlas_db"
+
+# Bind R2 bucket for artifacts
+[[r2_buckets]]
+binding = "ATLAS_R2"
+bucket_name = "prompt_atlas_r2"
+
+[vars]
+# API keys allowed to use protected endpoints
+API_KEYS = "YOUR_FREEMIUM_AND_DEV_KEYS"
+ENVIRONMENT = "prod"
