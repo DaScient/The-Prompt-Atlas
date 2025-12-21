@@ -1,4 +1,238 @@
-# README.md
+# Prompt Atlas  
+**An Edge-Native Prompt Library & Cognitive Toolbelt**  
+DaScient Apps, Inc.
+
+---
+
+## Overview
+
+**Prompt Atlas** is a globally distributed, edge-native API and application platform designed to serve as a **library, toolbelt, and cognitive infrastructure for AI prompting**.
+
+It is built on **Cloudflare Workers**, backed by **D1 (SQLite)**, **KV**, and **R2**, and is designed to scale worldwide with ultra-low latency.
+
+Prompt Atlas is:
+- Open-source at its core
+- Freemium by design
+- Developer-first
+- Future-proofed for AI agents, semantic search, and collaborative intelligence
+
+This repository contains the backend Worker, database schema, and deployment configuration.
+
+---
+
+## Live Deployment
+
+- **API Base URL**  
+  https://prompt-atlas.aristocles24.workers.dev
+
+- **Health Check**  
+  `GET /health`
+
+- **Book (Prompt Atlas)**  
+  https://www.amazon.com/dp/B0G13W7RW4
+
+- **Press & Media**  
+  https://DaScient.com/press
+
+- **Shop**  
+  https://DaScient.com/shop
+
+---
+
+## Core Capabilities
+
+- 📚 **Prompt Library**
+  - Categories
+  - Search & filtering
+  - Tags
+  - Pagination
+
+- 🧰 **Prompt Composition Engine**
+  - Structured prompt packs
+  - Variants (creative, analytical, adversarial, etc.)
+  - Counter-prompts & continuation hooks
+
+- 🧬 **Lineage Threads**
+  - Track the evolution of ideas
+  - Threaded prompt development
+  - Graph-ready data model
+
+- 🔐 **Freemium API Access**
+  - API key authentication
+  - Monthly quota enforcement
+  - Usage tracking via KV
+
+- 🌍 **Edge-Native Performance**
+  - Cloudflare Workers
+  - Global distribution
+  - Stateless + persistent hybrid design
+
+---
+
+## Tech Stack
+
+- **Runtime:** Cloudflare Workers  
+- **Database:** Cloudflare D1 (SQLite)  
+- **Cache & Counters:** Workers KV  
+- **Artifacts:** Cloudflare R2  
+- **Auth:** API Keys (Bearer or `x-api-key`)  
+- **CLI:** Wrangler v4+
+
+---
+
+## Repository Structure
+
+/
+├── worker.js        # Main Cloudflare Worker
+├── wrangler.toml    # Cloudflare configuration
+├── schema.sql       # D1 database schema
+├── bootstrap.sql    # Starter content
+├── README.md
+
+---
+
+## API Endpoints
+
+### Health
+
+GET /health
+
+### Categories
+
+GET /v1/atlas/categories
+
+### Prompt Search
+
+GET /v1/atlas/prompts
+GET /v1/atlas/prompts?q=science
+GET /v1/atlas/prompts?tags=engineering,writing
+GET /v1/atlas/prompts?limit=10&offset=0
+
+### Prompt Detail
+
+GET /v1/atlas/prompts/:id
+
+### Prompt Composition (API Key Required)
+
+POST /v1/atlas/compose
+
+Body:
+```json
+{
+  "goal": "Explain edge-native computing",
+  "audience": "Developers",
+  "tone": "Technical",
+  "constraints": ["concise", "clear"]
+}
+```
+Lineage
+
+POST /v1/atlas/lineage/start
+POST /v1/atlas/lineage/:threadId/continue
+
+Stateless Delete
+
+DELETE /v1/mirror/data
+
+
+⸻
+
+Setup & Deployment
+
+Prerequisites
+	•	Node.js
+	•	Wrangler CLI
+	•	Cloudflare account with Workers, KV, D1, and R2 enabled
+
+Install Wrangler:
+
+npm install -g wrangler
+
+Authenticate:
+
+wrangler login
+
+
+⸻
+
+Configure Wrangler
+
+Edit wrangler.toml and set:
+	•	account_id
+	•	KV namespace IDs
+	•	API keys
+	•	Environment (dev or prod)
+
+⸻
+
+Initialize Database
+
+Apply schema:
+
+wrangler d1 execute prompt_atlas_db --remote --file schema.sql
+
+Load starter data:
+
+wrangler d1 execute prompt_atlas_db --remote --file bootstrap.sql
+
+
+⸻
+
+Deploy
+
+wrangler deploy
+
+
+⸻
+
+Authentication & Usage
+	•	API keys are required for protected endpoints
+	•	Keys are passed via:
+	•	x-api-key header
+	•	or Authorization: Bearer <key>
+
+Freemium limits are enforced monthly via Workers KV.
+
+⸻
+
+Philosophy
+
+Prompt Atlas is not just an API.
+
+It is a cognitive commons:
+	•	A place where prompts become reusable intellectual artifacts
+	•	A system that respects lineage, context, and evolution
+	•	An open foundation for AI-augmented reasoning
+
+The long-term goal is to make Prompt Atlas ubiquitous in the AI ecosystem — powering tools, agents, education, and creativity across disciplines.
+
+⸻
+
+Roadmap Highlights
+	•	OpenAPI / Swagger specification
+	•	SDKs (Swift, TypeScript, Python)
+	•	Semantic / vector search
+	•	Prompt marketplace
+	•	Collaborative workspaces
+	•	Agent integrations
+	•	Knowledge graph & ontology layer
+
+⸻
+
+License
+
+MIT License
+Open source, permissive, and community-friendly.
+
+⸻
+
+About DaScient Apps, Inc.
+
+DaScient Apps, Inc. builds edge-native, human-centric systems at the intersection of intelligence, creativity, and computation.
+
+Prompt Atlas is one of its flagship platforms.
+
+⸻
 
 ## The Prompt Atlas: Kronos Edition
 
