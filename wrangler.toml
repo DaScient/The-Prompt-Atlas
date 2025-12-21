@@ -3,7 +3,7 @@ main = "worker.js"
 compatibility_date = "2025-01-01"
 account_id = "22202ff07e559347483b0526ded1fd31"
 
-# KV Namespaces (using your existing ones)
+# KV Namespaces
 kv_namespaces = [
   { binding = "ATLAS_KV", id = "6806f0b27b60448bbe8ac9f3bba2a4e8" },
   { binding = "RAG_KV",    id = "721d959b75ab4bed88d0153cf1408d64" }
@@ -14,7 +14,7 @@ kv_namespaces = [
 binding = "ATLAS_DB"
 database_name = "prompt_atlas_db"
 
-# R2 Bucket
+# R2 Bucket (valid name)
 [[r2_buckets]]
 binding = "ATLAS_R2"
 bucket_name = "prompt-atlas-r2"
