@@ -16,7 +16,7 @@ database_name = "prompt_atlas_db"
 # Bind R2 bucket for artifacts
 [[r2_buckets]]
 binding = "ATLAS_R2"
-bucket_name = "prompt_atlas_r2"
+bucket_name = "prompt-atlas-r2"
 
 [vars]
 # API keys allowed to use protected endpoints
