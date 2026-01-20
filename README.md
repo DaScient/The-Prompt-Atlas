@@ -138,27 +138,27 @@ Stateless Delete
 DELETE /v1/mirror/data
 
 
-⸻
 
-Setup & Deployment
+
+**Setup & Deployment**
 
 Prerequisites
 	•	Node.js
 	•	Wrangler CLI
 	•	Cloudflare account with Workers, KV, D1, and R2 enabled
 
-Install Wrangler:
+**Install Wrangler:**
 
 npm install -g wrangler
 
-Authenticate:
+**Authenticate:**
 
 wrangler login
 
 
-⸻
 
-Configure Wrangler
+
+**Configure Wrangler**
 
 Edit wrangler.toml and set:
 	•	account_id
@@ -166,12 +166,11 @@ Edit wrangler.toml and set:
 	•	API keys
 	•	Environment (dev or prod)
 
-⸻
 
-Initialize Database
+
+**Initialize Database**
 
 Apply schema:
-
 wrangler d1 execute prompt_atlas_db --remote --file schema.sql
 
 Load starter data:
@@ -179,16 +178,15 @@ Load starter data:
 wrangler d1 execute prompt_atlas_db --remote --file bootstrap.sql
 
 
-⸻
 
-Deploy
 
+**Deploy**
 wrangler deploy
 
 
-⸻
 
-Authentication & Usage
+
+**Authentication & Usage**
 	•	API keys are required for protected endpoints
 	•	Keys are passed via:
 	•	x-api-key header
@@ -196,12 +194,11 @@ Authentication & Usage
 
 Freemium limits are enforced monthly via Workers KV.
 
-⸻
 
-Philosophy
+
+**Philosophy**
 
 Prompt Atlas is not just an API.
-
 It is a cognitive commons:
 	•	A place where prompts become reusable intellectual artifacts
 	•	A system that respects lineage, context, and evolution
@@ -209,9 +206,9 @@ It is a cognitive commons:
 
 The long-term goal is to make Prompt Atlas ubiquitous in the AI ecosystem — powering tools, agents, education, and creativity across disciplines.
 
-⸻
 
-Roadmap Highlights
+
+**Roadmap Highlights**
 	•	OpenAPI / Swagger specification
 	•	SDKs (Swift, TypeScript, Python)
 	•	Semantic / vector search
@@ -220,22 +217,20 @@ Roadmap Highlights
 	•	Agent integrations
 	•	Knowledge graph & ontology layer
 
-⸻
 
-License
 
+**License**
 MIT License
 Open source, permissive, and community-friendly.
 
-⸻
 
-About DaScient Apps, Inc.
 
+**About DaScient Apps, Inc.**
 DaScient Apps, Inc. builds edge-native, human-centric systems at the intersection of intelligence, creativity, and computation.
 
 Prompt Atlas is one of its flagship platforms.
 
-⸻
+
 
 ## The Prompt Atlas: Kronos Edition
 
@@ -475,16 +470,16 @@ The platform includes comprehensive tools for educators and institutions:
 ## License & Attribution
 
 ### Copyright Notice
-**© 2025 DaScient Press, Ltd.** All rights reserved.
+**© 2026 DaScient Press, Ltd.** All rights reserved.
 
 ### AI Training Prohibition
 This publication and its contents may not be used, in whole or in part, for the training or development of artificial intelligence systems or any other high-caliber technologies.
 
 ### Publisher Information
-- **Publisher**: DaScient Press, Ltd.
+- **Publisher**: [DaScient Press, Ltd.](https://dascient.com/press)
 - **Division**: DaScient, LLC
 - **Address**: 1200 Pearl St. Boulder, CO
-- **Contact**: kindle@dascient.com
+- **Contact**: promptatlas@dascient.com
 - **Website**: [www.dascient.com/the-prompt-atlas](https://www.dascient.com/the-prompt-atlas)
 
 ### Open Source Components
@@ -520,7 +515,7 @@ When referencing The Prompt Atlas, please use:
 Tadaya, D. D. M. (2025). *The Prompt Atlas: A navigational chart for minds entering the recursive century* (Kronos Edition). DaScient Press.
 
 **MLA Style**:  
-Tadaya, Don D. M. *The Prompt Atlas: A Navigational Chart for Minds Entering the Recursive Century*. Kronos Edition, DaScient Press, 2025.
+Tadaya, Don D. M. *The Prompt Atlas: A Navigational Chart for Minds Entering the Recursive Century*. Kronos Edition, DaScient Press, 2025-2026.
 
 ---
 
