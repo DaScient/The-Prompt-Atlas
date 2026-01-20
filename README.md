@@ -22,6 +22,9 @@ This repository contains the backend Worker, database schema, and deployment con
 
 ## Live Deployment
 
+- **Free Book Promo**  
+  [The Prompt Atlas: Kronos Edition (Digital) $0.00](https://dascient.com/shop/ols/products/the-prompt-atlas-digital-kronos-edition)
+
 - **API Base URL**  
   https://prompt-atlas.aristocles24.workers.dev
 
@@ -36,9 +39,6 @@ This repository contains the backend Worker, database schema, and deployment con
 
 - **Shop**  
   https://DaScient.com/shop
-
-- **Free Book Promo**  
-  [The Prompt Atlas: Kronos Edition (Digital) $0.00](https://dascient.com/shop/ols/products/the-prompt-atlas-digital-kronos-edition)https://dascient.com/shop/ols/products/the-prompt-atlas-digital-kronos-edition
 
 ---
 
