@@ -1,4 +1,4 @@
-# Prompt Atlas  
+# [The Prompt Atlas](https://promptatlas.dascient.org)  
 **An Edge-Native Prompt Library & Cognitive Toolbelt**  
 DaScient Apps, Inc.
 
