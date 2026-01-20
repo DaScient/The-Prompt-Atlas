@@ -31,7 +31,7 @@ This repository contains the backend Worker, database schema, and deployment con
 - **Health Check**  
   `GET /health`
 
-- **Book (Prompt Atlas)**  
+- **Amazon Kindle, Paperback, and Hardcover**  
   https://www.amazon.com/dp/B0G13W7RW4
 
 - **Press & Media**  
