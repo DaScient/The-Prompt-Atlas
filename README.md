@@ -495,10 +495,10 @@ While the book content is copyrighted, the interactive platform code is open-sou
 ## Community & Contributing
 
 ### Join the Community
-- **Discord**: Community discussions and support
+- **Instagram**: @[ThePromptAtlas](https://www.instagram.com/thepromptatlas)
 - **GitHub**: Code contributions and issue tracking
-- **Email**: hello@promptatlas.com for general inquiries
-- **Twitter**: @PromptAtlasAI for updates
+- **Email**: promptatlas@dascient.com for general inquiries
+- **TikTok**: @[PromptAtlas](https://www.tiktok.com/@promptatlas) for updates
 
 ### Contributing
 We welcome contributions to:
