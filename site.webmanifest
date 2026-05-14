@@ -1,0 +1,21 @@
+{
+  "name": "The Prompt Atlas — A Guide for AI & Humanity",
+  "short_name": "Prompt Atlas",
+  "description": "The Prompt Atlas: Kronos Edition — a navigational chart for the recursive century. Free, open, and built for all ages, cultures, and learners.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "lang": "en",
+  "categories": ["education", "books", "productivity", "reference"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

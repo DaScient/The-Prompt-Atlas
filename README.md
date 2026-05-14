@@ -131,14 +131,36 @@ The-Prompt-Atlas/
 ├── visualizations.html     # 6 data-driven visualizations
 ├── about.html              # Project, team, timeline, mission
 ├── kronos-edition.html     # Edition details, ISBNs, purchase + reader guide
+├── 404.html                # Friendly themed "uncharted coordinate" fallback
 ├── main.js                 # Site-wide JS (animations, modal helpers, p5 backgrounds)
 ├── worker.js               # Cloudflare Worker (edge-native Prompt Atlas API)
 ├── wrangler.toml           # Cloudflare configuration
 ├── schema.sql              # D1 (SQLite) schema
 ├── bootstrap.sql           # Starter prompt content
 ├── package.json            # Frontend dev-server dependencies
+├── favicon.svg             # Inline SVG favicon
+├── og-card.svg             # Open Graph / Twitter share card
+├── site.webmanifest        # PWA-style web app manifest
+├── robots.txt              # Crawler policy + sitemap pointer
+├── sitemap.xml             # All public routes for search engines
+├── CNAME                   # promptatlas.dascient.org custom domain
+├── .nojekyll               # Disables Jekyll on GitHub Pages
+├── .github/workflows/      # GitHub Actions Pages auto-deploy workflow
 └── resources/              # Fonts, images, JSON datasets
 ```
+
+### ♿ Accessibility & inclusivity baseline
+
+Every page on the Atlas ships with the same baseline so that the project is usable by **all ages, cultures, groups, and industry leaders and learners alike**:
+
+- A **"Skip to main content" link** that becomes visible on first Tab.
+- A high-contrast **`:focus-visible`** ring (gold on dark) for keyboard users.
+- **`prefers-reduced-motion`** is honoured — animations collapse to ~0ms for vestibular-sensitive readers.
+- `lang="en"`, semantic landmarks (`<nav>`, `<main>`, anchored `#main-content`).
+- **`<meta name="rating" content="general">`** on every page — content is suitable for all audiences.
+- **Open Graph + Twitter Card** metadata so links unfurl beautifully in Slack, Discord, iMessage, X, LinkedIn, etc.
+- **Canonical links**, **`theme-color`**, **manifest**, and **inline SVG favicon** so the site installs cleanly as a PWA.
+- The Kronos prose itself is plain-language and PG — written to welcome a curious 14-year-old or a sceptical CTO with the same warmth.
 
 ---
 
@@ -162,17 +184,25 @@ open http://localhost:8080
 
 ### GitHub Pages deployment
 
-This repo is published from the default branch via **Settings → Pages → Build from a branch**. Any push to `main` is live within ~60 seconds at:
+The repo includes a **GitHub Actions workflow** (`.github/workflows/pages.yml`) that auto-publishes the entire site on every push to `main` — no build step, no Jekyll. To enable it:
 
-- **Canonical:** <https://promptatlas.dascient.org>
-- **Pages mirror:** <https://dascient.github.io/The-Prompt-Atlas>
+1. **Settings → Pages → Build and deployment → Source = `GitHub Actions`**.
+2. Push to `main`. The site is live within ~60 seconds at:
+   - **Canonical:** <https://promptatlas.dascient.org>
+   - **Pages mirror:** <https://dascient.github.io/The-Prompt-Atlas>
+3. The bundled `CNAME` file points the canonical domain at the Pages origin; configure a `CNAME` DNS record pointing `promptatlas` to `dascient.github.io`.
 
-For production hardening:
+Already configured for you out of the box:
 
-1. Ensure all CDN scripts are loaded over HTTPS (already the case).
-2. Enable gzip / brotli at the edge (Pages does this automatically).
-3. Set long cache TTLs on `resources/**` and a short TTL on HTML.
-4. Front the origin with a CDN (Cloudflare / Fastly / Netlify) for global low-latency.
+| File | Purpose |
+| ---- | ------- |
+| `.nojekyll` | Disables Jekyll so files starting with `_` and underscores in paths work. |
+| `CNAME` | Custom domain `promptatlas.dascient.org`. |
+| `404.html` | Themed "uncharted coordinate" page Pages serves automatically on missing routes. |
+| `robots.txt` | Allows crawling, points at the sitemap, restates the no-AI-training clause. |
+| `sitemap.xml` | All seven public routes with priority + change frequency. |
+| `site.webmanifest` | Installable PWA-style manifest. |
+| `favicon.svg` / `og-card.svg` | Vector favicon and 1200×630 share card. |
 
 ---
 
