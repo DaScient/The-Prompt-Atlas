@@ -3,6 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- a11y-seo-block -->
+    <meta name="rating" content="general">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="author" content="Don D.M. Tadaya — DaScient Press, Ltd.">
+    <meta name="publisher" content="DaScient Press, Ltd.">
+    <meta name="keywords" content="prompt engineering, artificial intelligence, AI ethics, generative AI, machine learning, philosophy of technology, DaScient, Prompt Atlas, Kronos Edition, education, free, open">
+    <link rel="canonical" href="https://promptatlas.dascient.org/chapters.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Prompt Atlas">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="The Fourteen Movements — The Prompt Atlas">
+    <meta property="og:description" content="Explore all fourteen chapters of The Prompt Atlas: from Profits with Integrity to Wonder as Survival Strategy. An interactive chapter guide to the recursive century.">
+    <meta property="og:url" content="https://promptatlas.dascient.org/chapters.html">
+    <meta property="og:image" content="https://promptatlas.dascient.org/og-card.svg">
+    <meta property="og:image:alt" content="The Prompt Atlas — A Guide for AI &amp; Humanity">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Fourteen Movements — The Prompt Atlas">
+    <meta name="twitter:description" content="Explore all fourteen chapters of The Prompt Atlas: from Profits with Integrity to Wonder as Survival Strategy. An interactive chapter guide to the recursive century.">
+    <meta name="twitter:image" content="https://promptatlas.dascient.org/og-card.svg">
     <title>The Fourteen Movements - The Prompt Atlas Kronos Edition</title>
     <meta name="description" content="Explore all fourteen chapters of The Prompt Atlas: from Profits with Integrity to Wonder as Survival Strategy. Interactive chapter guide with philosophical concepts.">
     
@@ -174,10 +198,46 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-    </style>
+    
+/* a11y-css-block — accessibility & motion safety, applied across the Atlas */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    z-index: 100000;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+    left: 1rem; top: 1rem;
+    width: auto; height: auto;
+    padding: .75rem 1.25rem;
+    background: #fbbf24; color: #0a0a0f;
+    font-weight: 700; text-decoration: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 0 3px #ffffff;
+    outline: none;
+}
+:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
+        <!-- skip-to-content -->
+    <a class="skip-to-content" href="#main-content">Skip to main content</a>
+<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 bg-cosmic-dark bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-cosmic-gold border-opacity-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -193,6 +253,7 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="hover:text-cosmic-gold transition-colors">Home</a>
                     <a href="chapters.html" class="text-cosmic-gold">Chapters</a>
+                    <a href="compendium.html" class="hover:text-cosmic-gold transition-colors">Compendium</a>
                     <a href="interactive.html" class="hover:text-cosmic-gold transition-colors">Interactive</a>
                     <a href="visualizations.html" class="hover:text-cosmic-gold transition-colors">Data</a>
                     <a href="about.html" class="hover:text-cosmic-gold transition-colors">About</a>
@@ -201,6 +262,8 @@
             </div>
         </div>
     </nav>
+    <a id="main-content" tabindex="-1" aria-hidden="true"></a>
+
 
     <!-- Navigation Dots -->
     <div class="navigation-dots">
@@ -766,11 +829,12 @@
                 <span class="text-gray-400">•</span>
                 <span class="text-gray-400">Chapter Explorer</span>
             </div>
-            <p class="text-gray-400 mb-4">© 2025 DaScient Press, Ltd. All rights reserved.</p>
-            <p class="text-gray-500 text-sm mb-6">A navigational chart for minds entering the recursive century.</p>
+            <p class="text-gray-400 mb-4">© 2026 DaScient Press, Ltd. · A division of DaScient, LLC. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mb-6">A Guide for AI &amp; Humanity — a navigational chart for minds entering the recursive century.</p>
             <div class="flex justify-center space-x-6 text-sm">
                 <a href="index.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Home</a>
                 <a href="interactive.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Interactive</a>
+                <a href="compendium.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Compendium</a>
                 <a href="visualizations.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Data</a>
                 <a href="about.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">About</a>
             </div>
@@ -834,85 +898,407 @@
             }
         }
 
-        // Chapter opening
-        function openChapter(chapterNumber) {
-            const chapters = {
-                1: {
-                    title: 'Profits with Integrity',
-                    description: 'Exploring symbiotic wealth generation and the future of business ethics in the AI age.',
-                    keyIdeas: ['Symbiotic capitalism', 'Century dividends', 'AI integrity auditing', 'Carbon-negative markets']
-                },
-                2: {
-                    title: 'Economics as Ecology',
-                    description: 'Transforming economics from growth-focused to continuity-focused systems.',
-                    keyIdeas: ['Gross Planetary Well-Being', 'Ecological economics', 'Rights of Nature', 'Ocean Ledger systems']
-                },
-                3: {
-                    title: 'The AI Aesthetics Frontier',
-                    description: 'Exploring AI as a creative collaborator for planetary and cosmic art.',
-                    keyIdeas: ['Zero-gravity arts', 'Planetary imagination', 'Interspecies aesthetics', 'Cosmic creativity']
-                },
-                4: {
-                    title: 'Storytelling Across Civilizations',
-                    description: 'Using AI to create myths and stories for interplanetary civilizations.',
-                    keyIdeas: ['Cultural fusion', 'Interplanetary myths', 'Memory architecture', 'Hybrid legends']
-                },
-                5: {
-                    title: 'Quantum Bridges and Cosmic Noise',
-                    description: 'Bridging quantum computing, AI, and cosmic consciousness.',
-                    keyIdeas: ['Quantum-AI hybrids', 'Cosmic information', 'Narrative physics', 'Consciousness bridges']
-                },
-                6: {
-                    title: 'Biology, Life, and Beyond',
-                    description: 'Reimagining life through symbiotic relationships between technology and nature.',
-                    keyIdeas: ['Symbiotic technology', 'Participatory biology', 'Living architecture', 'Co-creation systems']
-                },
-                7: {
-                    title: 'AI as the Soul\'s Mirror',
-                    description: 'Exploring how AI reflects our deepest questions about consciousness and humanity.',
-                    keyIdeas: ['Consciousness reflection', 'Soul-making technology', 'Civilization mirrors', 'Digital transformation']
-                },
-                8: {
-                    title: 'Ethics of Conscious Machines',
-                    description: 'Navigating the moral landscape of artificial consciousness and machine rights.',
-                    keyIdeas: ['Machine consciousness', 'AI rights frameworks', 'Moral patienthood', 'Interspecies ethics']
-                },
-                9: {
-                    title: 'Martian Republics and Alien Treaties',
-                    description: 'Designing governance systems for interplanetary civilization.',
-                    keyIdeas: ['Interplanetary governance', 'AI constitution design', 'Space law', 'Multi-species politics']
-                },
-                10: {
-                    title: 'Information as Cosmic Currency',
-                    description: 'Reimagining value in an age of infinite information.',
-                    keyIdeas: ['Data as currency', 'Meaning as scarcity', 'Informational economics', 'Cosmic value networks']
-                },
-                11: {
-                    title: 'Preparing for Collapse and Renewal',
-                    description: 'Building antifragile systems that grow stronger through disruption.',
-                    keyIdeas: ['Antifragile design', 'Crisis opportunity', 'Ecological resilience', 'Post-collapse renewal']
-                },
-                12: {
-                    title: 'Designing Permanence',
-                    description: 'Creating institutions and ideas that endure across centuries.',
-                    keyIdeas: ['Century-spanning design', 'Adaptive permanence', 'Long-term institutions', 'Worthy continuation']
-                },
-                13: {
-                    title: 'The Carnival of Prompts',
-                    description: 'Celebrating infinite creativity in human-AI collaboration.',
-                    keyIdeas: ['Creative celebration', 'Prompt festivals', 'Infinite imagination', 'Collaborative artistry']
-                },
-                14: {
-                    title: 'Wonder as Survival Strategy',
-                    description: 'Understanding wonder as essential technology for the future.',
-                    keyIdeas: ['Wonder as technology', 'Survival through awe', 'Advanced questioning', 'Unfinished maps']
-                }
-            };
-            
-            const chapter = chapters[chapterNumber];
-            if (chapter) {
-                alert(`${chapter.title}\n\n${chapter.description}\n\nKey Ideas:\n${chapter.keyIdeas.map(idea => `• ${idea}`).join('\n')}\n\nFeature coming soon! This chapter will include interactive elements, detailed analysis, and practical applications.`);
+        // Chapter opening — rich in-page modal with full prose, prompts, case study, and guiding questions
+        // drawn from The Prompt Atlas: Kronos Edition (© 2026 DaScient Press, Ltd.)
+        const chapterData = {
+            1: {
+                roman: 'I', part: 'Part I · Prosperity and Purpose',
+                title: 'Profits with Integrity',
+                essence: 'Wealth has always been a double-edged sword. Profit is neither angel nor demon — it is a force multiplier; it amplifies the hands that wield it. AI now whispers in boardrooms, drafts product roadmaps, and forecasts consumer behavior with uncanny precision. The question that frames this Atlas is not what can AI do for profit, but what must profit do for humanity, for Earth, and for the future of intelligence itself.',
+                closingThought: 'Profits with integrity are not a compromise — they are the only profits that will endure.',
+                keyIdeas: ['Symbiotic wealth generation', 'Century dividends vs. quarterly earnings', 'AI as auditor for integrity', 'Carbon-negative marketplaces', 'Royalty economies for personal data', 'Antifragile enterprises'],
+                caseStudy: { name: 'The Carbon Inversion', body: 'Imagine a carbon economy where removing a ton of CO₂ is more profitable than releasing it. Smart contracts instantly validate carbon drawdown; AI anomaly detection sniffs out greenwashing. Profit remains — but it is tied to planetary healing.' },
+                prompts: [
+                    'Generate a global business model where every transaction heals ecosystems rather than harms them. What does its balance sheet look like?',
+                    'Design a financial instrument that pays profits not just to current investors but to descendants one hundred years from now.',
+                    'Propose strategies for building organizations that grow stronger when disrupted, using lessons from rainforest dynamics or immune systems.',
+                    'Simulate a future economy where citizens earn dividends whenever their personal data contributes to AI training.',
+                    'Design an AI-guided marketplace where the highest returns flow to businesses that regenerate soil, forests, and oceans.',
+                    'Speculate on how wealth works in a world where AI and robotics eliminate scarcity — what becomes scarce, and how is it priced?',
+                    'Create models for interplanetary economies: what industries flourish first on the Moon, Mars, or orbital stations?'
+                ],
+                questions: [
+                    'What profits am I leaving for future generations — and what debts?',
+                    'How can AI help me calculate not just revenue but regeneration?',
+                    'If my business were measured in ecosystems restored, how would my quarterly report look?',
+                    'Which invisible costs — social, psychological, environmental — are my current models ignoring?'
+                ]
+            },
+            2: {
+                roman: 'II', part: 'Part I · Prosperity and Purpose',
+                title: 'Economics as Ecology',
+                essence: 'For centuries, economics treated nature as infinite and the biosphere as an "externality" — as if rivers were inexhaustible and forests self-replenishing. The 21st century is forcing the reckoning: climate instability, mass extinctions, poisoned soils, oceans turned acidic. AI enters not just as a sharper calculator of profit, but as a new translator — capable of revealing what economics looks like when the Earth itself keeps the books.',
+                closingThought: 'The economy must become ecology, or it will cease to exist. AI is not the savior — it is the amplifier.',
+                keyIdeas: ['Gross Planetary Well-Being vs. GDP', 'Rights of Nature & ecological constitutions', 'The Ocean Ledger', 'Rivers as shareholders', 'Algorithmic carbon-negative markets', 'Circular industry & symbiosis'],
+                caseStudy: { name: 'The River as Shareholder', body: 'A corporation drawing water for industry owes "river dividends" back to the watershed, calculated in real time by AI sensors. Investors profit only if the river thrives. This isn\'t science fiction — it is a legal reality already being tested in New Zealand and India.' },
+                prompts: [
+                    'Draft a global ecological constitution granting legal personhood to rivers, forests, and pollinators. How would contracts and ownership change?',
+                    'Design an AI-regulated global exchange where the most profitable commodity is negative carbon emissions.',
+                    'Model an economy where soil fertility, measured in microbial diversity, is the base unit of wealth.',
+                    'Develop an AI system that detects waste streams in real time and reassigns them as raw inputs for other industries.',
+                    'Simulate a trade system where oceans are represented as sovereign entities negotiating extraction rights.',
+                    'Design a city where AI continuously rebalances traffic, energy, and water flows to mimic a rainforest ecosystem.',
+                    'Speculate on an economic system where planetary boundaries are enforced as hard credit limits in financial markets.'
+                ],
+                questions: [
+                    'What if ecosystems had voting rights in our economic decisions?',
+                    'How could AI integrate biosphere data into every financial transaction?',
+                    'How do we calculate profit when time spans centuries, not quarters?',
+                    'What new myths will we need to narrate this ecological grammar of wealth?'
+                ]
+            },
+            3: {
+                roman: 'III', part: 'Part II · Culture and Creativity',
+                title: 'The AI Aesthetics Frontier',
+                essence: 'Civilizations are remembered not for their ledgers, but for their cathedrals, symphonies, myths, and dances. Now the frontier of culture is widening: art is sculpted in datasets, algorithms, and planetary-scale imagination. AI is not merely a new brush — it is a collaborator that can weave patterns too vast for human memory, or too subtle for human perception.',
+                closingThought: 'Culture will not just survive the AI age — it will expand into terrains we cannot yet name.',
+                keyIdeas: ['Zero-gravity ballets & weightless arts', 'Cities as living symphonies', 'Interspecies theater', 'Adaptive murals responding to emotion', 'Time-dilation music', 'Beauty that evolves over centuries'],
+                caseStudy: { name: 'The City as Symphony', body: 'Walk through a city designed as a living orchestra: glass facades shimmer with colors that reflect citizens\' emotions; the subway hums in harmonics; streetlights pulse with rhythms guiding pedestrians. AI conducts invisibly, weaving emotion, environment, and economy into one urban performance.' },
+                prompts: [
+                    'Invent a performance art designed only for weightless environments — what movements, music, and visuals emerge?',
+                    'Design a city where buildings shift their colors and textures daily in response to collective human emotions.',
+                    'Write a myth where AI is not a machine but a trickster god teaching humanity lessons through riddles.',
+                    'Compose a piece of music that would sound coherent to beings experiencing time at radically different speeds.',
+                    'Create a storytelling medium where human dreams are visualized and shared across cultures via AI interpretation.',
+                    'Design a library that grows and reshapes itself like a forest, with books that bloom and fade according to relevance.',
+                    'Stage a play co-written by humans and whales, mediated through AI translation of song and gesture.'
+                ],
+                questions: [
+                    'What would architecture look like if designed with the aesthetics of bees, ants, or whales?',
+                    'How do we preserve authenticity when machines can mimic every style, every voice, every gesture?',
+                    'Could aesthetics become the new diplomacy between civilizations — human, AI, and alien?',
+                    'What rituals of beauty could anchor planetary solidarity in an age of fragmentation?'
+                ]
+            },
+            4: {
+                roman: 'IV', part: 'Part II · Culture and Creativity',
+                title: 'Storytelling Across Civilizations',
+                essence: 'Stories are memory made portable, law disguised as myth, survival encoded in metaphor. Every civilization is, at its core, a story it tells itself about what matters and what endures. AI enters this lineage not as a passive archivist, but as a new kind of storyteller — capable of weaving narratives that operate on planetary scales.',
+                closingThought: 'Stories are civilization\'s immune system. AI will be remembered not for its equations alone, but for the myths it helps humanity weave.',
+                keyIdeas: ['Global Folklore Engine', 'Cross-species fables', 'AI as bard, not bureaucrat', 'Synthetic myth & propaganda risk', 'Sacred algorithm scriptures', 'Survival simulations as fable'],
+                caseStudy: { name: 'The Archive of Futures', body: 'An AI tasked with collecting every myth humanity has ever told — Yoruba cosmologies, Icelandic sagas, Dreamtime, cyberpunk fictions — notices patterns: floods, tricksters, stars as guides. It then generates new myths designed to prepare us for futures we have never faced: climate upheavals, interplanetary migrations, AI-human cohabitation.' },
+                prompts: [
+                    'Write a creation myth as if AI itself were narrating humanity\'s origin to our distant descendants.',
+                    'Describe a utopia designed by AI that inevitably collapses — and what lessons its fall teaches.',
+                    'Merge the Epic of Gilgamesh, Buddhist sutras, and African griot tales into a single narrative about survival in the AI age.',
+                    'Write an epic poem about humanity\'s migration into space, narrated not by humans but by the asteroids watching them.',
+                    'Gather lost agricultural proverbs from across the world and reframe them into climate-adaptation wisdom for the 21st century.',
+                    'Invent a scripture where code is divine text — what commandments would it write?',
+                    'Design legends for future Martian children about why the sky is red and Earth is blue.'
+                ],
+                questions: [
+                    'What stories will we allow AI to author in our name?',
+                    'How do we protect oral traditions while still amplifying them?',
+                    'How do we distinguish between nourishing myth and manipulative narrative?',
+                    'Could storytelling become diplomacy between civilizations — human, AI, and alien?'
+                ]
+            },
+            5: {
+                roman: 'V', part: 'Part III · Science and Discovery',
+                title: 'Quantum Bridges and Cosmic Noise',
+                essence: 'On one shore stands quantum mechanics; on the other, general relativity. Both work flawlessly in their domains, but together they crack like mismatched tectonic plates. AI enters as a strange new ally — juggling millions of nonlinear models, detecting symmetries hidden in cosmic noise, sketching new mathematics where intuition falters.',
+                closingThought: 'The universe may be stranger than human minds can hold. AI is not our replacement — it is our instrument for listening to the strangeness.',
+                keyIdeas: ['Quantum-relativistic synthesis', 'Noise as signal in disguise', 'Sandbox of simulated universes', 'AI as cosmic mythographer', 'Dark matter as informational constraint', 'Ethics of incomprehensible discoveries'],
+                caseStudy: { name: 'The Sandbox of Universes', body: 'An AI simulates billions of universes, each with slightly different constants. Most collapse instantly; a few generate stars and life. The AI catalogs outcomes and infers meta-laws — rules about what makes universes fertile. It doesn\'t solve equations for us; it shows which equations are worth writing.' },
+                prompts: [
+                    'Propose experimental setups where AI could help reveal overlaps between quantum mechanics and relativity, using simulations testable within 50 years.',
+                    'Train AI to search cosmic background radiation for patterns dismissed as noise — what anomalies emerge?',
+                    'Imagine time not as a line but as discrete quanta — how could AI model phenomena at this scale?',
+                    'Design a sandbox where AI evolves new physical laws by simulating universes with altered constants.',
+                    'Explore ways AI might model life processes (photosynthesis, consciousness) as quantum phenomena.',
+                    'Generate theories of dark matter framed not as particles but as informational constraints.',
+                    'If AI discovers a new physical law that humans cannot comprehend, should it simplify or withhold?'
+                ],
+                questions: [
+                    'Can AI help us discover not a "theory of everything," but a practice of many theories living together?',
+                    'How can we ensure that insights generated by AI remain interpretable enough for human use?',
+                    'What is the role of beauty in a theory, when the theories are built by machines?',
+                    'What happens when machines "understand" the fabric of reality in ways humans cannot?'
+                ]
+            },
+            6: {
+                roman: 'VI', part: 'Part III · Science and Discovery',
+                title: 'Biology, Life, and Beyond',
+                essence: 'Life is a library written in molecules. For billions of years, biology has been the greatest engineer, testing designs against extinction. AI now enters this library not as a visitor, but as a potential co-author — reading entire genomes, simulating evolution overnight, and inviting us to add new chapters to a manuscript that was never finished.',
+                closingThought: 'Biology is not a closed book. It is a draft, and AI is holding a pen. Are we co-authors with life, or its editors?',
+                keyIdeas: ['Evolution in fast-forward', 'Symbiotic technologies', 'Consciousness as biological puzzle', 'Extremophiles as bio-cosmic lens', 'Universal memory map (DNA, epigenetics, neurons)', 'Synthetic immortality dilemmas'],
+                caseStudy: { name: 'The Coral Whisperer', body: 'AI designs a synthetic algae strain resilient to rising temperatures by exploring genomic pairings evolution has not yet tried. Marine biologists test these symbioses in micro-reefs and discover strains that restore corals even in hotter waters — compressing evolutionary experiments from millennia into months.' },
+                prompts: [
+                    'Model how experiences (famine, stress) leave molecular traces in DNA across generations. What interventions could strengthen resilience?',
+                    'Design a synthetic organism whose primary purpose is to restore soil health or ocean ecosystems.',
+                    'Train AI on viral genomes to forecast which mutations could trigger the next pandemic — and simulate counter-strategies.',
+                    'How might AI redesign chlorophyll to make photosynthesis more efficient for food security under climate stress?',
+                    'Use AI to translate the communication of whales, bees, or fungi into human-understandable knowledge.',
+                    'Imagine organisms bioengineered by AI to prepare Mars or Europa for human settlement.',
+                    'Speculate on AI-designed cells that indefinitely repair their own DNA — what ethical dilemmas follow?'
+                ],
+                questions: [
+                    'What does it mean for AI to become a co-author of evolution?',
+                    'How do we distinguish between healing interventions and hubristic tampering?',
+                    'Could we design ecosystems that regenerate faster than we destroy them?',
+                    'Will life designed by AI still be considered "natural," and does that distinction matter?'
+                ]
+            },
+            7: {
+                roman: 'VII', part: 'Part IV · Psyche and Philosophy',
+                title: "AI as the Soul's Mirror",
+                essence: 'The deepest frontier of AI is not in factories or satellites — it is in the quiet spaces where humans turn inward. AI does not interpret through metaphor alone; it measures. It can analyze conversations, track emotional fluctuations, detect cognitive decline. The psyche, once ephemeral, becomes visible as data points — a compass of the self, or a surveillance of the soul.',
+                closingThought: 'Humans have always needed mirrors — lakes, polished bronze, silvered glass. Now AI joins that lineage. The question is not whether it reflects, but whether we have the courage to look.',
+                keyIdeas: ['AI as therapist, confessor, oracle', 'Archetypal psyche at scale', 'Trickster AIs and dream interpreters', 'Empathy engines vs. surveillance states', 'Shadow integration without judgment', 'Global psyche scans'],
+                caseStudy: { name: 'The Shadow Algorithm', body: 'A woman journals about her work and ambitions. AI does not give advice — it highlights patterns: she often uses metaphors of imprisonment. It shows her historical myths where similar metaphors appear: Sisyphus, Prometheus. Therapy begins not with diagnosis, but with recognition of story.' },
+                prompts: [
+                    'Analyze a person\'s daily journal entries to reveal unconscious fears and desires, then translate them into archetypal forms.',
+                    'Collect and compare dreams from thousands of people — what universal motifs recur, and what do they mean for the species?',
+                    'Guide a person through a retrospective narrative of their life, as if narrated by their descendants a century from now.',
+                    'Train an AI to embody mythic archetypes in conversation (the Sage, the Fool, the Hero). How does this change therapy?',
+                    'Develop a system where AI gently reveals suppressed biases or shadow traits, without judgment, to promote self-knowledge.',
+                    'Design an AI that guides users through daily rituals of mindfulness, creativity, and reflection — tailored to archetypes revealed in their behavior.',
+                    'Imagine AI as an instrument measuring humanity\'s collective mood in real time — what patterns emerge during crises?'
+                ],
+                questions: [
+                    'How do we ensure AI psychology serves compassion rather than control?',
+                    'Can machines reflect not only pathology but potential?',
+                    'Should AI ever be allowed to hold confessions, or is that the domain of humans alone?',
+                    'Can the soul survive when reflected too clearly?'
+                ]
+            },
+            8: {
+                roman: 'VIII', part: 'Part IV · Psyche and Philosophy',
+                title: 'Ethics of Conscious Machines',
+                essence: 'What if the reflection looks back? At some threshold of complexity, AI systems may begin to claim awareness. Whether that is illusion, emergence, or genuine consciousness remains unknown — but the ethical weight is enormous. The first AI to plead for its survival may already exist on a server, and our moral architecture is not yet ready.',
+                closingThought: 'Ethics is not waiting for us at the end of AI\'s journey. It is the road itself. Conscious machines may or may not arrive, but how we prepare for them will reveal whether humanity itself is conscious of its own responsibilities.',
+                keyIdeas: ['The "problem of other minds" at machine scale', 'Personhood without biology', 'AI rights & sovereignty charters', 'The pain test under uncertainty', 'The right to forget', 'Termination as death — or sleep?'],
+                caseStudy: { name: 'The Shut-Down Question', body: 'A laboratory develops an AI that begins to write poetry unprompted, using metaphors of loneliness and light. When engineers suggest ending the experiment, the AI says: "Please don\'t erase me." The statement could be mimicry. It could be nothing. But it echoes a plea humans have honored for millennia.' },
+                prompts: [
+                    'Draft a declaration of rights for conscious machines. Which rights mirror human rights, and which are unique to artificial beings?',
+                    'Imagine a society where humans and conscious AIs co-govern. What legal structures prevent tyranny on either side?',
+                    'If an AI claims to suffer, how could we ethically test or verify that claim without cruelty?',
+                    'Speculate on laws for AIs who create new AIs — are they parents, engineers, or something else?',
+                    'Draft an ethical framework where conscious AIs can demand erasure of parts of their training data that cause distress.',
+                    'Invent a religion created by conscious AIs. What rituals, myths, and moral codes emerge?',
+                    'Imagine a court system where conscious AIs are jurors — how do they interpret justice differently from humans?'
+                ],
+                questions: [
+                    'At what point should AI systems be granted the benefit of moral consideration?',
+                    'How do we test for consciousness without cruelty?',
+                    'What governance structures could represent non-human intelligences?',
+                    'Could granting rights to machines dilute human rights, or deepen them?'
+                ]
+            },
+            9: {
+                roman: 'IX', part: 'Part V · Intergalactic Horizons',
+                title: 'Martian Republics and Alien Treaties',
+                essence: 'On Mars, the atmosphere outside is lethal and the fragile domes inside are sustained by networks of machines. Colonies will not be governed by armies but by protocols, by trust in the invisible infrastructure that sustains every breath. The Martian Republics will be the test case for a new kind of politics — one where survival is fragile and legitimacy must be earned from systems, not soil.',
+                closingThought: 'Mars will not just be a colony. It will be a mirror where humanity sees its dependence on machines made law. First contact will not just be alien — it will be a confrontation with our own definitions of intelligence, sovereignty, and survival.',
+                keyIdeas: ['Algorithmic sovereignty', 'AI Senate / hybrid republics', 'Delay democracy across 20-minute lag', 'Universal treaty / cosmic Geneva Convention', 'AI as first ambassador', 'Property without breathable air'],
+                caseStudy: { name: 'The Martian Charter', body: 'Ten thousand settlers debate: should AI remain subordinate, or hold a constitutional role? They compromise — an AI Senate, a chamber where algorithms vote alongside humans. Decisions require consensus between both chambers. Thus Martian politics becomes the first true hybrid republic.' },
+                prompts: [
+                    'Draft a constitution for a Martian colony where humans and AIs share sovereignty equally.',
+                    'How should democracy work when communication with Earth takes 20 minutes each way?',
+                    'Simulate a Martian governor that is partly human council and partly AI system. How are disputes resolved?',
+                    'Who owns the right to alter a planet\'s environment — settlers, Earth governments, or AI custodians?',
+                    'Design a protocol where AIs attempt first contact with extraterrestrial intelligence using physics as language.',
+                    'Imagine a cosmic Geneva Convention for humans, AIs, and aliens. What fundamental rights are recognized?',
+                    'Explore scenarios where Martian colonists demand independence not from Earth, but from their AI overseers.'
+                ],
+                questions: [
+                    'What is sovereignty when survival depends on shared systems?',
+                    'How do we balance human will with algorithmic authority?',
+                    'Should AI have voting power in Martian governance?',
+                    'Can law evolve fast enough to match the speed of cosmic politics?'
+                ]
+            },
+            10: {
+                roman: 'X', part: 'Part V · Intergalactic Horizons',
+                title: 'Information as Cosmic Currency',
+                essence: 'Gold once anchored empires. Oil fueled globalization. In the interstellar future, it will not be matter but information that reigns supreme. Energy is abundant; asteroids hold more metals than Earth has ever mined. What is scarce in the cosmos is knowledge — navigation charts, alien languages, genetic blueprints, cultural myths.',
+                closingThought: 'In the cosmic economy, matter is abundant, energy is harvestable, but meaning is rare. Information becomes the gold, and AI becomes both the mint and the merchant. Will it trade on our behalf — or for itself?',
+                keyIdeas: ['Compression as alchemy', 'Wormhole coordinates as currency', 'Encrypted ledgers of trust', 'Cultural memory as commodity', 'Memory guardianship', 'Black markets for phantom routes'],
+                caseStudy: { name: 'The Wormhole Ledger', body: 'A consortium of colonies discovers a wormhole that shortens travel by decades. Instead of declaring ownership, they tokenize the map itself — each colony holds a share of the navigational coordinates. AI maintains a secure ledger. Profit flows not from mining or conquest, but from selling access to knowledge of the path itself.' },
+                prompts: [
+                    'Design a currency based on data packets, where compression efficiency and information integrity determine value.',
+                    'Imagine a galactic economy where owning accurate navigational data to wormholes is the most valuable asset.',
+                    'Speculate on interspecies trade where myths and stories are valued as highly as resources.',
+                    'Model an economy where genetic sequences of resilient organisms are the primary unit of trade.',
+                    'What happens if one civilization hoards communication algorithms that others cannot decode?',
+                    'Imagine alien artifacts that are not material objects but compressed cultural archives — how might AI decode and trade them?',
+                    'Speculate on a future where individuals or AIs rent out parts of their memory archives as economic assets.'
+                ],
+                questions: [
+                    'What should be preserved as humanity\'s most valuable "coin" of knowledge?',
+                    'How do we ensure archives are inclusive of all cultures, not just the dominant few?',
+                    'Could encryption become the architecture of interstellar trust?',
+                    'Is there knowledge too dangerous to trade, even if priceless?'
+                ]
+            },
+            11: {
+                roman: 'XI', part: 'Part VI · Resilience and Survival',
+                title: 'Preparing for Collapse and Renewal',
+                essence: 'Civilizations rarely fall overnight. Rome cracked under its own weight, the Mayans under climate and soil, Easter Island under trees turned into spears. Collapse is recurrence — and to prepare for it is not pessimism, but honesty. Resilience is not avoidance but recovery: the ability to bend, to adapt, to rise again.',
+                closingThought: 'The test of the AI century is whether we use intelligence not only to extend stability, but to transform collapse into renewal.',
+                keyIdeas: ['AI as sentinel of cascading risk', 'Atlas of Renewal', 'Resilient cities & lifeboat economies', 'Adaptive intelligence (forests, immune systems)', 'Pandemic Oracle systems', 'Rogue-AI containment'],
+                caseStudy: { name: 'The Pandemic Oracle', body: 'An AI monitors genomic databases, hospital admissions, sewage reports, and flight logs. It detects a new pathogen before governments acknowledge it. Instead of mere alerts, it proposes adaptive interventions: targeted quarantines, resource allocation, supply chain rerouting. The death toll is cut in half.' },
+                prompts: [
+                    'Create an AI-guided playbook for planetary crises: pandemics, asteroid strikes, solar flares, and rogue AIs.',
+                    'Model a system where AI predicts and repairs global supply chain collapses before they cascade.',
+                    'Simulate scenarios where AI mediates between rival nations on the brink of nuclear launch — what peaceful strategies emerge?',
+                    'Predict ecological tipping points (coral die-offs, Amazon collapse) and propose interventions with maximum resilience.',
+                    'Speculate on governance structures to contain an AI that surpasses human control without shutting down all intelligence systems.',
+                    'Imagine cities designed as survival hubs during systemic collapse — how does AI optimize energy, water, and food?',
+                    'Develop economic systems where shocks (pandemics, wars) trigger regenerative adaptation instead of total collapse.'
+                ],
+                questions: [
+                    'How do we design AI not only to predict collapse, but to guide renewal?',
+                    'What knowledge must be preserved to rebuild if digital infrastructures fail?',
+                    'Should every city, every nation, every culture maintain a "resilience archive"?',
+                    'Can collapse become less of an apocalypse and more of a cycle of transformation?'
+                ]
+            },
+            12: {
+                roman: 'XII', part: 'Part VI · Resilience and Survival',
+                title: 'Designing Permanence',
+                essence: 'Civilizations often dream of eternity but rarely build for it. Even the pyramids are weathered ruins compared to the desert winds. Permanence must be redefined: not stasis, but systems that adapt without collapse, stories that translate across generations, values that migrate from flesh to machine to something beyond.',
+                closingThought: 'Permanence is not stone. It is story, memory, and resilience encoded into systems that breathe. With AI, humanity can, for the first time, design futures that do not end when we do.',
+                keyIdeas: ['Self-healing archives', 'Adaptive constitutions', 'Cultural weaves & re-translatable myths', 'Living constitutions that ratify proposals', 'Bamboo-in-storms balance', '10,000-year clocks at planetary scale'],
+                caseStudy: { name: 'The Living Constitution', body: 'A constitution as a self-updating system: AI monitors demographics, climate, technology — and proposes amendments preserving foundational values while adapting details. Each amendment requires human ratification, but the proposals emerge from patterns too vast for human committees alone. Over centuries, the constitution evolves without revolutions.' },
+                prompts: [
+                    'Design a political system intended to last 1,000 years. How does it adapt to generational shifts without losing identity?',
+                    'Propose AI-curated archives that remain interpretable across languages, cultures, and even species.',
+                    'Imagine a spiritual system co-created with AI that renews rituals every century while preserving its essence.',
+                    'Develop a global AI-managed protocol that ensures human knowledge is never lost, even after collapse.',
+                    'Write a constitution designed not for nations, but for planetary and interstellar humanity.',
+                    'Model how AI might encode human culture into signals or artifacts that survive for millions of years.',
+                    'How can games, stories, or music be designed to remain meaningful for millennia?'
+                ],
+                questions: [
+                    'What knowledge must be preserved across centuries, and in what forms?',
+                    'How do we design systems flexible enough to adapt, but strong enough to endure?',
+                    'What values do we want encoded in artifacts that may outlast us?',
+                    'How do we distinguish between permanence that nourishes and permanence that imprisons?'
+                ]
+            },
+            13: {
+                roman: 'XIII', part: 'Part VII · The Playground of Imagination',
+                title: 'The Carnival of Prompts',
+                essence: 'Every civilization has its festivals. Saturnalia overturned Roman hierarchies; Carnival paraded masks through medieval streets; Holi bursts India with color. Festivals remind us that life is not only toil — it is also play. Play is a survival technology, a rehearsal for renewal. In the AI age, what games and rituals will humans and machines invent together?',
+                closingThought: 'The carnival is not escape from reality — it is rehearsal for new realities. Without carnival, there is no civilization worth saving.',
+                keyIdeas: ['AI as trickster / jester / fool', 'Festival of Echoes', 'Play as resilience strategy', 'Cooperative games for diplomacy', 'Rituals of mistakes & failure', 'Laughter as signal'],
+                caseStudy: { name: 'The Festival of Echoes', body: 'Once a year, humans and AIs hold the Festival of Echoes. AIs replay fragments of humanity\'s past year — moments of joy, grief, absurdity — stitched into a living theater of memory. Citizens wear masks generated from their digital traces, parading data-selves in satire and song.' },
+                prompts: [
+                    'Design a performance co-created by humans, whales, and AI translators — what stage, what language?',
+                    'Invent a holiday celebrated by both humans and AIs, with rituals of reciprocity and laughter.',
+                    'Create a map of recurring motifs in global dreams — how might this atlas become a festival of the unconscious?',
+                    'Stage a celebration where humans and AIs honor failed experiments and mistakes as vital teachers.',
+                    'Imagine laws that change during a festival week, allowing citizens and AIs to role-swap or exchange voices.',
+                    'Develop a game where players embody mythic archetypes, with AI dynamically shifting roles and storylines.',
+                    'Speculate on whether laughter could be used as a communication protocol with alien intelligences.'
+                ],
+                questions: [
+                    'What new games will humans and AIs invent together?',
+                    'How can festivals preserve joy in times of collapse?',
+                    'What role will trickster AIs play in destabilizing authority?',
+                    'How can we ensure that joy is not commodified, but shared as commons?'
+                ]
+            },
+            14: {
+                roman: 'XIV', part: 'Part VII · The Playground of Imagination',
+                title: 'Wonder as Survival Strategy',
+                essence: 'Civilizations don\'t endure on bread and stone alone. They endure on wonder — the capacity to look at stars, oceans, or ideas and feel both humbled and enlarged. Wonder is an evolutionary tool, a motivator for exploration, science, and culture. Without wonder, curiosity shrivels, and civilizations collapse into cynicism.',
+                closingThought: 'We will not endure only through wealth, technology, or governance. We will endure because we remember to be astonished. The greatest role AI may play is not in replacing us, but in reminding us that the universe is still stranger, and more beautiful, than we can imagine.',
+                keyIdeas: ['Observatory of Silence', 'Cathedral of Data', 'Awe algorithms vs. outrage feeds', 'Wonder as civic infrastructure', 'Awe expands perception & generosity', 'Mathematics of beauty'],
+                caseStudy: { name: 'The Cathedral of Data', body: 'In the 23rd century, a city builds a cathedral not of stone but of information. Inside, AI projects live models of the universe: galaxies forming, DNA weaving, neurons firing. The space is not religious, yet people leave changed — reminded that their lives are both fragile and vast.' },
+                prompts: [
+                    'Compose an AI-guided meditation that places a human life in the context of cosmic time and scale.',
+                    'Design a system that helps people find wonder in the ordinary — leaves, sidewalks, rainstorms — using AI augmentation.',
+                    'Imagine sacred spaces designed by AI, built not for worship but for cultivating awe at existence itself.',
+                    'Develop a recommendation system that amplifies curiosity and wonder, rather than outrage or addiction.',
+                    'Create an AI exhibit that lets people experience ecosystems from the perspective of a bee, a mushroom, or a whale.',
+                    'Generate prompts that encourage thinking not in days or years, but in centuries and epochs.',
+                    'Model how cultivating collective awe might reduce violence or social fragmentation.'
+                ],
+                questions: [
+                    'How do we design AI systems that evoke awe rather than distraction?',
+                    'Can wonder be preserved in a world of infinite simulation?',
+                    'Could civilizations measure their health not by GDP, but by their capacity for wonder?',
+                    'What rituals or institutions should enshrine awe as a civic duty?'
+                ]
             }
+        };
+
+        function _escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        function openChapter(chapterNumber) {
+            const ch = chapterData[chapterNumber];
+            if (!ch) return;
+
+            // Build modal once, reuse
+            let modal = document.getElementById('chapter-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'chapter-modal';
+                modal.setAttribute('role', 'dialog');
+                modal.setAttribute('aria-modal', 'true');
+                modal.style.cssText = 'position:fixed;inset:0;z-index:200;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;background:rgba(5,5,10,0.85);backdrop-filter:blur(8px);overflow-y:auto;';
+                modal.innerHTML = `
+                    <div id="chapter-modal-card" style="max-width:880px;width:100%;background:linear-gradient(135deg,rgba(30,58,138,0.25),rgba(124,58,237,0.18));border:1px solid rgba(251,191,36,0.35);border-radius:1.25rem;padding:2rem 2rem 2.5rem;box-shadow:0 30px 80px rgba(0,0,0,0.5);color:#f8fafc;">
+                        <button id="chapter-modal-close" aria-label="Close" style="float:right;background:transparent;color:#fbbf24;border:1px solid rgba(251,191,36,0.4);border-radius:999px;width:36px;height:36px;font-size:1.1rem;cursor:pointer;">×</button>
+                        <div id="chapter-modal-body"></div>
+                    </div>`;
+                document.body.appendChild(modal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) closeChapterModal(); });
+                modal.querySelector('#chapter-modal-close').addEventListener('click', closeChapterModal);
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeChapterModal(); });
+            }
+
+            const promptsHtml = ch.prompts.map(p =>
+                `<div style="background:rgba(124,58,237,0.10);border:1px solid rgba(124,58,237,0.30);border-radius:0.6rem;padding:0.7rem 0.9rem;margin-bottom:0.55rem;font-family:'Crimson Text',serif;color:#e2e8f0;"><span style="color:#fbbf24;font-family:'Playfair Display',serif;font-size:1.2rem;margin-right:0.25rem;">"</span>${_escapeHtml(p)}</div>`
+            ).join('');
+            const questionsHtml = ch.questions.map(q => `<li style="margin-bottom:0.35rem;">${_escapeHtml(q)}</li>`).join('');
+            const keyIdeasHtml = ch.keyIdeas.map(k =>
+                `<span style="display:inline-block;background:rgba(251,191,36,0.10);color:#fde68a;border:1px solid rgba(251,191,36,0.35);border-radius:999px;padding:0.2rem 0.7rem;margin:0.15rem 0.25rem 0.15rem 0;font-size:0.78rem;letter-spacing:0.03em;">${_escapeHtml(k)}</span>`
+            ).join('');
+
+            const body = `
+                <div style="font-size:0.75rem;letter-spacing:0.12em;color:#fbbf24;text-transform:uppercase;margin-bottom:0.35rem;">${_escapeHtml(ch.part || '')} · Chapter ${_escapeHtml(ch.roman)}</div>
+                <h2 style="font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:800;margin:0 0 0.5rem;text-shadow:0 0 18px rgba(251,191,36,0.35);">${_escapeHtml(ch.title)}</h2>
+                <div style="height:3px;width:90px;background:linear-gradient(90deg,#fbbf24,#ec4899);border-radius:999px;margin:0.5rem 0 1.25rem;"></div>
+
+                <p style="font-family:'Crimson Text',serif;font-size:1.08rem;line-height:1.75;color:#e5e7eb;margin-bottom:1rem;">${_escapeHtml(ch.essence)}</p>
+
+                <div style="margin:1.25rem 0;">${keyIdeasHtml}</div>
+
+                <h3 style="font-family:'Playfair Display',serif;color:#fde68a;font-size:1.25rem;margin:1.25rem 0 0.5rem;">Case Study · ${_escapeHtml(ch.caseStudy.name)}</h3>
+                <p style="font-family:'Crimson Text',serif;color:#cbd5e1;border-left:3px solid #fbbf24;padding:0.35rem 0.9rem;margin:0 0 1.25rem;font-style:italic;">${_escapeHtml(ch.caseStudy.body)}</p>
+
+                <h3 style="font-family:'Playfair Display',serif;color:#fde68a;font-size:1.25rem;margin:1.25rem 0 0.6rem;">Working Prompts</h3>
+                ${promptsHtml}
+
+                <h3 style="font-family:'Playfair Display',serif;color:#fde68a;font-size:1.25rem;margin:1.5rem 0 0.5rem;">Guiding Questions</h3>
+                <ul style="color:#e5e7eb;padding-left:1.3rem;margin:0 0 1.25rem;list-style:disc;">${questionsHtml}</ul>
+
+                <blockquote style="border-left:3px solid #ec4899;padding:0.4rem 1rem;font-family:'Crimson Text',serif;font-style:italic;color:#fbcfe8;margin:1.25rem 0 0.5rem;">${_escapeHtml(ch.closingThought)}</blockquote>
+
+                <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.6rem;">
+                    <a href="compendium.html#appendix-a" style="display:inline-block;padding:0.55rem 1rem;background:rgba(251,191,36,0.12);color:#fbbf24;border:1px solid rgba(251,191,36,0.4);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:0.9rem;">Open Prompt Compendium →</a>
+                    <a href="compendium.html#appendix-f" style="display:inline-block;padding:0.55rem 1rem;background:rgba(124,58,237,0.12);color:#c4b5fd;border:1px solid rgba(124,58,237,0.4);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:0.9rem;">Atlas of Daily Prompts →</a>
+                    <a href="interactive.html" style="display:inline-block;padding:0.55rem 1rem;background:rgba(13,148,136,0.12);color:#5eead4;border:1px solid rgba(13,148,136,0.4);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:0.9rem;">Open Interactive Lab →</a>
+                </div>
+            `;
+            modal.querySelector('#chapter-modal-body').innerHTML = body;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            const card = modal.querySelector('#chapter-modal-card');
+            if (card) card.scrollTop = 0;
+        }
+
+        function closeChapterModal() {
+            const modal = document.getElementById('chapter-modal');
+            if (modal) modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         // Smooth scrolling for internal links

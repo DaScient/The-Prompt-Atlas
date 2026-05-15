@@ -3,6 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- a11y-seo-block -->
+    <meta name="rating" content="general">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="author" content="Don D.M. Tadaya — DaScient Press, Ltd.">
+    <meta name="publisher" content="DaScient Press, Ltd.">
+    <meta name="keywords" content="prompt engineering, artificial intelligence, AI ethics, generative AI, machine learning, philosophy of technology, DaScient, Prompt Atlas, Kronos Edition, education, free, open">
+    <link rel="canonical" href="https://promptatlas.dascient.org/about.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Prompt Atlas">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="About — The Prompt Atlas">
+    <meta property="og:description" content="About The Prompt Atlas: a free, open guide for AI & Humanity, published by DaScient Press. Built for all ages, cultures, groups, and industry leaders and learners alike.">
+    <meta property="og:url" content="https://promptatlas.dascient.org/about.html">
+    <meta property="og:image" content="https://promptatlas.dascient.org/og-card.svg">
+    <meta property="og:image:alt" content="The Prompt Atlas — A Guide for AI &amp; Humanity">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About — The Prompt Atlas">
+    <meta name="twitter:description" content="About The Prompt Atlas: a free, open guide for AI & Humanity, published by DaScient Press. Built for all ages, cultures, groups, and industry leaders and learners alike.">
+    <meta name="twitter:image" content="https://promptatlas.dascient.org/og-card.svg">
     <title>About - The Prompt Atlas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -20,10 +44,46 @@
         .timeline-item { position: relative; padding-left: 2rem; }
         .timeline-item::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 12px; height: 12px; background: #8B5CF6; border-radius: 50%; }
         .timeline-line { position: absolute; left: 5px; top: 1.5rem; bottom: -1rem; width: 2px; background: linear-gradient(to bottom, #8B5CF6, transparent); }
-    </style>
+    
+/* a11y-css-block — accessibility & motion safety, applied across the Atlas */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    z-index: 100000;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+    left: 1rem; top: 1rem;
+    width: auto; height: auto;
+    padding: .75rem 1.25rem;
+    background: #fbbf24; color: #0a0a0f;
+    font-weight: 700; text-decoration: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 0 3px #ffffff;
+    outline: none;
+}
+:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
-    <!-- Navigation -->
+        <!-- skip-to-content -->
+    <a class="skip-to-content" href="#main-content">Skip to main content</a>
+<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -36,6 +96,7 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
                     <a href="chapters.html" class="text-gray-300 hover:text-white transition-colors">Chapters</a>
+                    <a href="compendium.html" class="text-gray-300 hover:text-white transition-colors">Compendium</a>
                     <a href="interactive.html" class="text-gray-300 hover:text-white transition-colors">Interactive</a>
                     <a href="visualizations.html" class="text-gray-300 hover:text-white transition-colors">Visualizations</a>
                     <a href="about.html" class="text-white font-medium">About</a>
@@ -49,6 +110,8 @@
             </div>
         </div>
     </nav>
+    <a id="main-content" tabindex="-1" aria-hidden="true"></a>
+
 
     <!-- Hero Section -->
     <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
@@ -469,7 +532,7 @@
                 </div>
                 <span class="text-xl font-bold gradient-text">The Prompt Atlas</span>
             </div>
-            <p class="text-gray-400 mb-4">© 2025 The Prompt Atlas. All rights reserved.</p>
+            <p class="text-gray-400 mb-4">© 2026 DaScient Press, Ltd. · A division of DaScient, LLC. A Guide for AI &amp; Humanity. All rights reserved.</p>
             <p class="text-gray-500 text-sm">Exploring the frontiers of artificial intelligence through education and community.</p>
         </div>
     </footer>

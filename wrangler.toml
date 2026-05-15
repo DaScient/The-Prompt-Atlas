@@ -1,24 +1,86 @@
-name = "prompt-atlas"
-main = "worker.js"
-compatibility_date = "2025-01-01"
-account_id = "22202ff07e559347483b0526ded1fd31"
+# ─────────────────────────────────────────────────────────────────────────────
+# The Prompt Atlas — Cloudflare Worker configuration
+#
+# Quick start:
+#   1. wrangler login
+#   2. Create resources (one-time):
+#        wrangler kv namespace create ATLAS_KV
+#        wrangler kv namespace create RAG_KV
+#        wrangler d1 create prompt_atlas_db
+#        wrangler r2 bucket create prompt-atlas-r2
+#      Then paste the returned IDs into the placeholders below.
+#   3. Apply schema + seed:
+#        wrangler d1 migrations apply prompt_atlas_db --remote
+#   4. Set your API key as a SECRET (never commit it):
+#        wrangler secret put API_KEYS
+#        # paste a comma-separated list of allowed keys at the prompt
+#   5. Deploy:
+#        wrangler deploy
+# ─────────────────────────────────────────────────────────────────────────────
 
-# KV Namespaces
-kv_namespaces = [
-  { binding = "ATLAS_KV", id = "6806f0b27b60448bbe8ac9f3bba2a4e8" },
-  { binding = "RAG_KV",    id = "721d959b75ab4bed88d0153cf1408d64" }
-]
+name                = "prompt-atlas"
+main                = "worker.js"
+compatibility_date  = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+account_id          = "22202ff07e559347483b0526ded1fd31"
+workers_dev         = true
 
-# D1 Database
+# Observability — surfaces logs in the Cloudflare dashboard
+[observability]
+enabled            = true
+head_sampling_rate = 1
+
+# ─── KV ──────────────────────────────────────────────────────────────────────
+# Rate-limit counters, monthly quotas, ephemeral mirror cache.
+[[kv_namespaces]]
+binding = "ATLAS_KV"
+id      = "6806f0b27b60448bbe8ac9f3bba2a4e8"
+
+# Retrieval-augmented composition cache.
+[[kv_namespaces]]
+binding = "RAG_KV"
+id      = "721d959b75ab4bed88d0153cf1408d64"
+
+# ─── D1 ──────────────────────────────────────────────────────────────────────
+# After `wrangler d1 create prompt_atlas_db`, paste the returned UUID into
+# `database_id`. The `migrations_dir` lets `wrangler d1 migrations apply` find
+# the schema files in this repo.
 [[d1_databases]]
-binding = "ATLAS_DB"
-database_name = "prompt_atlas_db"
+binding        = "ATLAS_DB"
+database_name  = "prompt_atlas_db"
+database_id    = "REPLACE_WITH_D1_DATABASE_ID"          # ← REQUIRED: run `wrangler d1 create prompt_atlas_db` and paste the UUID it returns
+migrations_dir = "migrations"
 
-# R2 Bucket (valid name)
+# ─── R2 ──────────────────────────────────────────────────────────────────────
 [[r2_buckets]]
-binding = "ATLAS_R2"
+binding     = "ATLAS_R2"
 bucket_name = "prompt-atlas-r2"
 
+# ─── Public, non-secret variables ────────────────────────────────────────────
+# Anything genuinely sensitive (e.g. API_KEYS) belongs in `wrangler secret put`,
+# NOT here.
 [vars]
-API_KEYS = "your_real_api_key_here"
-ENVIRONMENT = "prod"
+ENVIRONMENT  = "prod"
+ALLOW_ORIGIN = "https://promptatlas.dascient.org,https://dascient.github.io"
+
+# ─── Custom domain routing (optional) ────────────────────────────────────────
+# Uncomment after attaching the zone in the Cloudflare dashboard.
+# [[routes]]
+# pattern      = "api.promptatlas.dascient.org/*"
+# zone_name    = "dascient.org"
+# custom_domain = true
+
+# ─── Per-environment overrides ───────────────────────────────────────────────
+[env.dev]
+name = "prompt-atlas-dev"
+
+[env.dev.vars]
+ENVIRONMENT  = "dev"
+ALLOW_ORIGIN = "*"
+
+[env.prod]
+name = "prompt-atlas"
+
+[env.prod.vars]
+ENVIRONMENT  = "prod"
+ALLOW_ORIGIN = "https://promptatlas.dascient.org,https://dascient.github.io"

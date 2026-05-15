@@ -3,6 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- a11y-seo-block -->
+    <meta name="rating" content="general">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="author" content="Don D.M. Tadaya — DaScient Press, Ltd.">
+    <meta name="publisher" content="DaScient Press, Ltd.">
+    <meta name="keywords" content="prompt engineering, artificial intelligence, AI ethics, generative AI, machine learning, philosophy of technology, DaScient, Prompt Atlas, Kronos Edition, education, free, open">
+    <link rel="canonical" href="https://promptatlas.dascient.org/kronos-edition.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Prompt Atlas">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="The Kronos Edition — DaScient Press · The Prompt Atlas">
+    <meta property="og:description" content="The Kronos Edition of The Prompt Atlas — published by DaScient Press, Ltd. Free, open, and available worldwide.">
+    <meta property="og:url" content="https://promptatlas.dascient.org/kronos-edition.html">
+    <meta property="og:image" content="https://promptatlas.dascient.org/og-card.svg">
+    <meta property="og:image:alt" content="The Prompt Atlas — A Guide for AI &amp; Humanity">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Kronos Edition — DaScient Press · The Prompt Atlas">
+    <meta name="twitter:description" content="The Kronos Edition of The Prompt Atlas — published by DaScient Press, Ltd. Free, open, and available worldwide.">
+    <meta name="twitter:image" content="https://promptatlas.dascient.org/og-card.svg">
     <title>The Prompt Atlas: Kronos Edition '25 - DaScient Press</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -130,10 +154,46 @@
             background: rgba(230, 126, 34, 0.2);
             border-left: 4px solid var(--accent-color);
         }
-    </style>
+    
+/* a11y-css-block — accessibility & motion safety, applied across the Atlas */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    z-index: 100000;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+    left: 1rem; top: 1rem;
+    width: auto; height: auto;
+    padding: .75rem 1.25rem;
+    background: #fbbf24; color: #0a0a0f;
+    font-weight: 700; text-decoration: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 0 3px #ffffff;
+    outline: none;
+}
+:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
 </head>
 <body class="overflow-x-hidden">
-    <!-- Navigation -->
+        <!-- skip-to-content -->
+    <a class="skip-to-content" href="#main-content">Skip to main content</a>
+<!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -149,6 +209,7 @@
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
                     <a href="chapters.html" class="text-gray-600 hover:text-gray-900 transition-colors">Chapters</a>
+                    <a href="compendium.html" class="text-gray-600 hover:text-gray-900 transition-colors">Compendium</a>
                     <a href="interactive.html" class="text-gray-600 hover:text-gray-900 transition-colors">Interactive</a>
                     <a href="visualizations.html" class="text-gray-600 hover:text-gray-900 transition-colors">Data</a>
                     <a href="about.html" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
@@ -162,6 +223,8 @@
             </div>
         </div>
     </nav>
+    <a id="main-content" tabindex="-1" aria-hidden="true"></a>
+
 
     <!-- Hero Section -->
     <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -565,7 +628,7 @@
                 <span class="text-gray-400">•</span>
                 <span class="text-gray-400">Kronos Edition '25</span>
             </div>
-            <p class="text-gray-400 mb-4">© 2025 DaScient Press, Ltd. All rights reserved.</p>
+            <p class="text-gray-400 mb-4">© 2026 DaScient Press, Ltd. · A division of DaScient, LLC. All rights reserved.</p>
             <p class="text-gray-500 text-sm">A navigational chart for minds entering the recursive century.</p>
         </div>
     </footer>

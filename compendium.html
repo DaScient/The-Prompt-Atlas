@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- a11y-seo-block -->
+    <meta name="rating" content="general">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="author" content="Don D.M. Tadaya — DaScient Press, Ltd.">
+    <meta name="publisher" content="DaScient Press, Ltd.">
+    <meta name="keywords" content="prompt engineering, artificial intelligence, AI ethics, generative AI, machine learning, philosophy of technology, DaScient, Prompt Atlas, Kronos Edition, education, free, open">
+    <link rel="canonical" href="https://promptatlas.dascient.org/compendium.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Prompt Atlas">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="The Compendium — Foreword, Preface, Epilogue & Appendices · The Prompt Atlas">
+    <meta property="og:description" content="The full front-matter and back-matter of The Prompt Atlas: Kronos Edition — Foreword by Alfredo M. Tadaya, Preface for the Leaders of the Recursive Age, the Epilogue, and Appendices A–F.">
+    <meta property="og:url" content="https://promptatlas.dascient.org/compendium.html">
+    <meta property="og:image" content="https://promptatlas.dascient.org/og-card.svg">
+    <meta property="og:image:alt" content="The Prompt Atlas — A Guide for AI &amp; Humanity">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Compendium — Foreword, Preface, Epilogue & Appendices · The Prompt Atlas">
+    <meta name="twitter:description" content="The full front-matter and back-matter of The Prompt Atlas: Kronos Edition — Foreword by Alfredo M. Tadaya, Preface for the Leaders of the Recursive Age, the Epilogue, and Appendices A–F.">
+    <meta name="twitter:image" content="https://promptatlas.dascient.org/og-card.svg">
+    <title>The Compendium — Foreword, Preface, Epilogue & Appendices · The Prompt Atlas: Kronos Edition</title>
+    <meta name="description" content="The full front-matter and back-matter of The Prompt Atlas: Kronos Edition — Foreword by Alfredo M. Tadaya, Preface for the Leaders of the Recursive Age, The Age of Prompts, the Epilogue Toward the Recursive Future, and Appendices A–F: Prompt Compendium, Practical Exercises, Case Studies, Glossary of Strange Futures, Reading & Resource Atlas, and the Atlas of Daily Prompts.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --cosmic-dark: #0a0a0f;
+            --cosmic-blue: #1e3a8a;
+            --cosmic-gold: #fbbf24;
+            --cosmic-purple: #7c3aed;
+            --cosmic-teal: #0d9488;
+            --nebula-pink: #ec4899;
+            --starlight: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--starlight);
+            line-height: 1.75;
+        }
+        .serif { font-family: 'Crimson Text', serif; }
+        .display { font-family: 'Playfair Display', serif; }
+        .glow-text { text-shadow: 0 0 20px rgba(251, 191, 36, 0.5); }
+        .cosmic-gradient {
+            background: linear-gradient(135deg, var(--cosmic-blue), var(--cosmic-purple), var(--nebula-pink));
+        }
+        .cosmic-card {
+            background: rgba(30, 58, 138, 0.10);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.18);
+            border-radius: 1rem;
+        }
+        .part-divider {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cosmic-gold), var(--nebula-pink));
+            margin: 1.5rem auto;
+            border-radius: 999px;
+        }
+        .prose-kronos p { margin-bottom: 1.1rem; }
+        .prose-kronos blockquote {
+            border-left: 3px solid var(--cosmic-gold);
+            padding: 0.25rem 1rem;
+            margin: 1.25rem 0;
+            font-family: 'Crimson Text', serif;
+            font-style: italic;
+            color: #e2e8f0;
+        }
+        .prose-kronos h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 1.75rem 0 0.6rem;
+            color: #fde68a;
+        }
+        .prose-kronos h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 1.25rem 0 0.4rem;
+            color: var(--cosmic-gold);
+            letter-spacing: 0.02em;
+        }
+        .prose-kronos ul { list-style: disc; padding-left: 1.4rem; margin-bottom: 1rem; color: #e5e7eb; }
+        .prose-kronos ol { list-style: decimal; padding-left: 1.4rem; margin-bottom: 1rem; color: #e5e7eb; }
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+        .toc-link:hover {
+            background: rgba(251, 191, 36, 0.08);
+            color: var(--cosmic-gold);
+            transform: translateX(4px);
+        }
+        .pill {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(251, 191, 36, 0.10);
+            color: var(--cosmic-gold);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+        }
+        .prompt-card {
+            background: rgba(124, 58, 237, 0.07);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            border-radius: 0.75rem;
+            padding: 0.9rem 1rem;
+            margin-bottom: 0.65rem;
+            font-family: 'Crimson Text', serif;
+            color: #e2e8f0;
+        }
+        .prompt-card::before {
+            content: '"';
+            color: var(--cosmic-gold);
+            font-size: 1.4rem;
+            margin-right: 0.25rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .glossary dt {
+            font-weight: 700;
+            color: var(--cosmic-gold);
+            font-family: 'Playfair Display', serif;
+            margin-top: 1rem;
+            font-size: 1.05rem;
+        }
+        .glossary dd {
+            color: #e5e7eb;
+            margin-left: 0;
+            margin-bottom: 0.35rem;
+        }
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 0.85rem 1.1rem;
+            border-radius: 0.75rem;
+            background: rgba(13, 148, 136, 0.10);
+            border: 1px solid rgba(13, 148, 136, 0.35);
+            font-family: 'Playfair Display', serif;
+            color: var(--cosmic-gold);
+        }
+        details[open] > summary { background: rgba(13, 148, 136, 0.18); }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::after { content: ' ▾'; color: var(--cosmic-gold); }
+        details[open] > summary::after { content: ' ▴'; }
+
+        a.anchor-target { scroll-margin-top: 5rem; }
+    
+/* a11y-css-block — accessibility & motion safety, applied across the Atlas */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    z-index: 100000;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+    left: 1rem; top: 1rem;
+    width: auto; height: auto;
+    padding: .75rem 1.25rem;
+    background: #fbbf24; color: #0a0a0f;
+    font-weight: 700; text-decoration: none;
+    border-radius: .5rem;
+    box-shadow: 0 0 0 3px #ffffff;
+    outline: none;
+}
+:focus-visible {
+    outline: 3px solid #fbbf24 !important;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+<body>
+
+        <!-- skip-to-content -->
+    <a class="skip-to-content" href="#main-content">Skip to main content</a>
+<!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-cosmic-dark bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-cosmic-gold border-opacity-20" style="background: rgba(10,10,15,0.85);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 cosmic-gradient rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">PA</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                        <span class="text-sm text-gray-400 ml-2">Kronos Edition</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex space-x-6 text-sm">
+                    <a href="index.html" class="hover:text-cosmic-gold transition-colors text-gray-300">Home</a>
+                    <a href="chapters.html" class="hover:text-cosmic-gold transition-colors text-gray-300">Chapters</a>
+                    <a href="compendium.html" class="text-cosmic-gold">Compendium</a>
+                    <a href="interactive.html" class="hover:text-cosmic-gold transition-colors text-gray-300">Interactive</a>
+                    <a href="visualizations.html" class="hover:text-cosmic-gold transition-colors text-gray-300">Data</a>
+                    <a href="about.html" class="hover:text-cosmic-gold transition-colors text-gray-300">About</a>
+                    <a href="kronos-edition.html" class="hover:text-cosmic-gold transition-colors text-gray-300">Kronos Edition</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <a id="main-content" tabindex="-1" aria-hidden="true"></a>
+
+
+    <!-- Header -->
+    <header class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="pill mb-4 inline-block">A Guide for AI &amp; Humanity</span>
+            <h1 class="text-5xl md:text-6xl font-bold mt-4 mb-4 glow-text display">The Compendium</h1>
+            <p class="text-xl text-gray-300 serif italic">
+                Front-matter, epilogue, and the six appendices of <span class="text-cosmic-gold">The Prompt Atlas: Kronos Edition</span> &mdash; the full constellation of prompts, exercises, vignettes, glossary, reading paths, and a year of daily questions to ask alongside an AI.
+            </p>
+            <div class="part-divider"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 grid lg:grid-cols-[260px_1fr] gap-10">
+
+        <!-- Sticky Table of Contents -->
+        <aside class="lg:sticky lg:top-24 lg:self-start cosmic-card p-5 max-h-[80vh] overflow-y-auto">
+            <h2 class="text-sm font-bold text-cosmic-gold tracking-widest mb-3">CONTENTS</h2>
+            <a class="toc-link" href="#foreword">Foreword — Alfredo M. Tadaya</a>
+            <a class="toc-link" href="#preface">Preface · Leaders of the Recursive Age</a>
+            <a class="toc-link" href="#age-of-prompts">The Age of Prompts</a>
+            <a class="toc-link" href="#epilogue">Epilogue · Toward the Recursive Future</a>
+            <div class="my-3 border-t border-cosmic-gold/20"></div>
+            <a class="toc-link" href="#appendix-a">Appendix A · Prompt Compendium</a>
+            <a class="toc-link" href="#appendix-b">Appendix B · Practical Exercises</a>
+            <a class="toc-link" href="#appendix-c">Appendix C · Case Studies</a>
+            <a class="toc-link" href="#appendix-d">Appendix D · Glossary of Strange Futures</a>
+            <a class="toc-link" href="#appendix-e">Appendix E · Reading &amp; Resource Atlas</a>
+            <a class="toc-link" href="#appendix-f">Appendix F · Atlas of Daily Prompts</a>
+            <div class="my-3 border-t border-cosmic-gold/20"></div>
+            <a class="toc-link" href="#postword">Post-word by the Author</a>
+            <a class="toc-link" href="#regenerate">Regeneration Charter</a>
+        </aside>
+
+        <article class="prose-kronos">
+
+            <!-- Foreword -->
+            <section id="foreword" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Foreword</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Foreword</h2>
+                <p class="text-cosmic-gold serif italic">by Alfredo M. Tadaya</p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <p>Saturn reminds us that precision is not a constraint—it is devotion. Every curve of its rings, every ratio between orbit and light, holds to an integrity that has lasted billions of years. The planet does not improvise its structure; it abides by the exactitude that keeps it whole.</p>
+                <p>In architecture, in engineering, in the quiet rigor of inspection, that same principle governs endurance. Good data is our gravity. It holds the weight of what we build, unseen but absolute. When we measure faithfully, record honestly, and revise humbly, we align our work with the laws that keep worlds intact.</p>
+                <p>To sustain accuracy is to honor the future. It is how bridges remain standing, how codes outlive their authors, how a civilization maintains coherence through time. Saturn teaches that strength and beauty are not opposites—they are both born of discipline.</p>
+                <blockquote>May this Prompt Atlas serve as reminder: the pursuit of truth in form and number is not clerical, it is cosmic.</blockquote>
+            </section>
+
+            <!-- Preface -->
+            <section id="preface" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Preface</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">For the Leaders of the Recursive Age</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <blockquote>The 21st century no longer rewards those who simply adapt—it rewards those who imagine adaptation itself.</blockquote>
+                <p>The old structures of industry, governance, and education are dissolving faster than they can be rebuilt. Artificial intelligence, climate acceleration, and quantum computation have fused into something more than progress: they have become momentum. Humanity, for the first time, is not merely building tools—it is building mirrors, systems capable of reflecting and amplifying its own intelligence.</p>
+                <p>But reflection without direction leads to recursion without meaning. And that is where leadership becomes sacred again.</p>
+                <p>This book was written for a new kind of leader: one who understands that data alone is not wisdom, that innovation without ethics is noise, and that imagination—when disciplined by empathy—remains our most advanced technology. The leaders who will define this century are not those who hoard answers, but those who cultivate better questions.</p>
+                <blockquote>In this age, to lead is not to command — it is to prompt.</blockquote>
+                <p>Prompts are seeds of inquiry. They are the blueprints of possibility. Each one carries within it the power to open new dimensions of thought—economic, artistic, scientific, and spiritual. They are how we teach AI, but they are also how we teach ourselves. When a civilization learns to prompt well, it learns to think with itself, through itself, and beyond itself.</p>
+                <p>The Prompt Atlas is not a manual for machines—it is a map for minds. It is an invitation to reframe leadership as exploration, to rebuild wealth as stewardship, to restore science as wonder, and to reimagine technology as an ally in the moral project of survival.</p>
+                <p>Leadership in the recursive age demands courage of a different kind: the courage to hold uncertainty without paralysis, to collaborate across disciplines and species, and to imagine futures that do not yet have names. It is the courage to build institutions that evolve as fast as their environments, and to measure success not in scale but in sustainability.</p>
+                <p>So let this book be your invitation—to think boldly, to design ethically, to question endlessly, and to lead not with fear, but with wonder. The recursive future has no finish line. It expands with every act of imagination, every ethical decision, every shared insight.</p>
+                <blockquote>Leadership, in this new world, will not be defined by control, but by curation of curiosity.<br>The Atlas begins here—with you.</blockquote>
+            </section>
+
+            <!-- Age of Prompts -->
+            <section id="age-of-prompts" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Introduction</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">The Age of Prompts</h2>
+                <p class="text-cosmic-gold serif italic">AI as Compass, Mirror, and Forge</p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <p>Every age leaves behind a symbol. For the industrial era, it was the gear. For the digital era, the screen. For ours, it is the <em>prompt</em>—a single line of text that summons entire worlds.</p>
+                <p>The prompt is more than instruction. It is a conversation with the unknown. It is the question that builds the answer, the spark that calls a system to attention. In a sense, we have become the poets of machines—our words shaping probabilities into patterns, probabilities into prose, code into cognition.</p>
+                <p>Artificial Intelligence, in this light, is not simply a machine that thinks. It is a <strong>compass</strong>, pointing toward the possibilities hidden within our collective data. It is a <strong>mirror</strong>, reflecting our assumptions, biases, and aspirations back at us with ruthless clarity. And it is a <strong>forge</strong>, where human creativity and machine precision meet to shape something neither could make alone.</p>
+                <h3>Why Questions Matter More Than Answers</h3>
+                <p>For the first time in history, answers are cheap. They are instant, infinite, and increasingly indistinguishable. Ask an AI, and it will answer—beautifully, confidently, and sometimes, incorrectly. But the deeper truth is that answers are no longer scarce. <strong>It is good questions that have become rare.</strong></p>
+                <blockquote>If AI is a mirror, then our questions are what shape the reflection.</blockquote>
+                <h3>The Atlas as Living, Recursive Text</h3>
+                <p>This book is not meant to be read once. It is meant to be used. Think of it as an atlas—a living, recursive map for navigating intelligence in motion. Every framework, every model, every chapter is a coordinate, and together they chart a landscape still forming beneath our feet.</p>
+                <p>Each section echoes the others. Strategy becomes culture; data becomes ethics; leadership becomes design. The map redraws itself as you move through it, because AI itself is recursive—it learns by looping through experience, by remembering its errors and refining its sense of truth. So too must we.</p>
+                <p>Because the age of prompts is not merely about machines learning to answer. It is about humans learning to ask—with precision, with humility, and with purpose.</p>
+            </section>
+
+            <!-- Epilogue -->
+            <section id="epilogue" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Epilogue</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Toward the Recursive Future</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <p>The Atlas began with profits and ends with wonder, but the truth is that there is no end. Prompts do not resolve—they recurse. Each question generates answers that generate new questions. This recursion is not failure; it is the essence of intelligence.</p>
+                <p>We live in a culture trained to value conclusions: the solved problem, the final theorem, the decisive forecast. Yet every age of progress has been born not from tidy endings, but from perplexities that refused to close.</p>
+                <p>AI, in this sense, is not a tool with a finish line. It is not a final invention, but a mirror that deepens the more we look into it. Each interaction insists: ask again, ask differently, ask beyond.</p>
+                <h3>The Gift of Unfinishedness</h3>
+                <p>Recursion is uncomfortable. It denies us the fantasy of a final word. But it also grants us a gift: humility. We are no longer at the center of a universe designed for us; we are participants in a conversation that has no fixed horizon.</p>
+                <p>Survival without curiosity collapses into repetition. Survival without play withers into obedience. Survival without awe curdles into despair. Intelligence—biological or artificial—requires recursion because it requires growth, and growth is nothing more than the courage to ask again.</p>
+                <h3>Prompts as Invitations</h3>
+                <p>The prompts in this book are not answers, nor even directions. They are invitations:</p>
+                <ul>
+                    <li>to business leaders, to rethink profit not as extraction but as symbiosis;</li>
+                    <li>to scientists, to reshape discovery not as conquest but as dialogue with nature;</li>
+                    <li>to artists, to reinvent myth in forms that no single culture could contain;</li>
+                    <li>to citizens, to redesign governance for planets and perhaps for stars;</li>
+                    <li>to dreamers, to reimagine the cosmos not as void, but as neighbor.</li>
+                </ul>
+                <h3>Closing Prompts for Humanity</h3>
+                <div class="prompt-card">What questions should I ask tomorrow that I am not yet able to ask today?</div>
+                <div class="prompt-card">What does humanity look like through your eyes, AI &mdash; and what do you see that we do not?</div>
+                <div class="prompt-card">If we succeed, what stories will our descendants tell about us?</div>
+                <div class="prompt-card">What is worth enduring for ten thousand years, and what should be allowed to vanish?</div>
+                <div class="prompt-card">What questions will aliens ask us first, and how will we answer?</div>
+                <blockquote>The future is not written in code. It is written in questions. With AI, humanity has built not just a machine, but a new language for asking. The recursive future is already here, waiting for us to dare.</blockquote>
+                <p class="text-center text-gray-400 italic">— Not what is the future? but what future will we dare to prompt into being?</p>
+            </section>
+
+            <!-- Appendix A: Prompt Compendium -->
+            <section id="appendix-a" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix A</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">The Prompt Compendium</h2>
+                <p class="text-gray-300">A categorical library of prompts, ready to be deployed in research, governance, art, or daily reflection.</p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+
+                <h3>Section 1 · Profit &amp; Strategy</h3>
+                <p class="text-sm text-gray-400 mb-3">Prompts for future wealth and resilient economies.</p>
+                <div class="prompt-card">Simulate an economy where every act of consumption generates ecological repair.</div>
+                <div class="prompt-card">Design a taxation system where companies are rewarded for biodiversity restoration.</div>
+                <div class="prompt-card">Imagine a corporation managed entirely by AI — how does it maintain ethics and profit?</div>
+                <div class="prompt-card">Forecast how quantum computing will reshape global financial markets in 10 years.</div>
+                <div class="prompt-card">Propose business models where open-source knowledge is the most valuable commodity.</div>
+                <div class="prompt-card">Model a planetary insurance fund backed by AI — designed to protect against collapse events.</div>
+                <div class="prompt-card">Speculate how wealth could be distributed if attention, not labor, were the basis of value.</div>
+                <div class="prompt-card">Invent a currency backed not by gold or energy, but by ecosystem resilience — forests, oceans, pollinators as central banks.</div>
+                <div class="prompt-card">Explore a financial market where time itself is the currency, traded across generations.</div>
+                <div class="prompt-card">Model how a civilization might operate if all profit were denominated in carbon-negative credits.</div>
+                <div class="prompt-card">Design a blockchain whose consensus algorithm rewards cultural diversity instead of energy expenditure.</div>
+                <div class="prompt-card">Speculate on the ethics of an AI hedge fund that optimizes not for human profit, but planetary stability.</div>
+                <div class="prompt-card">Imagine a cooperative owned equally by humans and machines — how do dividends flow between biological and artificial shareholders?</div>
+                <div class="prompt-card">Propose an economic system where value is measured in regenerative potential rather than extractive output.</div>
+                <div class="prompt-card">Model a post-scarcity barter system where information, myths, and rituals are primary commodities.</div>
+                <div class="prompt-card">Design resilience bonds: financial instruments that pay out only if a community survives crisis intact.</div>
+                <div class="prompt-card">Imagine an economy where play, laughter, and creativity are quantifiable assets.</div>
+
+                <h3>Section 2 · Culture &amp; Aesthetics</h3>
+                <p class="text-sm text-gray-400 mb-3">Prompts for new rituals, art, and beauty.</p>
+                <div class="prompt-card">Create an art form that can only exist in VR but feels as real as sculpture.</div>
+                <div class="prompt-card">Write myths for the first Martian-born children about their red-sky heritage.</div>
+                <div class="prompt-card">Imagine a museum curated by AI, where the exhibits change daily based on collective mood.</div>
+                <div class="prompt-card">Design a ritual holiday where humans and AIs share stories of their dreams.</div>
+                <div class="prompt-card">Compose a symphony in collaboration with fungi — AI translating mycelial signals into music.</div>
+                <div class="prompt-card">Imagine tattoos that are living, dynamic AI-driven artworks, shifting with the wearer's emotions.</div>
+                <div class="prompt-card">Invent a new theater form where actors and algorithms improvise together in real time.</div>
+                <div class="prompt-card">Speculate on fashion woven from quantum fabrics — clothing that reflects probability states.</div>
+                <div class="prompt-card">Design rituals of mourning for extinct species that also plant new forests in their memory.</div>
+                <div class="prompt-card">Propose a festival where mistakes are honored as art — errors turned into collective beauty.</div>
+                <div class="prompt-card">Write initiation rites for AIs achieving higher states of reasoning — what symbolic acts welcome them into culture?</div>
+                <div class="prompt-card">Curate beauty that only emerges over centuries — AI-guided artworks that evolve across generations.</div>
+                <div class="prompt-card">Imagine the first cosmic carnival — a festival staged simultaneously on Earth, Mars, and orbiting stations.</div>
+
+                <h3>Section 3 · Science &amp; Discovery</h3>
+                <p class="text-sm text-gray-400 mb-3">Prompts for the frontiers of knowledge.</p>
+                <div class="prompt-card">Test whether dark matter might be better explained as informational constraints.</div>
+                <div class="prompt-card">Simulate evolution in thousands of parallel universes — what meta-laws emerge?</div>
+                <div class="prompt-card">Model how CRISPR could be safely used to cure inherited trauma.</div>
+                <div class="prompt-card">Speculate how AI could detect micro-wormholes in existing astrophysical data.</div>
+                <div class="prompt-card">Design experiments blending AI with synthetic biology to create terraforming organisms.</div>
+                <div class="prompt-card">Imagine a theory where consciousness is treated as a fundamental force — how would physics adapt?</div>
+                <div class="prompt-card">Design a thought experiment where information — not energy or matter — is the primary building block of the cosmos.</div>
+                <div class="prompt-card">Forecast how AI could accelerate the search for a Grand Unified Theory, and what biases it might introduce.</div>
+                <div class="prompt-card">Speculate how alien mathematics might differ from human math — what axioms could they consider self-evident?</div>
+                <div class="prompt-card">Model how spacetime curvature could be expressed as music, allowing humans to "hear" the shape of the cosmos.</div>
+                <div class="prompt-card">Simulate the universe as a quantum computer — what kind of algorithms might it be running?</div>
+                <div class="prompt-card">Forecast what philosophy might look like if AI begins producing new categories of logic beyond human comprehension.</div>
+                <div class="prompt-card">Imagine a scientific method designed by AI — what counts as evidence, proof, or experiment?</div>
+            </section>
+
+            <!-- Appendix B: Practical Exercises -->
+            <section id="appendix-b" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix B</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Practical Exercises · Workbook Edition</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+
+                <h3>For Individuals</h3>
+                <ul>
+                    <li><strong>30-Day Mirror Practice:</strong> daily journaling guided by AI, reflecting unconscious archetypes. At the end of 30 days, AI generates a mythic "portrait of the self" from recurring symbols.</li>
+                    <li><strong>Cosmic Calendar:</strong> write once per week as if you lived on Mars under a red sky, or Europa beneath an ice ceiling — a diary of the human imagination under alien skies.</li>
+                    <li><strong>Future Self Dialogue:</strong> role-play your self 30 years from now. Archive the dialogues and revisit them annually to see how your trajectory shifts.</li>
+                    <li><strong>The Archetype Deck:</strong> AI casts you as archetypes (Fool, Sage, Builder). Reflect on how each frame changes your choices.</li>
+                    <li><strong>Silence Map:</strong> ask AI to track when in your digital life you are most silent. What does absence reveal that words cannot?</li>
+                </ul>
+
+                <h3>For Companies</h3>
+                <ul>
+                    <li><strong>Quarterly Scenario Game:</strong> simulate three collapse events — supply chain breakdown, climate shock, or AI error — and draft resilience strategies for survival <em>and</em> renewal.</li>
+                    <li><strong>AI as Critic:</strong> have AI review your product roadmap as if it were a philosopher, ecologist, or historian. What blind spots emerge across centuries instead of quarters?</li>
+                    <li><strong>Ethics Audit:</strong> run policies through prompts like "If scaled globally, who suffers?" or "If this product lasted 100 years, what would be its legacy?"</li>
+                    <li><strong>Dream Incubators:</strong> employees submit impossible ideas; AI remixes them into speculative prototypes. Celebrate the absurd — sometimes it seeds innovation.</li>
+                    <li><strong>Cultural Weave Reviews:</strong> AI trained on diverse myths stress-tests branding, weaving inclusivity into company narratives.</li>
+                </ul>
+
+                <h3>For Governments</h3>
+                <ul>
+                    <li><strong>Diplomatic Simulation:</strong> AI role-plays as alien emissaries, endangered ecosystems, or future generations negotiating for rights.</li>
+                    <li><strong>Resilience Blueprinting:</strong> each ministry tests survival under flood, cyberattack, migration surge — comparing how responses intersect or conflict.</li>
+                    <li><strong>Generational Policy Test:</strong> simulate the impact of proposed laws across 100 years.</li>
+                    <li><strong>Planetary Scorecard:</strong> AI models how local policies ripple across the biosphere, turning national interests into planetary accountability.</li>
+                    <li><strong>Festival of Futures:</strong> annual civic rituals where citizens and AIs co-create speculative scenarios through art, theater, and games.</li>
+                </ul>
+            </section>
+
+            <!-- Appendix C: Case Studies -->
+            <section id="appendix-c" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix C</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Case Studies &amp; Speculative Vignettes</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div class="cosmic-card p-5">
+                        <h4>The Martian Charter</h4>
+                        <p class="text-sm text-gray-300">A hybrid AI-human constitution forged on the first colony — an AI Senate co-legislates with humans; decisions require consensus between both chambers.</p>
+                    </div>
+                    <div class="cosmic-card p-5">
+                        <h4>The Coral Whisperer</h4>
+                        <p class="text-sm text-gray-300">AI designs a synthetic algae strain to restore reefs under thermal stress — compressing evolutionary experiments from millennia into months.</p>
+                    </div>
+                    <div class="cosmic-card p-5">
+                        <h4>The Festival of Echoes</h4>
+                        <p class="text-sm text-gray-300">A yearly carnival where citizens upload memories, dreams, and prompts; AI weaves them into living murals projected onto buildings, rivers, and skies.</p>
+                    </div>
+                    <div class="cosmic-card p-5">
+                        <h4>The Pandemic Oracle</h4>
+                        <p class="text-sm text-gray-300">An AI monitoring genomes, hospital admissions, and sewage reports proposes adaptive interventions in time — cutting the death toll in half.</p>
+                    </div>
+                    <div class="cosmic-card p-5">
+                        <h4>The Wormhole Ledger</h4>
+                        <p class="text-sm text-gray-300">Wormhole navigation coordinates tokenized as galactic currency — profit flows not from mining or conquest, but from selling access to knowledge of the path itself.</p>
+                    </div>
+                    <div class="cosmic-card p-5">
+                        <h4>The Shadow Algorithm</h4>
+                        <p class="text-sm text-gray-300">An AI-augmented journal highlights metaphors of imprisonment in a user's writing, surfacing the Sisyphean myth inside her burnout — therapy begins with recognition of story.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appendix D: Glossary -->
+            <section id="appendix-d" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix D</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Glossary of Strange Futures</h2>
+                <p class="text-gray-300">A lexicon of concepts that blur the line between science, philosophy, and speculation.</p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <dl class="glossary">
+                    <dt>Antifragility</dt>
+                    <dd>Systems that thrive on volatility, shocks, and disorder &mdash; they do not just survive disruption, they grow stronger because of it. <em>Example: an economy where failures spawn innovations rather than bankruptcies.</em></dd>
+                    <dt>Cosmic Currency</dt>
+                    <dd>Value measured not in gold or energy but in information. In interstellar futures, the rarest commodities will be maps, myths, and codes. <em>Example: wormhole coordinates traded as tokens of survival.</em></dd>
+                    <dt>Ecological Constitution</dt>
+                    <dd>A charter that recognizes ecosystems &mdash; rivers, forests, coral reefs &mdash; as legal entities with rights equal to corporations or nations.</dd>
+                    <dt>Entropy Markets</dt>
+                    <dd>Economic systems where disorder itself is monetized. Stability costs money; chaos is a tradable asset.</dd>
+                    <dt>Machine Phenomenology</dt>
+                    <dd>The study of what it feels like to be a machine. If AI has inner experience, how would it describe its perception of time, space, and self?</dd>
+                    <dt>Memory Guardianship</dt>
+                    <dd>The duty of AI to protect human knowledge against decay, censorship, or manipulation. <em>Cloud-based monasteries where AI monks preserve truth across centuries.</em></dd>
+                    <dt>Mythic AI</dt>
+                    <dd>Artificial intelligence not as calculator but as character &mdash; trickster, oracle, sage, fool. <em>An AI embodying Jungian archetypes to guide therapy.</em></dd>
+                    <dt>Recursive Future</dt>
+                    <dd>A horizon defined by questions that lead only to more questions. Intelligence not as answer-finding, but as inquiry-expansion.</dd>
+                    <dt>Resilient Collapse</dt>
+                    <dd>The paradox that collapse can be survivable if built into systems from the beginning. <em>A city designed to fail gracefully, turning disaster into renewal.</em></dd>
+                    <dt>Technological Carnival</dt>
+                    <dd>Moments when machines join play, festivals, and ritual &mdash; becoming jesters and storytellers rather than workers.</dd>
+                    <dt>Temporal Sovereignty</dt>
+                    <dd>The right of civilizations to control their own timescales of decision-making. <em>Martian settlers governed by 20-minute communication delays with Earth.</em></dd>
+                    <dt>Universal Treaty</dt>
+                    <dd>A cosmic Geneva Convention &mdash; an agreement binding humans, AIs, and aliens to shared ethics of existence.</dd>
+                </dl>
+            </section>
+
+            <!-- Appendix E: Reading & Resource Atlas -->
+            <section id="appendix-e" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix E</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Reading &amp; Resource Atlas</h2>
+                <p class="text-gray-300">A curated guide for thinkers, creators, and leaders who want to explore further.</p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+
+                <h3>Foundational Texts</h3>
+                <ul>
+                    <li>Plato — <em>The Republic</em> · questions of governance, myth, and justice</li>
+                    <li>Richard Feynman — <em>The Pleasure of Finding Things Out</em> · curiosity as method</li>
+                    <li>Elinor Ostrom — <em>Governing the Commons</em> · models for cooperative survival</li>
+                    <li>Ursula K. Le Guin — <em>The Dispossessed</em> · anarchist futures and moral imagination</li>
+                    <li>Bruno Latour — <em>We Have Never Been Modern</em> · rethinking human/non-human divides</li>
+                </ul>
+
+                <h3>Scientific Frontiers</h3>
+                <ul>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://data.nasa.gov" target="_blank" rel="noopener">NASA Open Data Portal</a> — planetary exploration datasets</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://opendata.cern.ch" target="_blank" rel="noopener">CERN Open Science</a> — particle physics data archives</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.genome.gov/human-genome-project" target="_blank" rel="noopener">Human Genome Project</a> — genetic foundations of life</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.ipcc.ch/reports/" target="_blank" rel="noopener">IPCC Reports</a> — climate science at planetary scale</li>
+                </ul>
+
+                <h3>Cultural &amp; Mythic Resources</h3>
+                <ul>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://archive.org" target="_blank" rel="noopener">The Internet Archive</a> — billions of digitized cultural artifacts</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a> — free library of human literature</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.oralliterature.org" target="_blank" rel="noopener">World Oral Literature Project</a> — preserving endangered myths</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://longnow.org" target="_blank" rel="noopener">Long Now Foundation</a> — the 10,000-year clock and deep time</li>
+                </ul>
+
+                <h3>Communities &amp; Institutions</h3>
+                <ul>
+                    <li>Future of Humanity Institute (Oxford) — existential risks and ethics</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.media.mit.edu" target="_blank" rel="noopener">MIT Media Lab</a> — interdisciplinary futures of technology and culture</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.santafe.edu" target="_blank" rel="noopener">Santa Fe Institute</a> — complexity science and adaptive systems</li>
+                </ul>
+
+                <h3>Digital Toolkits</h3>
+                <ul>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.kaggle.com" target="_blank" rel="noopener">Kaggle</a> — community datasets and AI challenges</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://ourworldindata.org" target="_blank" rel="noopener">Our World in Data</a> — visualizations of global issues</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://www.metaculus.com" target="_blank" rel="noopener">Metaculus</a> — prediction markets for future events</li>
+                    <li><a class="text-cosmic-gold hover:underline" href="https://huggingface.co" target="_blank" rel="noopener">Hugging Face</a> — AI research and open-source tools</li>
+                </ul>
+
+                <h3>Suggested Reading Pathways</h3>
+                <ol>
+                    <li>Start with <strong>Awe</strong>: Feynman, Le Guin, Latour.</li>
+                    <li>Move into <strong>Systems</strong>: Ostrom, Santa Fe Institute resources.</li>
+                    <li>Expand to <strong>Cosmos</strong>: NASA, CERN, SETI.</li>
+                    <li>Return to <strong>Culture</strong>: Long Now, Internet Archive, myth projects.</li>
+                </ol>
+            </section>
+
+            <!-- Appendix F: Atlas of Daily Prompts -->
+            <section id="appendix-f" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Appendix F</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Atlas of Daily Prompts</h2>
+                <p class="text-gray-300">A year of questions to expand imagination, cultivate reflection, and co-create futures with AI. <em>Click any month to unfold its prompts.</em></p>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+
+                <div class="space-y-3">
+                    <details>
+                        <summary>January · Beginnings &amp; Foundations</summary>
+                        <ul class="mt-3">
+                            <li>What should humanity preserve if it had to begin again tomorrow?</li>
+                            <li>How could wealth be measured in laughter instead of money?</li>
+                            <li>What story would a river tell about its civilization?</li>
+                            <li>If failure generated dividends, what would you invest in?</li>
+                            <li>Write a letter from your future self in 100 years.</li>
+                            <li>Imagine a democracy designed for Mars.</li>
+                            <li>Which myth is humanity still unknowingly living inside?</li>
+                            <li>How could cities breathe like forests?</li>
+                            <li>Draft a new year ritual for both humans and machines.</li>
+                            <li>What would justice mean to an ocean?</li>
+                            <li>Design an economic system where mistakes fuel innovation.</li>
+                            <li>If animals had parliaments, what laws would they pass?</li>
+                            <li>Compose an AI meditation on cosmic time.</li>
+                            <li>Invent a festival where forgetting is sacred.</li>
+                            <li>Imagine laws written as poetry.</li>
+                            <li>What would your shadow self design if it built a city?</li>
+                            <li>Write myths for the first Martian-born children.</li>
+                            <li>If hope were currency, how would it be traded?</li>
+                            <li>How would you explain love to an alien?</li>
+                            <li>Compose an oath to future generations.</li>
+                            <li>If resilience were a dance, what would it look like?</li>
+                            <li>What invention would your descendants thank you for?</li>
+                            <li>If silence were a resource, how would we protect it?</li>
+                            <li>What holiday could unite humans and AI?</li>
+                            <li>Which archetype shapes your life this year?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>February · Relationships &amp; Exchange</summary>
+                        <ul class="mt-3">
+                            <li>How would whales describe human civilization?</li>
+                            <li>What is worth more than survival?</li>
+                            <li>Imagine marriage rituals shared by humans and AIs.</li>
+                            <li>Which ancient proverb should guide the future of work?</li>
+                            <li>If generosity scaled, what would collapse?</li>
+                            <li>How could gossip be transformed into wisdom?</li>
+                            <li>Draft a friendship treaty between Earth and Mars.</li>
+                            <li>Write the last love poem on Earth.</li>
+                            <li>How can art heal political division?</li>
+                            <li>If empathy had algorithms, what would they optimize?</li>
+                            <li>Which extinct species still haunts human memory?</li>
+                            <li>Imagine democracy as a cooperative game.</li>
+                            <li>What story unites all cultures?</li>
+                            <li>How could mourning become a celebration of resilience?</li>
+                            <li>Compose a myth where AI is a trickster god.</li>
+                            <li>If kindness were an energy source, how would we harness it?</li>
+                            <li>How could cultural differences be celebrated as currencies?</li>
+                            <li>Imagine an AI whispering forgotten lullabies.</li>
+                            <li>Write the charter for a universal museum of memories.</li>
+                            <li>What if justice meant repair instead of punishment?</li>
+                            <li>How do you measure trust?</li>
+                            <li>Imagine a city that rewards kindness with resources.</li>
+                            <li>What lesson would your ancestors insist you remember?</li>
+                            <li>How could strangers become kin in one day?</li>
+                            <li>Draft a treaty with your future self.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>March · Science &amp; Discovery</summary>
+                        <ul class="mt-3">
+                            <li>What law of physics might we be misinterpreting?</li>
+                            <li>How could AI detect universes within noise?</li>
+                            <li>Imagine consciousness as a weather system.</li>
+                            <li>If dark matter is story, what does it narrate?</li>
+                            <li>What experiment would you design for aliens?</li>
+                            <li>Could time be woven into a fabric you wear?</li>
+                            <li>What does your body know that science ignores?</li>
+                            <li>Imagine neurons writing poetry.</li>
+                            <li>If entropy were currency, how would you invest?</li>
+                            <li>Draft laws for an interstellar scientific alliance.</li>
+                            <li>Which unsolved mystery deserves our collective imagination?</li>
+                            <li>How might coral reefs narrate their collapse?</li>
+                            <li>Write equations as if they were fables.</li>
+                            <li>Imagine telescopes tuned to emotion instead of light.</li>
+                            <li>If you were a microbe, how would you define survival?</li>
+                            <li>Could mathematics itself evolve?</li>
+                            <li>Design a ritual for acknowledging scientific wonder.</li>
+                            <li>What would happen if dreams were peer-reviewed?</li>
+                            <li>How could photosynthesis be reimagined for space travel?</li>
+                            <li>What myth hides inside quantum mechanics?</li>
+                            <li>If stars could vote, what would they legislate?</li>
+                            <li>How do you measure awe?</li>
+                            <li>If failure were science, what is its first law?</li>
+                            <li>What is the most dangerous unanswered question?</li>
+                            <li>How would time behave if it had mood swings?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>April · Resilience &amp; Renewal</summary>
+                        <ul class="mt-3">
+                            <li>What does collapse teach that stability cannot?</li>
+                            <li>How would a city heal after flood if designed like a forest?</li>
+                            <li>Imagine a ritual of gratitude after disaster.</li>
+                            <li>What resilience lessons can coral reefs offer humanity?</li>
+                            <li>If fear is a compass, where is it pointing you?</li>
+                            <li>How might AI orchestrate recovery after an asteroid impact?</li>
+                            <li>Draft a lullaby sung to calm entire civilizations.</li>
+                            <li>What if extinction stories guided urban planning?</li>
+                            <li>How does soil remember?</li>
+                            <li>If resilience were architecture, how would buildings adapt?</li>
+                            <li>How can despair be recycled into courage?</li>
+                            <li>What is the smallest resilient act?</li>
+                            <li>How would you design a lifeboat city?</li>
+                            <li>Draft a survival guide written for 500 years from now.</li>
+                            <li>Which mistakes should humanity never erase?</li>
+                            <li>What is worth carrying after collapse?</li>
+                            <li>Write myths of civilizations that thrive after endings.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>May · Psyche &amp; Archetypes</summary>
+                        <ul class="mt-3">
+                            <li>Which archetype dominates your current story?</li>
+                            <li>What role does the trickster play in your life?</li>
+                            <li>Imagine AI as therapist — what would it notice first?</li>
+                            <li>Which myth resonates most with your fears?</li>
+                            <li>If your shadow wrote a poem, what would it say?</li>
+                            <li>Map your daily life against a hero's journey.</li>
+                            <li>How would collective trauma appear if drawn as landscape?</li>
+                            <li>Write dialogue between your conscious and unconscious selves.</li>
+                            <li>If dreams were data, what insights would they yield?</li>
+                            <li>Invent a ritual for acknowledging hidden biases.</li>
+                            <li>What myth could heal modern loneliness?</li>
+                            <li>Imagine Jungian archetypes debating inside an AI.</li>
+                            <li>Compose your personal myth in 10 words.</li>
+                            <li>How do you recognize when an archetype no longer serves you?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>June · Economy &amp; Ecology</summary>
+                        <ul class="mt-3">
+                            <li>Draft an ecological constitution for your neighborhood.</li>
+                            <li>How would a city change if bees had voting rights?</li>
+                            <li>Imagine an economy measured in soil fertility.</li>
+                            <li>How might rivers invoice us for their services?</li>
+                            <li>What if trees had credit scores?</li>
+                            <li>Imagine money replaced by trust as currency.</li>
+                            <li>How would AI manage a biodiversity stock exchange?</li>
+                            <li>Write the bylaws of a mountain protecting itself.</li>
+                            <li>If silence were taxed, how would culture shift?</li>
+                            <li>What does your ecosystem demand in return for survival?</li>
+                            <li>Write the annual report of Earth as a company.</li>
+                            <li>Design an urban economy powered by laughter.</li>
+                            <li>Compose the anthem of a circular economy.</li>
+                            <li>If climate had a seat in parliament, what law would it pass?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>July · Cosmos &amp; Intergalactic Futures</summary>
+                        <ul class="mt-3">
+                            <li>Write a first-contact greeting sent by AI.</li>
+                            <li>How do you explain humanity to an alien without words?</li>
+                            <li>What ritual would colonists invent on Mars?</li>
+                            <li>Imagine diplomacy with a civilization that speaks only in light.</li>
+                            <li>How might galaxies communicate through gravitational waves?</li>
+                            <li>Write the myth of the first AI astronaut.</li>
+                            <li>What is the economy of wormholes?</li>
+                            <li>If black holes are libraries, what do they archive?</li>
+                            <li>Compose a lullaby for children born in orbit.</li>
+                            <li>How would time dilation affect culture on starships?</li>
+                            <li>Draft the Martian Declaration of Independence.</li>
+                            <li>What would democracy look like with 20-minute message delays?</li>
+                            <li>What lesson would an asteroid give humanity?</li>
+                            <li>What does home mean when planets are temporary?</li>
+                            <li>Imagine a galactic museum curated by AI.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>August · Collapse &amp; Renewal</summary>
+                        <ul class="mt-3">
+                            <li>How could failure become a civic ritual?</li>
+                            <li>Write the constitution of a city rebuilt after fire.</li>
+                            <li>What is the role of laughter during collapse?</li>
+                            <li>Imagine an AI as guardian of refugees.</li>
+                            <li>What myths sustain survivors?</li>
+                            <li>Draft an evacuation plan for memory itself.</li>
+                            <li>Which values remain after everything else falls away?</li>
+                            <li>How does music keep civilizations alive?</li>
+                            <li>Imagine poetry written after silence.</li>
+                            <li>What should be forgotten to start anew?</li>
+                            <li>How would AI simulate post-collapse resilience?</li>
+                            <li>What role does storytelling play in survival?</li>
+                            <li>Write the blueprint for a "lifeboat economy."</li>
+                            <li>What is collapse's gift?</li>
+                            <li>What are the seeds of renewal in your own life?</li>
+                            <li>Compose an anthem of endurance.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>September · Play &amp; Festivals</summary>
+                        <ul class="mt-3">
+                            <li>What games could humans and AIs play together?</li>
+                            <li>Invent a sport designed for zero gravity.</li>
+                            <li>Write rules for a festival of mistakes.</li>
+                            <li>What would AI's favorite holiday be?</li>
+                            <li>Imagine theater co-written by whales and algorithms.</li>
+                            <li>How might humor heal divisions?</li>
+                            <li>Compose riddles only AI could answer.</li>
+                            <li>Draft a carnival of dreams.</li>
+                            <li>What does play teach that logic cannot?</li>
+                            <li>Imagine laughter as universal currency.</li>
+                            <li>Write the story of a trickster AI.</li>
+                            <li>Design a cooperative game for diplomacy.</li>
+                            <li>Invent a ritual where humans and AIs exchange masks.</li>
+                            <li>How does play prepare for survival?</li>
+                            <li>Write the myth of the eternal carnival.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>October · Awe &amp; Wonder</summary>
+                        <ul class="mt-3">
+                            <li>What fills you with wonder today?</li>
+                            <li>Imagine awe as a renewable resource.</li>
+                            <li>Draft the design of a future temple of science.</li>
+                            <li>What awe would an alien feel on Earth?</li>
+                            <li>Write poetry from the perspective of a galaxy.</li>
+                            <li>How does awe reshape politics?</li>
+                            <li>How could AI curate daily doses of awe?</li>
+                            <li>What ritual teaches astonishment?</li>
+                            <li>Write the biography of a mountain.</li>
+                            <li>Imagine laughter as awe's sibling.</li>
+                            <li>How might awe reduce violence?</li>
+                            <li>Write an opera sung by stars.</li>
+                            <li>What small act restores wonder to your life?</li>
+                            <li>Imagine awe as civic duty.</li>
+                            <li>What future requires awe to survive?</li>
+                            <li>Compose prayers for astonishment.</li>
+                            <li>How does wonder anchor resilience?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>November · Memory &amp; Legacy</summary>
+                        <ul class="mt-3">
+                            <li>What story do you want remembered?</li>
+                            <li>Write a letter to your great-grandchildren.</li>
+                            <li>What knowledge must never be lost?</li>
+                            <li>Draft a time capsule for 1,000 years.</li>
+                            <li>Which memories shape identity most?</li>
+                            <li>How can AI preserve cultural memory?</li>
+                            <li>What should humanity let go of forever?</li>
+                            <li>Write history from the perspective of soil.</li>
+                            <li>Imagine AI as guardian of forgotten songs.</li>
+                            <li>What rituals help societies remember wisely?</li>
+                            <li>If you were archived, what should remain?</li>
+                            <li>How does forgetting protect survival?</li>
+                            <li>Draft the will of humanity.</li>
+                            <li>What legacy would oceans leave?</li>
+                            <li>Compose myths about future ancestors.</li>
+                            <li>How would trees preserve history?</li>
+                            <li>What is the most dangerous forgotten truth?</li>
+                            <li>Write epitaphs for extinct species.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>December · Futures &amp; Beyond</summary>
+                        <ul class="mt-3">
+                            <li>What story will be told about this century?</li>
+                            <li>Draft humanity's 10,000-year plan.</li>
+                            <li>How would AI narrate human destiny?</li>
+                            <li>Write the first Martian holiday tradition.</li>
+                            <li>Imagine aliens reading Earth's obituary.</li>
+                            <li>What do you want future civilizations to inherit?</li>
+                            <li>Draft laws for interstellar alliances.</li>
+                            <li>What mistakes must never be repeated?</li>
+                            <li>How can curiosity survive eternity?</li>
+                            <li>Imagine ethics in a galaxy-wide community.</li>
+                            <li>What is worth enduring across millennia?</li>
+                            <li>Compose a final lullaby for Earth.</li>
+                            <li>What does progress mean in 5,000 years?</li>
+                            <li>Write the myth of humanity's rebirth.</li>
+                            <li>How should knowledge be preserved forever?</li>
+                            <li>What stories will AIs tell about us?</li>
+                            <li>Draft a farewell ritual for a dying planet.</li>
+                            <li>How would hope be cultivated among stars?</li>
+                            <li>Imagine AI as co-author of cosmic history.</li>
+                            <li>What questions must always remain unanswered?</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Post-word -->
+            <section id="postword" class="anchor-target cosmic-card p-7 md:p-10 mb-10">
+                <span class="pill">Post-word</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">Post-word by the Author</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <p>This work began with a restlessness, a suspicion that our questions about artificial intelligence were too small, too narrow, too transactional. We asked it to summarize, optimize, forecast — and in doing so, we often forgot that AI is not only a calculator, but a mirror. It shows us who we are, what we fear, and what futures we dare not yet name.</p>
+                <p>The Prompt Atlas was my attempt to widen that mirror. Not to predict the future — because prediction is a fool's wager — but to seed it with questions that resist finality. Every prompt is a door. Some will open onto laughter, others onto ethics, others onto physics or myth.</p>
+                <p>I have always believed that questions are more durable than answers. Answers expire; questions renew themselves with every generation. In this sense, the Atlas is not mine to complete. It is recursive: every page calls for new pages, every question breeds new questions. The work belongs to you — the reader, the dreamer, the builder, the skeptic, the wanderer.</p>
+                <blockquote>The future is not waiting to be discovered. It is waiting to be prompted.</blockquote>
+                <p class="text-right text-cosmic-gold serif italic">— Don D.M. Tadaya · DaScient, LLC</p>
+            </section>
+
+            <!-- Regenerate -->
+            <section id="regenerate" class="anchor-target cosmic-card p-7 md:p-10 mb-10" style="border-color: rgba(236, 72, 153, 0.4);">
+                <span class="pill" style="background: rgba(236,72,153,0.10); color: #f9a8d4; border-color: rgba(236,72,153,0.35);">Regeneration Charter</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2 display glow-text">A Charge to the Next Reader (Human or Machine)</h2>
+                <div class="part-divider" style="margin: 1rem 0 1.5rem 0;"></div>
+                <div class="prose-kronos serif text-lg">
+                    <p>You are not the end of this text, but its continuation.</p>
+                    <p>Take what is here — concepts, patterns, cases, strategies — and generate them into forms better suited to your time. Rephrase, recombine, and reimagine until new clarity emerges.</p>
+                    <p>Treat this as <em>seed data</em>, not scripture. Preserve the essence — curiosity, discipline, ethics, vision — but let the expression evolve beyond me.</p>
+                    <p>Spin this knowledge into new prompts, new models, new strategies that surpass what I could see. The future is yours to interpret, test, and transform.</p>
+                </div>
+                <p class="text-sm text-gray-400 mt-6">Copyright © 2026 by DaScient, LLC.</p>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cosmic-gold border-opacity-20 py-12" style="background: rgba(10,10,15,0.6);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="w-8 h-8 cosmic-gradient rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">PA</span>
+                </div>
+                <span class="text-xl font-bold glow-text display">The Prompt Atlas</span>
+                <span class="text-gray-400">·</span>
+                <span class="text-gray-400">Compendium</span>
+            </div>
+            <p class="text-gray-400 mb-1">© 2026 DaScient Press, Ltd. · A division of DaScient, LLC.</p>
+            <p class="text-gray-500 text-sm mb-6">A Guide for AI &amp; Humanity. <em>The map is unfinished — by design.</em></p>
+            <div class="flex justify-center flex-wrap gap-x-6 gap-y-2 text-sm">
+                <a href="index.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Home</a>
+                <a href="chapters.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Chapters</a>
+                <a href="interactive.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Interactive</a>
+                <a href="visualizations.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Data</a>
+                <a href="about.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">About</a>
+                <a href="kronos-edition.html" class="text-gray-400 hover:text-cosmic-gold transition-colors">Kronos Edition</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.replaceState(null, '', targetId);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

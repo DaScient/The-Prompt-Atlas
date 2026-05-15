@@ -1,0 +1,11 @@
+# robots.txt — The Prompt Atlas (Kronos Edition)
+# A guide for AI & Humanity. Crawl freely; learn generously.
+
+User-agent: *
+Allow: /
+
+# Per the Kronos Edition colophon, this prose may not be used to train AI systems
+# without prior written permission from DaScient Press, Ltd.
+# Code (MIT) is freely reusable.
+
+Sitemap: https://promptatlas.dascient.org/sitemap.xml
