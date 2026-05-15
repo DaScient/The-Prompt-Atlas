@@ -182,41 +182,6 @@ php -S localhost:8080                  # PHP
 open http://localhost:8080
 ```
 
-### GitHub Pages deployment
-
-The repo includes a **GitHub Actions workflow** (`.github/workflows/pages.yml`) that auto-publishes the entire site on every push to `main` — no build step, no Jekyll. To enable it:
-
-1. **Settings → Pages → Build and deployment → Source = `GitHub Actions`**.
-2. Push to `main`. The site is live within ~60 seconds at:
-   - **Canonical:** <https://promptatlas.dascient.org>
-   - **Pages mirror:** <https://dascient.github.io/The-Prompt-Atlas>
-3. The bundled `CNAME` file points the canonical domain at the Pages origin; configure a `CNAME` DNS record pointing `promptatlas` to `dascient.github.io`.
-
-Already configured for you out of the box:
-
-| File | Purpose |
-| ---- | ------- |
-| `.nojekyll` | Disables Jekyll so files starting with `_` and underscores in paths work. |
-| `CNAME` | Custom domain `promptatlas.dascient.org`. |
-| `404.html` | Themed "uncharted coordinate" page Pages serves automatically on missing routes. |
-| `robots.txt` | Allows crawling, points at the sitemap, restates the no-AI-training clause. |
-| `sitemap.xml` | All seven public routes with priority + change frequency. |
-| `site.webmanifest` | Installable PWA-style manifest. |
-| `favicon.svg` / `og-card.svg` | Vector favicon and 1200×630 share card. |
-
----
-
-## ⚡ Edge-Native API (Cloudflare Workers)
-
-In addition to the Pages site, the Atlas exposes a developer-first API.
-
-- **Base URL:** `https://prompt-atlas.aristocles24.workers.dev`
-- **Runtime:** Cloudflare Workers
-- **Database:** Cloudflare D1 (SQLite)
-- **Cache &amp; Counters:** Workers KV
-- **Artifact Store:** Cloudflare R2
-- **Auth:** API keys via `Authorization: Bearer <key>` *or* `x-api-key`
-
 ### Endpoints
 
 | Method | Path | Purpose |
