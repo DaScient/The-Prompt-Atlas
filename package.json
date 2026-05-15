@@ -1,0 +1,29 @@
+{
+  "name": "the-prompt-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Prompt Atlas — Edge-native API (Cloudflare Worker) + static GitHub Pages frontend.",
+  "type": "module",
+  "main": "worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:remote": "wrangler dev --remote",
+    "deploy": "wrangler deploy",
+    "deploy:dev": "wrangler deploy --env dev",
+    "deploy:prod": "wrangler deploy --env prod",
+    "tail": "wrangler tail",
+    "secret:set": "wrangler secret put API_KEYS",
+    "db:migrate": "wrangler d1 migrations apply prompt_atlas_db --remote",
+    "db:migrate:local": "wrangler d1 migrations apply prompt_atlas_db --local",
+    "db:seed:public": "wrangler d1 execute prompt_atlas_db --remote --file migrations/0002_seed_public_prompts.sql",
+    "pages:serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DaScient/The-Prompt-Atlas.git"
+  }
+}

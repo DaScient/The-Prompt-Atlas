@@ -246,23 +246,43 @@ curl -X POST https://prompt-atlas.aristocles24.workers.dev/v1/atlas/compose \
 
 ### Setup &amp; deploy the Worker
 
+The repo now ships everything you need: `worker.js` (the implementation), `wrangler.toml` (config), `migrations/0001_init.sql` (canonical schema), `migrations/0002_seed_public_prompts.sql` (seed), and `package.json` (scripts).
+
 ```bash
-# 1. Tooling
-npm install -g wrangler
-wrangler login
+# 0. Install Wrangler and authenticate
+npm install
+npx wrangler login
 
-# 2. Configure
-# Edit wrangler.toml: account_id, KV namespace IDs, D1 binding, API keys, env.
+# 1. Create the Cloudflare resources (one-time)
+npx wrangler kv namespace create ATLAS_KV
+npx wrangler kv namespace create RAG_KV
+npx wrangler d1 create prompt_atlas_db
+npx wrangler r2 bucket create prompt-atlas-r2
+# Copy the returned IDs into wrangler.toml (kv ids + database_id)
 
-# 3. Database
-wrangler d1 execute prompt_atlas_db --remote --file schema.sql
-wrangler d1 execute prompt_atlas_db --remote --file bootstrap.sql
+# 2. Apply the D1 schema + public seed (uses migrations/ directory)
+npm run db:migrate
+npm run db:seed:public
+
+# 3. Store your API key(s) as a SECRET — never commit this
+npm run secret:set
+# paste e.g. "key_live_xxx,key_team_yyy" at the prompt
 
 # 4. Ship it
-wrangler deploy
+npm run deploy           # production
+npm run deploy:dev       # separate dev worker
+npm run tail             # live log stream
 ```
 
-Freemium quotas are enforced monthly via Workers KV counters keyed on API key.
+What the Worker provides out of the box:
+
+- **CORS** locked to the GitHub Pages site (configurable via `ALLOW_ORIGIN`).
+- **Per-IP rate limit** (60 req/min) on every `/v1/*` endpoint via KV.
+- **Per-API-key monthly quota** (10,000 `/compose` calls) via KV.
+- **Authentication** via `Authorization: Bearer <key>` *or* `x-api-key`.
+- **Deterministic compose** (no external LLM call required to run).
+- **D1-backed** prompt catalog and lineage trees with parent integrity checks.
+- **Observability** enabled — logs visible from the Cloudflare dashboard.
 
 ---
 
