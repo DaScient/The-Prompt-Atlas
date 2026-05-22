@@ -146,6 +146,7 @@ The-Prompt-Atlas/
 ├── CNAME                   # promptatlas.dascient.org custom domain
 ├── .nojekyll               # Disables Jekyll on GitHub Pages
 ├── .github/workflows/      # GitHub Actions Pages auto-deploy workflow
+├── course/                 # 📘 The Recursive Century — free 12-week syllabus, adoption kit, one-pager
 └── resources/              # Fonts, images, JSON datasets
 ```
 
@@ -300,13 +301,14 @@ All user-supplied strings rendered into the chapter modal are HTML-escaped via `
 
 The Atlas is built to slot into curricula at K–12, university, and professional levels:
 
+- **📘 [*The Recursive Century* — Free 12-Week Course Syllabus](course/Prompt-Atlas-12-Week-Syllabus.md)** — a downloadable, openly-licensed (CC BY-NC-SA 4.0) curriculum that turns the 14 chapters into 12 weekly "quests" (co-write a myth, draft the Martian Charter, design a 10,000-year artifact, host a Festival of Futures). Standards-aligned to UNESCO AICFS, ISTE, AAC&U VALUE rubrics, and CCSS-ELA. Includes rubrics, AI-use policy boilerplate, equity checklist, and 45-min / 75-min / semester / intensive variants. Marketed directly to curriculum directors — see the [Adoption Kit](course/README.md) and the printable [One-Pager](course/Curriculum-Director-One-Pager.md).
 - **Modular chapter structure** — each chapter is self-contained; mix and match into syllabi.
 - **Workbook (Appendix B)** — turnkey exercises for individuals, companies, and governments.
 - **Daily Prompts (Appendix F)** — 365 prompts for journal practice, classroom warm-ups, or boardroom standups.
 - **Assessment hooks** — the Ethics Simulator scores responses; the Consciousness Lab outputs numeric awareness indices.
 - **Citation block** — see the [Citation](#citation) section below.
 
-For partnerships, write **promptatlas@dascient.com** with subject line `Education`.
+For partnerships, write **promptatlas@dascient.com** with subject line `Education`. For course adoption, open an issue tagged `curriculum` on this repo.
 
 ---
 
