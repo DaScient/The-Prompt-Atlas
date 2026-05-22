@@ -137,11 +137,11 @@ async function listPrompts(url, env) {
 
   const sql =
     "SELECT id, title, body, category, tags, " +
-    "       COALESCE(visibility, 'public')               AS visibility, " +
-    "       COALESCE(source,     'Prompt Atlas')          AS source, " +
-    "       COALESCE(license,    'All rights reserved')   AS license, " +
+    "       COALESCE(visibility, 'public')              AS visibility, " +
+    "       COALESCE(source,     'Prompt Atlas')        AS source, " +
+    "       COALESCE(license,    'All rights reserved') AS license, " +
     "       created_at, " +
-    "       COALESCE(updated_at, created_at)              AS updated_at " +
+    "       COALESCE(updated_at, created_at)            AS updated_at " +
     "FROM prompts " +
     "WHERE " + where.join(" AND ") + " " +
     "ORDER BY created_at DESC LIMIT ? OFFSET ?";
@@ -158,7 +158,7 @@ async function getPrompt(id, env) {
   const row = await env.ATLAS_DB
     .prepare(
       "SELECT id, title, body, category, tags, " +
-      "       COALESCE(visibility, 'public')             AS visibility, " +
+      "       COALESCE(visibility, 'public')              AS visibility, " +
       "       COALESCE(source,     'Prompt Atlas')        AS source, " +
       "       COALESCE(license,    'All rights reserved') AS license, " +
       "       created_at, " +
