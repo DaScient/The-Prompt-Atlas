@@ -56,7 +56,7 @@ async function route(request, url, env, ctx) {
       status: "ok",
       environment: env.ENVIRONMENT || "prod",
       time: new Date().toISOString(),
-      version: "1.0.0",
+      version: "1.1.0",
     });
   }
 
@@ -119,7 +119,8 @@ async function listPrompts(url, env) {
   const limit   = clampInt(url.searchParams.get("limit"), 1, 100, 20);
   const offset  = clampInt(url.searchParams.get("offset"), 0, 10000, 0);
 
-  const where = [];
+  // Anonymous list endpoint: only expose rows explicitly flagged public.
+  const where = ["COALESCE(visibility, 'public') = 'public'"];
   const binds = [];
   if (q) {
     where.push("(title LIKE ? OR body LIKE ?)");
@@ -135,9 +136,14 @@ async function listPrompts(url, env) {
   }
 
   const sql =
-    "SELECT id, title, body, category, tags, created_at " +
+    "SELECT id, title, body, category, tags, " +
+    "       COALESCE(visibility, 'public')              AS visibility, " +
+    "       COALESCE(source,     'Prompt Atlas')        AS source, " +
+    "       COALESCE(license,    'All rights reserved') AS license, " +
+    "       created_at, " +
+    "       COALESCE(updated_at, created_at)            AS updated_at " +
     "FROM prompts " +
-    (where.length ? "WHERE " + where.join(" AND ") + " " : "") +
+    "WHERE " + where.join(" AND ") + " " +
     "ORDER BY created_at DESC LIMIT ? OFFSET ?";
   binds.push(limit, offset);
 
@@ -150,7 +156,17 @@ async function listPrompts(url, env) {
 
 async function getPrompt(id, env) {
   const row = await env.ATLAS_DB
-    .prepare("SELECT id, title, body, category, tags, created_at FROM prompts WHERE id = ? LIMIT 1")
+    .prepare(
+      "SELECT id, title, body, category, tags, " +
+      "       COALESCE(visibility, 'public')              AS visibility, " +
+      "       COALESCE(source,     'Prompt Atlas')        AS source, " +
+      "       COALESCE(license,    'All rights reserved') AS license, " +
+      "       created_at, " +
+      "       COALESCE(updated_at, created_at)            AS updated_at " +
+      "FROM prompts " +
+      "WHERE id = ? AND COALESCE(visibility, 'public') = 'public' " +
+      "LIMIT 1"
+    )
     .bind(id)
     .first();
   if (!row) return json({ error: "not_found", id }, 404);
@@ -405,7 +421,11 @@ function normalizePrompt(row) {
     tags: typeof row.tags === "string" && row.tags
       ? row.tags.split(",").map(s => s.trim()).filter(Boolean)
       : [],
+    visibility: row.visibility || "public",
+    source: row.source || "Prompt Atlas",
+    license: row.license || "All rights reserved",
     created_at: row.created_at,
+    updated_at: row.updated_at ?? row.created_at,
   };
 }
 
