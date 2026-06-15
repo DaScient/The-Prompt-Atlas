@@ -1,0 +1,6 @@
+{
+  "name": "The Prompt Atlas",
+  "description": "In an era where artificial intelligence shapes not just tools but thought itself, Prompt Atlas offers a navigational chart for minds entering the recursive century.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
